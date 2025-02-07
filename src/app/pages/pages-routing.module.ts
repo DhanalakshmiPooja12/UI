@@ -58,7 +58,7 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: MaindashboardComponent,
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
       },
       {
         path: 'template',
@@ -70,7 +70,7 @@ const routes: Routes = [
           { path: 'temPreview/:id', component: TemplatePreviewComponent },
           { path: 'temView/:id', component: TemplateViewComponent },
         ],
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
       },
       {
         path: 'master',
@@ -81,7 +81,7 @@ const routes: Routes = [
           { path: 'edit/:id', component: MasterEditComponent },
           { path: 'preview/:id', component: PreviewComponent },
         ],
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
       },
       {
         path: 'checklist',
@@ -102,7 +102,7 @@ const routes: Routes = [
           },
           { path: 'InputPreview/:id', component: PreviewgetChecklistComponent },
         ],
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
       },
       {
         path: 'config',
@@ -119,7 +119,7 @@ const routes: Routes = [
           { path: 'shift', component: ShiftComponent },
           { path: 'machine', component: MachineComponent },
         ],
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
       },
     ],
   },
