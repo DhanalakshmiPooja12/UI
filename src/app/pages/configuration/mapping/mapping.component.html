@@ -1,0 +1,292 @@
+<div class="container-fluid text-center mt-5">
+  <div class="col text-left mt-4">
+    <h2><b>Mapping</b></h2>
+    <h4>List</h4>
+  </div>
+  <div class="col text-right mt-5">
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="!mapPermission['create']"
+      (click)="openWidgetEditorDialog(template, '', 'Add')"
+    >
+      <!-- (click)="openModal(template, '', 'Add')" -->
+      Add
+    </button>
+  </div>
+  <div class="mt-3 row">
+    <div class="col-lg-12">
+      <!-- <div class="card">
+        <div class="card-body"> -->
+      <!-- <div class="table-responsive mt-3 ml-5"> -->
+      <!-- *ngIf="selectedType == 'Devices' && res.length !== 0" -->
+      <!-- datatable dt-responsive nowrap -->
+      <table
+        class="table table-centered table-borderless datatable dt-responsive nowrap"
+        style="border-collapse: collapse; border-spacing: 0; width: 100%"
+      >
+        <thead class="theme-dependent-colors" style="color: aliceblue">
+          <th>SI.NO</th>
+          <th>Users</th>
+          <!-- <th>Departments</th>
+          <th>Roles</th> -->
+          <th>Plants</th>
+          <th>Zones</th>
+          <th>Machines</th>
+          <th>Shifts</th>
+          <th>Actions</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let a of paginateData; let i = index">
+            <td>{{ a.index }}</td>
+            <td>{{ a.user }}</td>
+            <!-- <td>{{ a.depart }}</td>
+            <td>{{ a.role }}</td> -->
+            <td>{{ a.plant }}</td>
+            <td>{{ a.zone }}</td>
+            <td>{{ a.machine }}</td>
+            <td>{{ a.shift }}</td>
+            <td>
+              <button
+                mat-raised-button
+                color="primary"
+                [disabled]="!mapPermission['modify']"
+                (click)="openWidgetEditorDialog(template, a, 'Edit')"
+              >
+                Edit
+              </button>
+              &nbsp;
+              <button
+                mat-raised-button
+                color="warn"
+                (click)="openWidgetEditorDialog(template1, a, 'del')"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- </div> -->
+      <!-- </div>
+      </div> -->
+    </div>
+  </div>
+  <div style="padding-left: 10px">
+    <ngb-pagination
+      [collectionSize]="mainData?.length"
+      #numPagesExp1
+      [(page)]="currentPage"
+      [maxSize]="maxSize"
+      [rotate]="true"
+      [pageSize]="itemsPerPage"
+      (pageChange)="loadPage()"
+      [directionLinks]="true"
+      [boundaryLinks]="true"
+    ></ngb-pagination>
+
+    <!-- <pre><span class="float-md-left mr-4">Page: {{ currentPage }} / {{ numPagesExp1.pageCount }}</span></pre> -->
+  </div>
+</div>
+
+<ng-template class="modal" #template>
+  <div class="modal-header card-header header-style">
+    <h4 class="modal-title pull-left">
+      {{ action == "Edit" ? "Edit Mapping" : "Add Mapping" }}
+    </h4>
+    <button
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      aria-label="Close"
+      matDialogClose
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body card-body">
+    <form #plForm="ngForm">
+      <div class="form-row row">
+        <div class="col-6 mt-2">
+          <!-- <label> User </label>
+          <select
+            name="digiI/O"
+            id="digiI/O"
+            [(ngModel)]="user"
+            (ngModelChange)="userSelect($event)"
+            required
+            class="form-control"
+          >
+            <option value="" selected disabled>--Select--</option>
+            <option *ngFor="let e of userData" value="{{ e.userName }}">
+              {{ e.userName }}
+            </option>
+          </select> -->
+
+          <mat-form-field class="col-12">
+            <mat-label>User</mat-label>
+            <mat-select
+              class="userDrop"
+              name="digiI/O"
+              id="digiI/O"
+              [(ngModel)]="user"
+              (ngModelChange)="userSelect($event)"
+              required
+            >
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let e of userData" value="{{ e.userName }}">
+                {{ e.userName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-6 mt-2">
+          <mat-form-field class="col-12">
+            <mat-label>Shift</mat-label>
+            <mat-select
+              name="shift1"
+              id="shift1"
+              [(ngModel)]="shift"
+              (ngModelChange)="shiftSelect($event)"
+              required
+            >
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let e of addShifts" value="{{ e.shiftName }}">
+                {{ e.shiftName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <!-- <div class="col-6 mt-2">
+          <mat-form-field class="col-12">
+            <mat-label>Department</mat-label>
+            <mat-select
+              name="digiI/O1"
+              id="digiI/O1"
+              [(ngModel)]="depart"
+              (ngModelChange)="departSelect($event)"
+              required
+            >
+              <mat-option>--</mat-option>
+              <mat-option
+                *ngFor="let e of addDepartments"
+                value="{{ e.dName }}"
+              >
+                {{ e.dName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div> -->
+      </div>
+      <div class="form-row row">
+        <div class="col-6 mt-2">
+          <mat-form-field class="col-12">
+            <mat-label>Plant</mat-label>
+            <mat-select
+              name="plant1"
+              id="plant1"
+              [(ngModel)]="plant"
+              (ngModelChange)="plantSelect($event)"
+              required
+            >
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let e of addPlants" value="{{ e.plantName }}">
+                {{ e.plantName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-6 mt-2">
+          <mat-form-field class="col-12">
+            <mat-label>Zone</mat-label>
+            <mat-select
+              name="zone1"
+              id="zone1"
+              [(ngModel)]="zone"
+              (ngModelChange)="zoneSelect($event)"
+              required
+            >
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let e of addZones" value="{{ e.zoneName }}">
+                {{ e.zoneName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="form-row row">
+        <div class="col-6 mt-2">
+          <mat-form-field class="col-12">
+            <mat-label>Machine</mat-label>
+            <mat-select
+              name="machine1"
+              id="machine1"
+              [(ngModel)]="machine"
+              (ngModelChange)="machineSelect($event)"
+              required
+            >
+              <mat-option>--</mat-option>
+              <mat-option
+                *ngFor="let e of addMachines"
+                value="{{ e.machineName }}"
+              >
+                {{ e.machineName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <!-- <div class="form-row row">
+        
+      </div> -->
+      <div class="modal-footer">
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!plForm.form.valid"
+          matDialogClose
+          (click)="submit(mainData)"
+        >
+          {{ action == "Edit" ? "Update" : "Save" }}
+        </button>
+        &nbsp;
+        <button mat-raised-button color="warn" matDialogClose>Cancel</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+<ng-template class="modal" #template1>
+  <div class="modal-header card-header header-style">
+    <h4 class="modal-title pull-left">Delete</h4>
+    <button
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      aria-label="Close"
+      matDialogClose
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body card-body">
+    <div class="example-container">
+      <form>
+        <div>
+          <p>Are you sure to delete?</p>
+        </div>
+        <button
+          type="submit"
+          mat-raised-button
+          color="warn"
+          matDialogClose
+          (click)="delete(mainData)"
+        >
+          Delete</button
+        >&nbsp;&nbsp;
+        <button type="submit" mat-raised-button color="primary" matDialogClose>
+          Cancel
+        </button>
+      </form>
+    </div>
+  </div>
+</ng-template>

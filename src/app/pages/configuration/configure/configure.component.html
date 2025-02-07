@@ -1,0 +1,766 @@
+<div class="container-fluid text-center mt-4">
+  <div class="col text-left">
+    <h2><b>Role</b></h2>
+    <h4>List</h4>
+  </div>
+  <!-- <div
+    [style.background-color]="color"
+    class="btn-group btn-group-lg btn-block"
+    role="group"
+    aria-label="..."
+  >
+    <button
+      type="button"
+      mat-raised-button
+      mat-stroked-button
+      class="btn"
+      (click)="depClick()"
+    >
+      Department
+    </button>
+    <button
+      type="button"
+      mat-raised-button
+      mat-stroked-button
+      class="btn"
+      (click)="roleClick()"
+    >
+      Role
+    </button>
+    <button
+      type="button"
+      mat-raised-button
+      mat-stroked-button
+      class="btn btn"
+      (click)="plantClick()"
+    >
+      Plant
+    </button>
+    <button
+      type="button"
+      mat-raised-button
+      mat-stroked-button
+      class="btn"
+      (click)="zoneClick()"
+    >
+      Zone
+    </button>
+    <button
+      type="button"
+      mat-raised-button
+      mat-stroked-button
+      class="btn"
+      (click)="machineClick()"
+    >
+      Machine
+    </button>
+    <button
+      type="button"
+      mat-raised-button
+      mat-stroked-button
+      class="btn"
+      (click)="shiftClick()"
+    >
+      Shift
+    </button>
+  </div> -->
+  <!-- <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+    <mat-button-toggle
+      mat-raised-button
+      [style.background-color]="color"
+      (click)="depClick()"
+      >Department</mat-button-toggle
+    >
+    <mat-button-toggle
+      mat-raised-button
+      [style.background-color]="color"
+      (click)="roleClick()"
+    >
+      Role</mat-button-toggle
+    >
+    <mat-button-toggle
+      mat-raised-button
+      [style.background-color]="color"
+      (click)="plantClick()"
+    >
+      Plant</mat-button-toggle
+    >
+    <mat-button-toggle
+      mat-raised-button
+      [style.background-color]="color"
+      (click)="zoneClick()"
+    >
+      Zone</mat-button-toggle
+    >
+    <mat-button-toggle
+      mat-raised-button
+      [style.background-color]="color"
+      (click)="machineClick()"
+    >
+      Machine</mat-button-toggle
+    >
+    <mat-button-toggle
+      mat-raised-button
+      [style.background-color]="color"
+      (click)="shiftClick()"
+    >
+      Shift</mat-button-toggle
+    >
+  </mat-button-toggle-group> -->
+  <mat-form-field class="col-5">
+    <mat-label>Select an option</mat-label>
+    <mat-select [(value)]="selected">
+      <mat-option>None</mat-option>
+      <mat-option value="option1" (click)="depClick()">Department</mat-option>
+      <mat-option value="option2" (click)="roleClick()">Role</mat-option>
+      <mat-option value="option3" (click)="plantClick()">Plant</mat-option>
+      <mat-option value="option3" (click)="zoneClick()">Zone</mat-option>
+      <mat-option value="option3" (click)="machineClick()">Machine</mat-option>
+      <mat-option value="option3" (click)="shiftClick()">Shift</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="col text-right mt-5">
+    <button
+      mat-raised-button
+      color="accent"
+      *ngIf="depBool"
+      (click)="openWidgetEditorDialog(templateDepartment, '', 'Add')"
+    >
+      + New Department
+    </button>
+    <div class="col text-right">
+      <button
+        mat-raised-button
+        color="accent"
+        *ngIf="roleBool"
+        (click)="openWidgetEditorDialog(templateRole, '', 'Add')"
+      >
+        + New Role
+      </button>
+    </div>
+    <div class="col text-right">
+      <button
+        mat-raised-button
+        color="accent"
+        *ngIf="plantBool"
+        (click)="openWidgetEditorDialog(templatePlant, '', 'Add')"
+      >
+        + New Plant
+      </button>
+    </div>
+    <div class="col text-right">
+      <button
+        mat-raised-button
+        color="accent"
+        *ngIf="zoneBool"
+        (click)="openWidgetEditorDialog(templateZone, '', 'Add')"
+      >
+        + New Zone
+      </button>
+    </div>
+    <div class="col text-right">
+      <button
+        mat-raised-button
+        color="accent"
+        *ngIf="machineBool"
+        (click)="openWidgetEditorDialog(templateMachine, '', 'Add')"
+      >
+        + New Machine
+      </button>
+    </div>
+    <div class="col text-right">
+      <button
+        mat-raised-button
+        color="accent"
+        *ngIf="shiftBool"
+        (click)="openWidgetEditorDialog(templateShift, '', 'Add')"
+      >
+        + New Shift
+      </button>
+    </div>
+  </div>
+
+  <div class="row mt-4 ml-4 mr-4 justify-content-center">
+    <table class="table table-borderless" *ngIf="depBool">
+      <thead class="theme-dependent-colors" style="color: aliceblue">
+        <tr>
+          <th>S.No</th>
+          <th>Department</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let e of addDepartments; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ e.dName }}</td>
+          <td>
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="openWidgetEditorDialog(templateDepartment, e, 'Edit')"
+            >
+              Edit
+            </button>
+            &nbsp;
+            <button
+              mat-raised-button
+              color="warn"
+              (click)="deleteDepartment(i, e)"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table table-borderless" *ngIf="roleBool">
+      <thead class="theme-dependent-colors" style="color: aliceblue">
+        <tr>
+          <th>S.No</th>
+          <th>Roles</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let e of addRoles; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ e.name }}</td>
+          <td>
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="openWidgetEditorDialog(templateRole, e, 'Edit')"
+            >
+              Edit
+            </button>
+            &nbsp;
+            <button mat-raised-button color="warn" (click)="deleteRole(i, e)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table table-borderless" *ngIf="plantBool">
+      <thead class="theme-dependent-colors" style="color: aliceblue">
+        <tr>
+          <th>S.No</th>
+          <th>Plant</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let e of addPlants; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ e.plantName }}</td>
+          <td>
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="openWidgetEditorDialog(templatePlant, e, 'Edit')"
+            >
+              Edit
+            </button>
+            &nbsp;
+            <button mat-raised-button color="warn" (click)="deletePlant(i, e)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table table-borderless" *ngIf="zoneBool">
+      <thead class="theme-dependent-colors" style="color: aliceblue">
+        <tr>
+          <th>S.No</th>
+          <th>Zones</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let e of addZones; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ e.zoneName }}</td>
+          <td>
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="openWidgetEditorDialog(templateZone, e, 'Edit')"
+            >
+              Edit
+            </button>
+            &nbsp;
+            <button mat-raised-button color="warn" (click)="deleteZone(i, e)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table table-borderless" *ngIf="machineBool">
+      <thead class="theme-dependent-colors" style="color: aliceblue">
+        <tr>
+          <th>S.No</th>
+          <th>Machines</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let e of addMachines; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ e.machineName }}</td>
+          <td>
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="openWidgetEditorDialog(templateMachine, e, 'Edit')"
+            >
+              Edit
+            </button>
+            &nbsp;
+            <button
+              mat-raised-button
+              color="warn"
+              (click)="deleteMachine(i, e)"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table table-borderless" *ngIf="shiftBool">
+      <thead class="theme-dependent-colors" style="color: aliceblue">
+        <tr>
+          <th>S.No</th>
+          <th>Shifts</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let e of addShifts; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ e.shiftName }}</td>
+          <td>
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="openWidgetEditorDialog(templateShift, e, 'Edit')"
+            >
+              Edit
+            </button>
+            &nbsp;
+            <button mat-raised-button color="warn" (click)="deleteShift(i, e)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<ng-template class="modal" #templateDepartment>
+  <div class="modal-header card-header header-style">
+    <div class="modal-title pull-left">
+      {{ action == "Edit" ? "Edit Department" : "Add Department" }}
+    </div>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      matDialogClose
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body card-body">
+    <form class="mt-2" #gform="ngForm">
+      <div class="form-row mt-2 row">
+        <!-- <div class="form-group p-float-label col-3">
+          <input
+            pInputText
+            type="text"
+            id="float-input"
+            required
+            name="{{ i + 1 }}"
+            class="floatingName form-control"
+            [(ngModel)]="e.index"
+          />
+        </div> -->
+        <div class="form-group col-3">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Department</mat-label>
+            <input
+              matInput
+              type="text"
+              required
+              name="dName"
+              [(ngModel)]="dName"
+            />
+          </mat-form-field>
+        </div>
+        <!-- <div class="form-group col-2">
+          <button
+            class="btn btn-sm btn-outline-success"
+            style="color: rgb(6, 88, 44)"
+            (click)="addDepartment()"
+          >
+            Add
+          </button>
+          &nbsp;
+          <button
+            class="btn btn-sm btn-outline-danger"
+            style="color: red"
+            [disabled]="i === 0"
+            (click)="deleteDepartment(i, e)"
+          >
+            Delete
+          </button>
+        </div> -->
+      </div>
+      <br />
+      <div class="modal-footer">
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!gform.form.valid"
+          (click)="colSubmit()"
+          matDialogClose
+        >
+          {{ action == "Edit" ? "Update" : "Save" }}
+        </button>
+        &nbsp;
+        <button mat-raised-button color="warn" matDialogClose>Cancel</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+<ng-template class="modal" #templateRole>
+  <div class="modal-header card-header header-style">
+    <div class="modal-title pull-left">
+      {{ action == "Edit" ? "Edit Role" : "Add Role" }}
+    </div>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      matDialogClose
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body card-body">
+    <form class="mt-2" #gform="ngForm">
+      <div class="form-row mt-2 row">
+        <div class="form-group col-3">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Role</mat-label>
+            <input
+              matInput
+              type="text"
+              required
+              name="name"
+              [(ngModel)]="name"
+            />
+          </mat-form-field>
+        </div>
+        <!-- <div class="form-group col-2">
+          <button
+            class="btn btn-sm btn-outline-success"
+            style="color: rgb(6, 88, 44)"
+            (click)="addRole()"
+          >
+            Add
+          </button>
+          &nbsp;
+          <button
+            class="btn btn-sm btn-outline-danger"
+            style="color: red"
+            [disabled]="i === 0"
+            (click)="deleteRole(i, e)"
+          >
+            Delete
+          </button>
+        </div> -->
+      </div>
+      <br />
+      <div class="modal-footer">
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!gform.form.valid"
+          (click)="roleSubmit()"
+          matDialogClose
+        >
+          {{ action == "Edit" ? "Update" : "Save" }}
+        </button>
+        &nbsp;
+        <button mat-raised-button color="warn" matDialogClose>Cancel</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+<ng-template class="modal" #templatePlant>
+  <div class="modal-header card-header header-style">
+    <div class="modal-title pull-left">
+      {{ action == "Edit" ? "Edit Plant" : "Add Plant" }}
+    </div>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      matDialogClose
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body card-body">
+    <form class="mt-2" #gform="ngForm">
+      <div class="form-row mt-2 row">
+        <div class="form-group col-3">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Plant</mat-label>
+            <input
+              matInput
+              type="text"
+              required
+              name="plantName"
+              [(ngModel)]="plantName"
+            />
+          </mat-form-field>
+        </div>
+
+        <!-- <div class="form-group col-2">
+          <button
+            class="btn btn-sm btn-outline-success"
+            style="color: rgb(6, 88, 44)"
+            (click)="addPlant()"
+          >
+            Add
+          </button>
+          &nbsp;
+          <button
+            class="btn btn-sm btn-outline-danger"
+            style="color: red"
+            [disabled]="i === 0"
+            (click)="deletePlant(i, e)"
+          >
+            Delete
+          </button>
+        </div> -->
+      </div>
+      <br />
+      <div class="modal-footer">
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!gform.form.valid"
+          (click)="plantSubmit()"
+          matDialogClose
+        >
+          {{ action == "Edit" ? "Update" : "Save" }}
+        </button>
+        &nbsp;
+        <button mat-raised-button color="warn" matDialogClose>Cancel</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+<ng-template class="modal" #templateZone>
+  <div class="modal-header card-header header-style">
+    <div class="modal-title pull-left">
+      {{ action == "Edit" ? "Edit Zone" : "Add Zone" }}
+    </div>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      matDialogClose
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body card-body">
+    <form class="mt-2" #gform="ngForm">
+      <div class="form-row mt-2 row">
+        <div class="form-group col-3">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Plant</mat-label>
+            <input
+              matInput
+              type="text"
+              required
+              name="zoneName"
+              [(ngModel)]="zoneName"
+            />
+          </mat-form-field>
+        </div>
+
+        <!-- <div class="form-group col-2">
+          <button
+            class="btn btn-sm btn-outline-success"
+            style="color: rgb(6, 88, 44)"
+            (click)="addZone()"
+          >
+            Add
+          </button>
+          &nbsp;
+          <button
+            class="btn btn-sm btn-outline-danger"
+            style="color: red"
+            [disabled]="i === 0"
+            (click)="deleteZone(i, e)"
+          >
+            Delete
+          </button>
+        </div> -->
+      </div>
+      <br />
+      <div class="modal-footer">
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!gform.form.valid"
+          (click)="zoneSubmit()"
+          matDialogClose
+        >
+          {{ action == "Edit" ? "Update" : "Save" }}
+        </button>
+        &nbsp;
+        <button mat-raised-button color="warn" matDialogClose>Cancel</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+<ng-template class="modal" #templateMachine>
+  <div class="modal-header card-header header-style">
+    <div class="modal-title pull-left">
+      {{ action == "Edit" ? "Edit Machine" : "Add Machine" }}
+    </div>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      matDialogClose
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body card-body">
+    <form class="mt-2" #gform="ngForm">
+      <div class="form-row mt-2 row">
+        <div class="form-group col-3">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Machine</mat-label>
+            <input
+              matInput
+              type="text"
+              required
+              name="machineName"
+              [(ngModel)]="machineName"
+            />
+          </mat-form-field>
+        </div>
+
+        <!-- <div class="form-group col-2">
+          <button
+            class="btn btn-sm btn-outline-success"
+            style="color: rgb(6, 88, 44)"
+            (click)="addMachine()"
+          >
+            Add
+          </button>
+          &nbsp;
+          <button
+            class="btn btn-sm btn-outline-danger"
+            style="color: red"
+            [disabled]="i === 0"
+            (click)="deleteMachine(i, e)"
+          >
+            Delete
+          </button>
+        </div> -->
+      </div>
+      <br />
+      <div class="modal-footer">
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!gform.form.valid"
+          (click)="machineSubmit()"
+          matDialogClose
+        >
+          {{ action == "Edit" ? "Update" : "Save" }}
+        </button>
+        &nbsp;
+        <button mat-raised-button color="warn" matDialogClose>Cancel</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+<ng-template class="modal" #templateShift>
+  <div class="modal-header card-header header-style">
+    <div class="modal-title pull-left">
+      {{ action == "Edit" ? "Edit Shift" : "Add Shift" }}
+    </div>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      matDialogClose
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body card-body">
+    <form class="mt-2" #gform="ngForm">
+      <div class="form-row mt-2 row">
+        <div class="form-group col-3">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Shift</mat-label>
+            <input
+              matInput
+              type="text"
+              required
+              name="shiftName"
+              [(ngModel)]="shiftName"
+            />
+          </mat-form-field>
+        </div>
+
+        <!-- <div class="form-group col-2">
+          <button
+            class="btn btn-sm btn-outline-success"
+            style="color: rgb(6, 88, 44)"
+            (click)="addShift()"
+          >
+            Add
+          </button>
+          &nbsp;
+          <button
+            class="btn btn-sm btn-outline-danger"
+            style="color: red"
+            [disabled]="i === 0"
+            (click)="deleteShift(i, e)"
+          >
+            Delete
+          </button>
+        </div> -->
+      </div>
+      <br />
+      <div class="modal-footer">
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!gform.form.valid"
+          (click)="shiftSubmit()"
+          matDialogClose
+        >
+          {{ action == "Edit" ? "Update" : "Save" }}
+        </button>
+        &nbsp;
+        <button mat-raised-button color="warn" matDialogClose>Cancel</button>
+      </div>
+    </form>
+  </div>
+</ng-template>

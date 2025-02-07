@@ -1,0 +1,18 @@
+.dropdown {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+td,
+thead,
+tr,
+th,
+table {
+  border: 1px solid black;
+  // width: inherit !important;
+
+  // padding: 10px;
+}
+
+.classinherit {
+  width: inherit !important;
+}

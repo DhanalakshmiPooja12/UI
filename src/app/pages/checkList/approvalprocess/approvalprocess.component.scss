@@ -1,0 +1,18 @@
+mat-nav-list.list-horizontal {
+  padding: 0;
+  .mat-list-item {
+    display: inline-block;
+    height: auto;
+    width: auto;
+  }
+  .mat-list-item.selected {
+    color: red;
+  }
+}
+.card {
+  border-radius: 25px;
+  border: 2px solid #0b0b0b;
+  padding: 20px;
+  width: 200px;
+  height: 100px;
+}

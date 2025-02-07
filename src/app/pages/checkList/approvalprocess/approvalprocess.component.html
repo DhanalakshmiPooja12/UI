@@ -1,0 +1,75 @@
+<div class="row mt-2 ml-2 mr-2">
+  <div class="col text-left">
+    <h2><b>Checklists</b></h2>
+  </div>
+</div>
+<mat-toolbar>
+  <mat-nav-list class="list-horizontal">
+    <mat-list-item>
+      <a
+        style="color: grey"
+        [ngStyle]="
+          clickedItem == 'New' ? { color: 'brown' } : { color: 'grey' }
+        "
+        [matBadge]="newChecklists?.length || null"
+        matBadgeColor="warn"
+        (click)="onClick('New')"
+        >New</a
+      >
+    </mat-list-item>
+    <mat-list-item>
+      <a
+        style="color: grey"
+        [ngStyle]="
+          clickedItem == 'Upcoming' ? { color: 'orange' } : { color: 'grey' }
+        "
+        [matBadge]="upcomingChecklists?.length || null"
+        (click)="onClick('Upcoming')"
+        >Upcoming</a
+      >
+    </mat-list-item>
+    <mat-list-item>
+      <a
+        style="color: grey"
+        [ngStyle]="
+          clickedItem == 'Approved' ? { color: 'green' } : { color: 'grey' }
+        "
+        [matBadge]="approvedChecklists?.length || null"
+        (click)="onClick('Approved')"
+        >Approved</a
+      >
+    </mat-list-item>
+    <mat-list-item>
+      <a
+        style="color: grey"
+        [ngStyle]="
+          clickedItem == 'Rejected' ? { color: 'red' } : { color: 'grey' }
+        "
+        [matBadge]="rejectedChecklists?.length || null"
+        matBadgeColor="warn"
+        (click)="onClick('Rejected')"
+        >Rejected</a
+      >
+    </mat-list-item>
+  </mat-nav-list>
+</mat-toolbar>
+<hr />
+<br />
+<div class="container-fluid mt-5">
+  <div class="row">
+    <div class="col-md-3" *ngFor="let list of filterChecklist">
+      <div
+        class="card text-center shadow-lg p-3 mb-5 rounded"
+        style="width: 100%; cursor: pointer"
+        (click)="checkListProvision(clickedItem, list)"
+      >
+        <div class="card-body" style="padding: initial">
+          <h3 class="text-center">
+            <b>{{ list?.checkListName }}</b>
+          </h3>
+        </div>
+      </div>
+      <br />
+    </div>
+  </div>
+</div>

@@ -1,0 +1,274 @@
+<div class="row mt-4 ml-2 mr-2">
+  <div class="col text-left">
+    <h2><b>Roles</b></h2>
+    <h4>List</h4>
+  </div>
+  <div class="col mt-5 text-right">
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="!rolePermission['create']"
+      (click)="openWidgetEditorDialog(template, '', 'Add')"
+    >
+      + New Role
+    </button>
+  </div>
+</div>
+<div
+  class="container-fluid text-center row mt-4 ml-2 justify-content-center text-center"
+>
+  <table class="table table-borderless">
+    <thead class="theme-dependent-colors" style="color: aliceblue">
+      <tr>
+        <th>S.No</th>
+        <th>Role</th>
+        <th>Description</th>
+        <th>Permissions</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let e of paginateData; let i = index">
+        <td>{{ e.index }}</td>
+        <td>{{ e.name }}</td>
+        <td>{{ e.description }}</td>
+        <td class="cursor">
+          <mat-icon class="selectall" (click)="addPermissions(e)"
+            >create</mat-icon
+          >
+        </td>
+        <td>
+          <button
+            mat-raised-button
+            color="primary"
+            [disabled]="!rolePermission['modify']"
+            (click)="openWidgetEditorDialog(template, e, 'Edit')"
+          >
+            Edit
+          </button>
+          &nbsp;
+          <button
+            mat-raised-button
+            color="warn"
+            (click)="openWidgetEditorDialog(deltemplate, e, 'del')"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div style="padding-left: 10px">
+  <ngb-pagination
+    [collectionSize]="addRoles?.length"
+    #numPagesExp1
+    [(page)]="currentPage"
+    [maxSize]="maxSize"
+    [rotate]="true"
+    [pageSize]="itemsPerPage"
+    (pageChange)="loadPage()"
+    [directionLinks]="true"
+    [boundaryLinks]="true"
+  ></ngb-pagination>
+
+  <!-- <pre><span class="float-md-left mr-4">Page: {{ currentPage }} / {{ numPagesExp1.pageCount }}</span></pre> -->
+</div>
+<div class="container">
+  <mat-card class="custom" *ngIf="addPermission">
+    <mat-card-title>Update Permissions : {{ rol }}</mat-card-title
+    ><br />
+    <mat-card-content>
+      <table class="table table-borderless">
+        <thead class="theme-dependent-colors" style="color: aliceblue">
+          <tr>
+            <th>Category</th>
+            <th>Create</th>
+            <th>Modify</th>
+            <th>View</th>
+            <th>selectAll</th>
+            <th>DeselectAll</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of temp['Configuration'] | keyvalue">
+            <td>{{ item.key }}</td>
+            <td>
+              <input
+                *ngIf="!item.value['create']"
+                class="cursor"
+                type="checkbox"
+                name="createCheckBox"
+                [checked]="item.value['create']"
+                data-md-icheck
+                (change)="toggleCreateCheck($event, item.key)"
+              />
+              <mat-icon
+                class="cursor"
+                *ngIf="item.value['create']"
+                name="doneCreate"
+                (click)="resetCreate($event, 0, item.key)"
+                >done</mat-icon
+              >
+            </td>
+            <td>
+              <input
+                *ngIf="!item.value['modify']"
+                class="cursor"
+                type="checkbox"
+                name="modifyCheckBox"
+                [checked]="item.value['modify']"
+                data-md-icheck
+                (change)="toggleModifyCheck($event, item.key)"
+              />
+              <mat-icon
+                class="cursor"
+                *ngIf="item.value['modify']"
+                name="doneModify"
+                (click)="resetModify($event, 0, item.key)"
+                >done</mat-icon
+              >
+            </td>
+            <td>
+              <input
+                *ngIf="!item.value['view']"
+                class="cursor"
+                type="checkbox"
+                name="viewCheckBox"
+                [checked]="item.value['view']"
+                data-md-icheck
+                (change)="toggleViewCheck($event, item.key)"
+              />
+              <mat-icon
+                class="cursor"
+                *ngIf="item.value['view']"
+                name="doneView"
+                (click)="resetView($event, 0, item.key)"
+                >done</mat-icon
+              >
+            </td>
+            <td>
+              <mat-icon
+                class="cursor selectall"
+                name="selectAll"
+                (click)="selectAll(item.key, 0)"
+                >done_all</mat-icon
+              >
+            </td>
+            <td>
+              <mat-icon
+                class="cursor clear deselectall"
+                name="deSelectAll"
+                (click)="selectAll(item.key, 1)"
+                >highlight_off</mat-icon
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+        <button mat-raised-button color="primary" (click)="roleSubmit()">
+          Update Permissions
+        </button>
+        &nbsp;
+        <button mat-raised-button color="warn" (click)="cancel()">
+          Cancel
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<ng-template class="modal" #template>
+  <div class="modal-header card-header header-style">
+    <div class="modal-title pull-left">
+      {{ action == "Edit" ? "Update Role" : "Add Role" }}
+    </div>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      matDialogClose
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body card-body">
+    <form class="mt-2" #gform="ngForm" autocomplete="off">
+      <div class="form-row ml-5 row">
+        <div class="form-group col-6">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>name</mat-label>
+            <input
+              matInput
+              type="text"
+              required
+              name="name"
+              [(ngModel)]="name"
+            />
+          </mat-form-field>
+        </div>
+        <div class="form-group col-6">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Role Description</mat-label>
+            <input
+              matInput
+              type="text"
+              required
+              name="description"
+              [(ngModel)]="description"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!gform.form.valid"
+          (click)="roleSubmit()"
+          matDialogClose
+        >
+          {{ action == "Edit" ? "Update" : "Save" }}
+        </button>
+        &nbsp;
+        <button mat-raised-button color="warn" matDialogClose>Cancel</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+<ng-template class="modal" #deltemplate>
+  <div class="modal-header card-header header-style">
+    <h4 class="modal-title pull-left">Delete</h4>
+    <button
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      aria-label="Close"
+      matDialogClose
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body card-body">
+    <div class="example-container">
+      <form>
+        <div>
+          <p>Are you sure to delete?</p>
+        </div>
+        <button
+          type="submit"
+          mat-raised-button
+          color="warn"
+          matDialogClose
+          (click)="deleteRole($event)"
+        >
+          Delete</button
+        >&nbsp;&nbsp;
+        <button type="submit" mat-raised-button color="primary" matDialogClose>
+          Cancel
+        </button>
+      </form>
+    </div>
+  </div>
+</ng-template>

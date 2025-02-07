@@ -1,0 +1,12 @@
+.floatingName::placeholder {
+  opacity: 0;
+}
+/* 2. Show placeholder on focus */
+.floatingName:focus::placeholder {
+  opacity: 1;
+}
+.period {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

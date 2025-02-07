@@ -1,0 +1,160 @@
+<div class="container-fluid text-center mt-4">
+  <div class="row mt-5 ml-2">
+    <h2><b>Status of Checklists</b></h2>
+  </div>
+  <div class="row mt-3 ml-3 mr-3 justify-content-center">
+    <mat-form-field appearance="outline" class="example-full-width col-10">
+      <mat-label><i class="fas fa-search"></i> Search</mat-label>
+      <input
+        matInput
+        type="text"
+        autocomplete="off"
+        [(ngModel)]="filterTerm"
+        name="searchTerm"
+        id="searchTerm"
+      />
+    </mat-form-field>
+  </div>
+  <div class="row mt-4 ml-4 mr-4 justify-content-center">
+    <table
+      class="table table-borderless"
+      style="border-collapse: collapse; border-spacing: 0; width: 100%"
+    >
+      <thead
+        class="theme-dependent-colors"
+        style="color: rgb(252, 247, 247) !important"
+      >
+        <tr>
+          <th>S.No</th>
+          <th>checkList</th>
+          <th>createdAt</th>
+          <th>filledBy</th>
+          <th>status</th>
+        </tr>
+      </thead>
+      &nbsp;
+      <tbody>
+        <tr *ngFor="let e of paginateData | filter : filterTerm; let i = index">
+          <td>{{ e.index }}</td>
+          <td>{{ e.checkListName }}</td>
+          <td>
+            {{ dateConvert(e.createdAt) }}
+          </td>
+          <td>{{ e.preparedBy }}</td>
+          <td
+            class="cursor"
+            [ngStyle]="
+              e.status === 'rejected'
+                ? { color: 'red' }
+                : e.status === 'waiting for approval'
+                ? { color: 'blue' }
+                : e.status === 'resent for filling'
+                ? { color: 'brown' }
+                : e.status === 'open'
+                ? { color: 'orange' }
+                : e.status === 'approved'
+                ? { color: 'green' }
+                : e.status === 'waiting for confirmation'
+                ? { color: 'darkviolet' }
+                : { color: 'black' }
+            "
+            (click)="openWidgetEditorDialog(template, e, 'progress')"
+          >
+            {{ e.status }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div
+    class="container-fluid text-center row mt-4 ml-4 d-flex justify-content-between p-2"
+  >
+    <ngb-pagination
+      [collectionSize]="listStatus?.length"
+      #numPagesExp1
+      [(page)]="currentPage"
+      [maxSize]="maxSize"
+      [rotate]="true"
+      [pageSize]="itemsPerPage"
+      (pageChange)="loadPage()"
+      [directionLinks]="true"
+      [boundaryLinks]="true"
+    ></ngb-pagination>
+    <!-- <pre><span class="float-md-left mr-4">Page: {{ currentPage }} / {{ numPagesExp1.pageCount }}</span></pre> -->
+  </div>
+</div>
+<ng-template class="modal" #template>
+  <div class="modal-header card-header header-style">
+    <div class="modal-title pull-left">Checklist Status</div>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      matDialogClose
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body card-body">
+    <mat-card class="custom" *ngIf="showProgress">
+      <mat-card-content>
+        <div>
+          <div class="row multi-steps-wrap">
+            <ul
+              class="list-unstyled multi-steps"
+              *ngIf="!completed && !reject && currentStatus !== ''"
+            >
+              <li
+                *ngFor="let item of levelDesc; let i = index"
+                class="job-status"
+                [ngClass]="{
+                  'job-inprogress is-active negative':
+                    item.level === currentStatus
+                }"
+              >
+                {{ item.level }}-{{ item.approvalPersonUser }}
+              </li>
+            </ul>
+            <ul
+              class="list-unstyled multi-steps"
+              *ngIf="!completed && !reject && currentStatus === ''"
+            >
+              <li
+                *ngFor="let item of levelDesc; let i = index"
+                class="job-status"
+                [ngClass]="{
+                  rejected: currentStatus === ''
+                }"
+              >
+                {{ item.level }}-{{ item.approvalPersonUser }}
+              </li>
+            </ul>
+            <ul class="list-unstyled multi-steps" *ngIf="completed">
+              <li
+                *ngFor="let item of levelDesc; let i = index"
+                class="job-status"
+                [ngClass]="{
+                  'is-active': item.level === currentStatus
+                }"
+              >
+                {{ item.level }}-{{ item.approvalPersonUser }}
+              </li>
+            </ul>
+            <ul class="list-unstyled multi-steps" *ngIf="reject">
+              <li
+                *ngFor="let item of levelDesc; let i = index"
+                class="job-status"
+                [ngClass]="{
+                  'job-inprogress is-active rejected':
+                    item.level === currentStatus
+                }"
+              >
+                {{ item.level }}-{{ item.approvalPersonUser }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </mat-card-content></mat-card
+    >
+  </div>
+</ng-template>

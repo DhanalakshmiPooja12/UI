@@ -1,0 +1,23 @@
+h2 {
+  color: #009d9a;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  img {
+    width: 40%;
+    height: auto;
+  }
+}
+.toolbar-item-spacer {
+  flex: 1 1 auto;
+}
+.bgcolor {
+  background-color: #009d9a;
+}

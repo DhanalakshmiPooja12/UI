@@ -1,0 +1,159 @@
+.cursor {
+  cursor: pointer;
+  :hover {
+    color: #3cba9f;
+  }
+}
+$color_1: #008400;
+$color_2: white;
+$color_3: #808080;
+$background-color_1: #fff;
+$background-color_2: gray;
+$background-color_3: red;
+$background-color_4: #008400;
+$background-color_5: #808080;
+$background-color_6: #eee;
+$border-color_1: red;
+$border-color_2: #008400;
+$border-color_3: #3cba9f;
+$border-color_4: #fff;
+
+/* .job-status {
+  position: relative !important;
+} */
+@media (max-width: 576px) {
+  .multi-steps-wrap {
+    margin: 0;
+  }
+}
+.m-0 {
+  margin: 0px !important;
+}
+.p-0 {
+  padding: 0px !important;
+}
+.multi-steps-wrap {
+  .multi-steps {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    > li {
+      counter-increment: stepNum;
+      text-align: center;
+      display: table-cell;
+      position: relative;
+      color: $color_1;
+      font-size: 12px;
+      z-index: 1;
+      &:before {
+        content: "✓";
+        display: block;
+        margin: 0 auto 4px;
+        background-color: $background-color_1;
+        width: 20px;
+        height: 20px;
+        line-height: 22px;
+        text-align: center;
+        font-size: 18px;
+        border-width: 2px;
+        border-style: solid;
+        border-color: $border-color_2;
+        border-radius: 50%;
+      }
+      &:after {
+        content: "";
+        height: 2px;
+        width: 100%;
+        background-color: $background-color_2;
+        position: absolute;
+        top: 12px;
+        left: 50%;
+        z-index: -1;
+      }
+      &:last-child {
+        &:after {
+          display: none;
+        }
+      }
+      &:last-child.is-active {
+        &:before {
+          content: "✓";
+        }
+      }
+      &:first-child.is-active {
+        &:before {
+          content: "✓";
+        }
+      }
+      &::after {
+        content: "";
+        height: 2px;
+        width: 100%;
+        background-color: $background-color_4;
+        position: absolute;
+        top: 12px;
+        left: 50%;
+        z-index: -1;
+      }
+    }
+    > li.is-active {
+      &:before {
+        background-color: $background-color_1;
+        border-color: $border-color_3;
+      }
+      ~ {
+        li {
+          color: $color_3;
+          &::after {
+            content: "";
+            background-color: $background-color_5;
+          }
+          &:before {
+            background-color: $background-color_6;
+            border-color: $border-color_4;
+          }
+        }
+      }
+    }
+    > li.negative {
+      &:before {
+        background-color: $background-color_3;
+        border-color: $border-color_1;
+        color: $color_2;
+      }
+      &::after {
+        content: "";
+        height: 2px;
+        width: 100%;
+        background-color: $background-color_5;
+        position: absolute;
+        top: 12px;
+        left: 50%;
+        z-index: -1;
+      }
+    }
+    > li.rejected {
+      &:before {
+        background-color: $background-color_3;
+        border-color: $border-color_1;
+        color: $color_2;
+        content: "X" !important;
+      }
+      &::after {
+        content: "";
+        height: 2px;
+        width: 100%;
+        background-color: $background-color_5;
+        position: absolute;
+        top: 12px;
+        left: 50%;
+        z-index: -1;
+      }
+    }
+  }
+}
+.negative {
+  border-color: $border-color_1;
+}

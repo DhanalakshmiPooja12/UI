@@ -1,0 +1,212 @@
+<div class="container-fluid mt-3 mb-5" [ngStyle]="{ width: dynamicTableWidth }">
+  <div>
+    <table>
+      <tr>
+        <td>
+          <img
+            *ngIf="imageHeaderBool"
+            class="text-left"
+            [src]="imageUrl"
+            alt="Image Source"
+            height="70px !important"
+            width="100px"
+            style="display: fit-content"
+          />
+          <h3 class="text-center">{{ localChecklistName }}</h3>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- <table>
+      <tr>
+        <td *ngFor="let k of getObjectKeys(partData)">
+          <b>{{ k }}:</b> {{ partData[0][k] }}
+        </td>
+      </tr>
+    </table> -->
+  <table [hidden]="!partBool">
+    <tr
+      cdkDropList
+      cdkDropListOrientation="horizontal"
+      #todoList="cdkDropList"
+      [cdkDropListData]="mainDataPartpush"
+      (cdkDropListDropped)="drop($event)"
+      [cdkDropListConnectedTo]="[doneList]"
+      style="cursor: pointer"
+    >
+      <td *ngFor="let item of mainDataPartpush; let i = index" cdkDrag>
+        <b> {{ arrayheaderkey[i] }}</b>
+        <span *ngIf="!urlsPresent(arrayheaderval[i])"
+          >:{{ arrayheaderval[i] }}</span
+        >
+        <img
+          *ngIf="urlsPresent(arrayheaderval[i])"
+          [src]="arrayheaderval[i]"
+          alt=""
+          height="50px !important"
+          width="100px"
+        />
+        <span *ngIf="!urlsPresent(arrayheaderval[i])"></span>
+      </td>
+    </tr>
+  </table>
+  <table [hidden]="!mainDatabool">
+    <tr
+      cdkDropList
+      cdkDropListOrientation="horizontal"
+      #doneList="cdkDropList"
+      [cdkDropListData]="subheaderArray"
+      (cdkDropListDropped)="drop($event)"
+      [cdkDropListConnectedTo]="[todoList]"
+      style="cursor: pointer"
+    >
+      <td
+        style="display: fit-content"
+        *ngFor="let m of subheaderArray; let j = index"
+        cdkDrag
+      >
+        <b>{{ elementkey[j] }} : </b
+        ><span *ngIf="!urlsPresent(elementval[j])"
+          ><input
+            matInput
+            type="text"
+            [(ngModel)]="elementval[j]"
+            name="name"
+            id="name"
+        /></span>
+        <img
+          *ngIf="urlsPresent(elementval[j])"
+          [src]="elementval[j]"
+          alt=""
+          height="auto"
+          width="100px"
+        />
+      </td>
+    </tr>
+  </table>
+  <table *ngIf="mainheaderBool">
+    <td class="text-center 1" style="width: 100%">
+      <b>{{ mainHeader }}</b>
+    </td>
+  </table>
+  <table *ngIf="colbool" style="width: 100%" #dynamicTable>
+    <tr [attr.rowspan]="columValue?.length">
+      <td
+        *ngFor="let h of tempHeading; let j = index"
+        [attr.colspan]="h.subheader ? h.subheader.length : 1"
+      >
+        <b>{{ h.cName }}</b>
+      </td>
+    </tr>
+    <tr>
+      <td
+        *ngFor="let t of columnData; let i = index"
+        [hidden]="t == 'rejected' || t == 'remarks'"
+      >
+        <b>{{ checkString(t) }}</b>
+      </td>
+    </tr>
+    <tr *ngFor="let e of columValue; let i = index">
+      <td
+        style="display: fit-content"
+        *ngFor="let t of columnData; let j = index"
+        [hidden]="t == 'rejected' || t == 'remarks'"
+        [ngStyle]="getStyleForIndex(i, t)"
+      >
+        <img
+          *ngIf="urlsPresent(e[t])"
+          [src]="e[t]"
+          alt=""
+          height="auto"
+          width="100px"
+        />
+        <span *ngIf="!urlsPresent(e[t])">
+          <input
+            matInput
+            type="text"
+            [(ngModel)]="e[t]"
+            name="name"
+            id="name"
+          />
+        </span>
+      </td>
+    </tr>
+  </table>
+
+  <span *ngIf="dailyPerodic != 'Daily'">
+    <table *ngIf="!footerBool">
+      <tr>
+        <td *ngFor="let s of tempFooter">
+          <b>{{ s.fName }}</b>
+        </td>
+      </tr>
+    </table>
+    <table *ngIf="footerBool" style="width: 100%">
+      <tr>
+        <td *ngFor="let s of tempFooter">
+          <b
+            ><input
+              matInput
+              type="text"
+              [(ngModel)]="s.fName"
+              name="name"
+              id="name"
+            />{{ s.fName }}</b
+          >
+        </td>
+      </tr>
+      <tr class="col-10" *ngFor="let e of footerData; let i = index">
+        <td style="display: fit-content" *ngFor="let s of tempFooter">
+          <img
+            *ngIf="urlsPresent(e[s.fName])"
+            [src]="e[s.fName]"
+            alt=""
+            height="auto"
+            width="100px"
+          />
+          <span *ngIf="!urlsPresent(e[s.fName])">
+            <input
+              matInput
+              type="text"
+              [(ngModel)]="e[s.fName]"
+              name="name"
+              id="name"
+            />{{ e[s.fName] }}</span
+          >
+        </td>
+      </tr>
+    </table>
+  </span>
+  <span *ngIf="dailyPerodic == 'Daily'">
+    <table *ngIf="!footerBool">
+      <tr>
+        <td *ngFor="let s of tempFooter">
+          <b>{{ s.fName }}</b>
+        </td>
+      </tr>
+    </table>
+    <table *ngIf="footerBool" style="width: 100%">
+      <tr *ngFor="let s of tempFooter">
+        <td>
+          <b>{{ s.fName }}</b>
+        </td>
+
+        <td
+          *ngFor="let e of footerData; let i = index"
+          cellspacing="3"
+          cellpadding="3"
+        >
+          <img
+            *ngIf="urlsPresent(e[s.fName])"
+            [src]="e[s.fName]"
+            alt=""
+            height="auto"
+            width="100px"
+          />
+          <span *ngIf="!urlsPresent(e[s.fName])"> {{ e[s.fName] }}</span>
+        </td>
+      </tr>
+    </table>
+  </span>
+</div>

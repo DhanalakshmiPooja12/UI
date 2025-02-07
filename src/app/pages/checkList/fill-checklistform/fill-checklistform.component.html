@@ -1,0 +1,38 @@
+<div class="row mt-2 ml-2 mr-2">
+  <div class="col text-left">
+    <h2><b>Selected Checklists</b></h2>
+    <h4>
+      <a href="javascript:void(0)" (click)="returnToMaster()">New Fill</a> >
+      Checklist
+    </h4>
+  </div>
+</div>
+<div class="text-center ml-3 mr-3">
+  <table
+    class="table table-borderless"
+    style="border-collapse: collapse; border-spacing: 0; width: 100%"
+  >
+    <thead class="theme-dependent-colors" style="color: aliceblue">
+      <tr>
+        <th>Checklist</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let e of masterData; let i = index">
+        <td>{{ e.masterName }}</td>
+        <td>
+          <button
+            [disabled]="e.submitBool || !newCLPermission['add']"
+            mat-raised-button
+            color="accent"
+            (click)="fill(e.masterName)"
+          >
+            Fill New
+          </button>
+          &nbsp;
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,29 @@
+.mat-card {
+  border-radius: 20px;
+  border-color: darkgray;
+  box-shadow: 50px;
+  //   width: 1200px ;
+}
+.cursor {
+  cursor: pointer;
+}
+.clear {
+  color: purple;
+}
+.rowCenter {
+  margin-top: 100vh;
+}
+.selectall {
+  color: rgb(9, 169, 126);
+}
+.selectall:hover {
+  color: darkgreen;
+}
+.deselectall:hover {
+  color: rgb(244, 23, 41);
+}
+.sc {
+  //   height: 50px;
+  //   display: block;
+  overflow-y: auto;
+}

@@ -1,0 +1,346 @@
+<div class="row mt-4 ml-2 mr-2">
+  <div class="col text-left">
+    <h2><b>User</b></h2>
+    <h4>List</h4>
+  </div>
+  <div class="col mt-5 text-right">
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="!userPermission['create']"
+      (click)="openWidgetEditorDialog(template, '', 'Add')"
+    >
+      + New User
+    </button>
+  </div>
+</div>
+<div
+  class="container-fluid text-center row mt-4 justify-content-center text-center"
+>
+  <table class="table table-borderless ml-4">
+    <thead class="theme-dependent-colors" style="color: aliceblue">
+      <tr>
+        <th>User ID</th>
+        <th>User Name</th>
+        <th>Role</th>
+        <th>Department</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let e of paginateData; let i = index">
+        <td>{{ e.userId }}</td>
+        <td>{{ e.userName }}</td>
+        <td>{{ e.role }}</td>
+        <td>{{ e.depart }}</td>
+        <td>{{ e.email }}</td>
+        <td>
+          <button
+            mat-raised-button
+            color="primary"
+            [disabled]="!userPermission['modify']"
+            (click)="openWidgetEditorDialog(template, e, 'Edit')"
+          >
+            Edit
+          </button>
+          &nbsp;
+          <button
+            mat-raised-button
+            color="warn"
+            (click)="openWidgetEditorDialog(template1, e, 'del')"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div style="padding-left: 20px">
+  <ngb-pagination
+    [collectionSize]="finalArr?.length"
+    #numPagesExp1
+    [(page)]="currentPage"
+    [maxSize]="maxSize"
+    [rotate]="true"
+    [pageSize]="itemsPerPage"
+    (pageChange)="loadPage()"
+    [directionLinks]="true"
+    [boundaryLinks]="true"
+  ></ngb-pagination>
+
+  <!-- <pre><span class="float-md-left mr-4">Page: {{ currentPage }} / {{ numPagesExp1.pageCount }}</span></pre> -->
+</div>
+<!-- <div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="userId">
+      <mat-header-cell *matHeaderCellDef> UserId</mat-header-cell>
+      <mat-cell *matCellDef="let finalArr"> {{ finalArr.userId }} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="userName">
+      <mat-header-cell *matHeaderCellDef> UserName </mat-header-cell>
+      <mat-cell *matCellDef="let finalArr"> {{ finalArr.userName }} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+      <mat-cell *matCellDef="let finalArr"> {{ finalArr.email }} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+</div> -->
+
+<ng-template class="modal" #template>
+  <div class="modal-header card-header header-style">
+    <div class="modal-title pull-left">
+      {{ action == "Edit" ? "Edit User" : "Add User" }}
+    </div>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      matDialogClose
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body card-body">
+    <form
+      class="mt-2"
+      [formGroup]="formEP"
+      (ngSubmit)="addUser()"
+      autocomplete="off"
+    >
+      <div class="form-row ml-5 row">
+        <div class="form-group col-6">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>UserId</mat-label>
+            <input
+              matInput
+              type="text"
+              id="float-input2"
+              [readonly]="true"
+              name="userId"
+              formControlName="userId"
+              [(ngModel)]="currentUserId"
+            />
+          </mat-form-field>
+        </div>
+        <div class="form-group col-6">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>UserName</mat-label>
+            <input
+              matInput
+              type="text"
+              id="float-input"
+              required
+              name="userName"
+              formControlName="userName"
+              [(ngModel)]="userName"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="form-row ml-5 row">
+        <div class="form-group col-6">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Role</mat-label>
+            <mat-select
+              name="role1"
+              id="role1"
+              [(ngModel)]="userRole"
+              (ngModelChange)="roleSelect($event)"
+              formControlName="role"
+              required
+            >
+              <mat-option *ngFor="let e of addRoles" value="{{ e.name }}">
+                {{ e.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-6">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Department</mat-label>
+            <mat-select
+              name="digiI/O1"
+              id="digiI/O1"
+              [(ngModel)]="depart"
+              formControlName="depart"
+              (ngModelChange)="departSelect($event)"
+              required
+            >
+              <mat-option>All</mat-option>
+              <mat-option
+                *ngFor="let e of addDepartments"
+                value="{{ e.dName }}"
+              >
+                {{ e.dName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="form-row mt-2 ml-5 row">
+        <div class="form-group col-6">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input
+              matInput
+              type="email"
+              id="float-input1"
+              required
+              name="email"
+              email="true"
+              formControlName="email"
+              [(ngModel)]="email"
+            />
+          </mat-form-field>
+          <div style="height: 50px; display: flex; color: red">
+            <div
+              *ngIf="
+                formEP.get('email').errors &&
+                (formEP.get('email').dirty || formEP.get('email').touched)
+              "
+            >
+              <span *ngIf="formEP.get('email').hasError('required')"
+                >Email is required</span
+              >
+              <span *ngIf="formEP.get('email').hasError('email')"
+                >Invalid email format
+              </span>
+              <span *ngIf="formEP.get('email').hasError('pattern')"
+                >Please Provide a Mail Format</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="form-group col-6">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Password</mat-label>
+            <input
+              matInput
+              type="{{ hide ? 'text' : 'password' }}"
+              id="float-password"
+              required
+              autocomplete="new-password"
+              name="password"
+              formControlName="password"
+              [(ngModel)]="password"
+              (keyup)="getInput()"
+            />
+            <i
+              *ngIf="hide"
+              (click)="toggleVisibility()"
+              class="fa fa-eye eyeicon"
+            ></i>
+            <i
+              *ngIf="!hide && formEP.controls['password'].status != 'DISABLED'"
+              (click)="toggleVisibility()"
+              class="fa fa-eye-slash eyeicon"
+            ></i>
+          </mat-form-field>
+          <button
+            *ngIf="action != 'Add'"
+            class="btn btn-primary btn-xs"
+            style="margin-top: -118px; margin-left: 208px"
+            type="button"
+            id="edit"
+            (click)="hide = false"
+            title="Edit User"
+          >
+            <i class="fa fa-undo" (click)="enable()"></i>
+          </button>
+
+          <!-- <div style="height: -10px; display: flex; color: red;"> -->
+          <!-- <div *ngIf="formEP.get('password').errors && (formEP.get('password').dirty || formEP.get('password').touched)"> -->
+          <!-- <span *ngIf="formEP.get('password').hasError('required')">Password is required</span>
+
+              <span *ngIf="formEP.get('password').hasError('minlength')"> Password should contain atleast 8 characters</span> -->
+          <!-- <span *ngIf="formEP.get('password').hasError('passwordStrength')"> {{ formEP.get('password').errors['passwordStrength'] }}</span>
+              <span *ngIf="formEP.get('password').hasError('passwordSpecial')"> {{ formEP.get('password').errors['passwordSpecial'] }}</span>
+              <span *ngIf="formEP.get('password').hasError('passwordStrengthU')"> {{ formEP.get('password').errors['passwordStrengthU'] }}</span> -->
+          <!-- <div class="error-text" *ngIf="formEP.get('password').hasError('passwordStrength')"> -->
+          <!-- {{formEP.get('password').errors['passwordStrength']}} -->
+          <!-- </div> -->
+          <!-- <div *ngIf="formEP.get('password').hasError('minlength')">
+                Password must be at least 8 characters
+              </div> -->
+          <!-- <div *ngIf="formEP.get('password').hasError('required')"> -->
+          <!-- password is required -->
+          <!-- </div> -->
+          <!-- </div> -->
+          <!-- </div> -->
+          <div style="height: 50px; display: flex; color: red">
+            <span *ngIf="passwordVaild">
+              Password must contain more than 8 characters, 1 upper case letter,
+              and 1 special character</span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="formEP.status == 'INVALID' ? true : false"
+          (click)="addUser()"
+          matDialogClose
+        >
+          {{ action == "Edit" ? "Update" : "Save" }}
+        </button>
+        &nbsp;
+        <button
+          mat-raised-button
+          color="warn"
+          (click)="formEP.reset(this.formEP.value)"
+          matDialogClose
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+<ng-template class="modal" #template1>
+  <div class="modal-header card-header header-style">
+    <h4 class="modal-title pull-left">Delete</h4>
+    <button
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      aria-label="Close"
+      matDialogClose
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body card-body">
+    <div class="example-container">
+      <form>
+        <div>
+          <p>Are you sure to delete?</p>
+        </div>
+        <button
+          type="submit"
+          mat-raised-button
+          color="warn"
+          matDialogClose
+          (click)="delete(finalArr)"
+        >
+          Delete</button
+        >&nbsp;&nbsp;
+        <button type="submit" mat-raised-button color="primary" matDialogClose>
+          Cancel
+        </button>
+      </form>
+    </div>
+  </div>
+</ng-template>

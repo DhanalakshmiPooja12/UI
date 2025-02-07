@@ -1,0 +1,374 @@
+<!-- <div class="row mt-2 ml-2 mr-2">
+  <div class="col text-left">
+    <h4><b>Filled Checklists</b></h4>
+    <h6>Type > {{ localtempName }}</h6>
+  </div>
+</div>
+<div class="col text-right">
+  <button
+    mat-raised-button
+    color="primary"
+    routerLink="mainpage/checklist/filledList"
+  >
+    Back
+  </button>
+</div>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-3" *ngFor="let e of masterName">
+      <div
+        class="card text-center shadow-lg p-3 mb-5 rounded"
+        style="width: 100%"
+      >
+        <div class="card-body" mat-raised-button (click)="tableClick(e)">
+          <h3 class="card-title">{{ e.masterName }}</h3>
+        </div>
+      </div>
+      <br />
+    </div>
+  </div>
+</div> -->
+<div class="container-fluid mt-5">
+  <div class="row mt-2 ml-2 mr-2">
+    <div class="col text-left">
+      <h2><b>Filled CheckList</b></h2>
+      <h4>List</h4>
+    </div>
+  </div>
+  <mat-toolbar>
+    <mat-nav-list class="list-horizontal">
+      <mat-list-item>
+        <a
+          style="color: grey"
+          [ngStyle]="
+            clickedItem == 'workingList'
+              ? { color: '#009d9a' }
+              : { color: 'grey' }
+          "
+          (click)="onClick('workingList')"
+          >Working Checklists</a
+        >
+      </mat-list-item>
+      <mat-list-item>
+        <a
+          style="color: grey"
+          [ngStyle]="
+            clickedItem == 'approvedList'
+              ? { color: '#009d9a' }
+              : { color: 'grey' }
+          "
+          (click)="onClick('approvedList')"
+          >Approved Checklists</a
+        >
+      </mat-list-item>
+      <mat-list-item>
+        <a
+          style="color: grey"
+          [ngStyle]="
+            clickedItem == 'rejectedList' ? { color: 'red' } : { color: 'grey' }
+          "
+          [matBadge]="rejectedLists?.length || null"
+          matBadgeColor="warn"
+          (click)="onClick('rejectedList')"
+          >Rejected Checklists</a
+        >
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-toolbar>
+  <hr />
+  <br />
+  <div class="row mt-3 justify-content-center">
+    <mat-form-field appearance="outline" class="example-full-width col-10">
+      <mat-label><i class="fas fa-search"></i> Search</mat-label>
+      <input
+        matInput
+        type="text"
+        autocomplete="off"
+        [(ngModel)]="filterTerm"
+        name="searchTerm"
+        id="searchTerm"
+      />
+    </mat-form-field>
+  </div>
+
+  <div class="table-responsive" *ngIf="showworkingList">
+    <!-- <table *ngIf="showLoader">
+      <ngx-skeleton-loader
+        [theme]="{
+          'border-radius': '0',
+          height: '20px',
+          'background-color': '#1d222e '
+        }"
+        count="4"
+      ></ngx-skeleton-loader>
+    </table> -->
+    <table
+      class="table table-centered table-borderless datatable dt-responsive nowrap"
+      style="border-collapse: collapse; border-spacing: 0; width: 100%"
+    >
+      <thead
+        class="theme-dependent-colors"
+        style="color: rgb(252, 247, 247) !important"
+      >
+        <tr>
+          <th>S.NO</th>
+          <th>CheckList</th>
+          <th>FilledBy</th>
+          <th>FilledAt</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let a of paginateData | filter : filterTerm; let i = index">
+          <td>{{ a.index }}</td>
+          <td>{{ a.checklistName }}</td>
+          <td>{{ a.createdBy }}</td>
+          <td>{{ dateConvert(a.updatedAt) }}</td>
+          <td style="cursor: pointer">
+            <div class="row" *ngIf="a.periodicSchedule === 'Daily'">
+              <!-- <span *ngIf="formattedDate1 == formattedDate"> -->
+              <button
+                *ngIf="a?.status != 'approved'"
+                class="col-4"
+                mat-raised-button
+                (click)="tableClick(a)"
+                [disabled]="
+                  (a.sentToApproval == 'true' &&
+                    checkAndDisable(a.updatedAt, a) &&
+                    a.status != 'rejected') ||
+                  !filledCLPermission['modify']
+                "
+                color="primary"
+              >
+                {{
+                  a.sentToApproval == "true" &&
+                  checkAndDisable(a.updatedAt, a) &&
+                  a.status != "rejected"
+                    ? "sent to Approval"
+                    : !checkAndDisable(a.updatedAt, a) || a.status == "rejected"
+                    ? "Update"
+                    : checkAndDisable(a.updatedAt, a)
+                    ? "Update"
+                    : ""
+                }}
+              </button>
+              <button
+                class="col-4"
+                *ngIf="
+                  a?.status == 'approved' && checkAndDisable(a.updatedAt, a)
+                "
+                mat-raised-button
+                color="accent"
+              >
+                {{ a.status }}
+              </button>
+              <!-- </span> -->
+
+              <button
+                class="col-4"
+                *ngIf="
+                  (a?.status == 'approved' &&
+                    !checkAndDisable(a.updatedAt, a)) ||
+                  a?.status == 'open' ||
+                  a?.status == 'waiting for approval'
+                "
+                mat-raised-button
+                color="primary"
+                (click)="tableClick(a)"
+              >
+                Update
+              </button>
+              <!-- <button
+                *ngIf="updateBool"
+                class="col-4"
+                mat-raised-button
+                color="accent"
+                (click)="tableClick(a)"
+              >
+                {{ updateButton }}
+              </button> -->
+
+              &nbsp; &nbsp;
+              <button
+                class="col-3"
+                mat-raised-button
+                color="accent"
+                (click)="Preview(a)"
+              >
+                Preview
+              </button>
+            </div>
+            <div class="row" *ngIf="a.periodicSchedule != 'Daily'">
+              <button
+                *ngIf="a?.status != 'approved'"
+                class="col-4"
+                mat-raised-button
+                (click)="tableClick(a)"
+                [disabled]="a.sentToApproval || !filledCLPermission['modify']"
+                color="primary"
+              >
+                {{ a.sentToApproval == "true" ? "sent to Approval" : "Update" }}
+              </button>
+              <button
+                class="col-4"
+                *ngIf="a?.status == 'approved'"
+                mat-raised-button
+                color="accent"
+              >
+                {{ a.status }}
+              </button>
+
+              &nbsp; &nbsp;
+              <button
+                class="col-3"
+                mat-raised-button
+                color="accent"
+                (click)="Preview(a)"
+              >
+                Preview
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      <tbody style="background-color: #333333; color: white !important">
+        <tr></tr>
+      </tbody>
+    </table>
+    <div
+      class="container-fluid text-center row mt-3 ml-3 d-flex justify-content-between p-2"
+    >
+      <ngb-pagination
+        [collectionSize]="workingLists?.length"
+        #numPagesExp1
+        [(page)]="currentPage"
+        [maxSize]="maxSize"
+        [rotate]="true"
+        [pageSize]="itemsPerPage"
+        (pageChange)="loadPage()"
+        [directionLinks]="true"
+        [boundaryLinks]="true"
+      ></ngb-pagination>
+      <!-- <pre><span class="float-md-left mr-4">Page: {{ currentPage }} / {{ numPagesExp1.pageCount }}</span></pre> -->
+    </div>
+  </div>
+
+  <div class="table-responsive" *ngIf="showrejectedList">
+    <table
+      class="table table-centered table-borderless datatable dt-responsive nowrap"
+      style="border-collapse: collapse; border-spacing: 0; width: 100%"
+    >
+      <thead
+        class="theme-dependent-colors"
+        style="color: rgb(252, 247, 247) !important"
+      >
+        <tr>
+          <th>S.NO</th>
+          <th>CheckList</th>
+          <th>RejectedAt</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let a of rejpaginateData | filter : filterTerm; let i = index"
+        >
+          <td>{{ a.index }}</td>
+          <td>{{ a.checkListName }}</td>
+          <td>{{ dateConvert(a.updatedTime) }}</td>
+          <td style="cursor: pointer">
+            <button mat-raised-button (click)="fillAgain(a)" color="primary">
+              {{ "fill again" }}
+            </button>
+          </td>
+        </tr>
+      </tbody>
+      <tbody style="background-color: #333333; color: white !important">
+        <tr></tr>
+      </tbody>
+    </table>
+    <div
+      class="container-fluid text-center row mt-4 ml-3 d-flex justify-content-between p-2"
+    >
+      <ngb-pagination
+        [collectionSize]="rejectedLists?.length"
+        #numPagesExp1
+        [(page)]="currentPage"
+        [maxSize]="rejMaxSize"
+        [rotate]="true"
+        [pageSize]="itemsPerPage"
+        (pageChange)="rejloadPage()"
+        [directionLinks]="true"
+        [boundaryLinks]="true"
+      ></ngb-pagination>
+      <!-- <pre><span class="float-md-left mr-4">Page: {{ currentPage }} / {{ numPagesExp1.pageCount }}</span></pre> -->
+    </div>
+  </div>
+  <div class="table-responsive" *ngIf="showApprovedList">
+    <table
+      class="table table-centered table-borderless datatable dt-responsive nowrap"
+      style="border-collapse: collapse; border-spacing: 0; width: 100%"
+    >
+      <thead
+        class="theme-dependent-colors"
+        style="color: rgb(252, 247, 247) !important"
+      >
+        <tr>
+          <th>S.NO</th>
+          <th>CheckList</th>
+          <th>FilledBy</th>
+          <th>FilledAt</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let a of approvedpaginateData | filter : filterTerm;
+            let i = index
+          "
+        >
+          <td>{{ a.index }}</td>
+          <td>{{ a.checklistName }}</td>
+          <td>{{ a.createdBy }}</td>
+          <td>{{ dateConvert(a.updatedAt) }}</td>
+          <td style="cursor: pointer">
+            <div class="row">
+              <button class="col-4" mat-raised-button color="accent">
+                {{ a.status }}
+              </button>
+
+              &nbsp; &nbsp;
+              <button
+                class="col-3"
+                mat-raised-button
+                color="accent"
+                (click)="Preview(a)"
+              >
+                Preview
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      <tbody style="background-color: #333333; color: white !important">
+        <tr></tr>
+      </tbody>
+    </table>
+    <div
+      class="container-fluid text-center row mt-4 ml-3 d-flex justify-content-between p-2"
+    >
+      <ngb-pagination
+        [collectionSize]="approvedLists.length"
+        #numPagesExp1
+        [(page)]="currentPage"
+        [maxSize]="approvedMaxSize"
+        [rotate]="true"
+        [pageSize]="itemsPerPage"
+        (pageChange)="approvedloadPage()"
+        [directionLinks]="true"
+        [boundaryLinks]="true"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

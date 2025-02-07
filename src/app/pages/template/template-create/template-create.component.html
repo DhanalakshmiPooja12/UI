@@ -1,0 +1,2289 @@
+<div class="row mt-2 ml-2 mr-2">
+  <div class="col text-left">
+    <h2><b>Checklist Template</b></h2>
+    <h4>
+      <a href="javascript:void(0)" (click)="returnToTemplate()">Templates</a> >
+      Create
+    </h4>
+  </div>
+</div>
+<!-- <div class="card" style="background-color: rgb(189, 127, 127)"> -->
+<div class="example-container">
+  <div class="row mt-4 ml-2 mr-2">
+    <form class="col-12" #uform="ngForm" autocomplete="off">
+      <div class="form-row">
+        <div class="form-group col-6">
+          <mat-form-field
+            appearance="outline"
+            class="example-full-width col-12"
+          >
+            <mat-label>Name</mat-label>
+            <input
+              matInput
+              type="text"
+              required
+              name="tempName"
+              [(ngModel)]="tempName"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <h4><b>Upload PDF for Instruction</b></h4>
+          <div class="row">
+            <input
+              type="file"
+              (change)="onFileSelected($event)"
+              accept=".pdf"
+            />
+            &nbsp; &nbsp; &nbsp;
+            <p (click)="getPDF()" *ngIf="fileBool">
+              <button mat-raised-button color="Pink" style="cursor: pointer">
+                <a target="_blank">Preview</a>
+              </button>
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="row">
+        <div class="form-group col-5">
+          <mat-form-field class="col-12">
+            <mat-label>Part Id</mat-label>
+            <mat-select
+              name="part"
+              id="part"
+              [(ngModel)]="PartId"
+              style="max-height: 200px; overflow-y: auto"
+            >
+              <mat-option>----</mat-option>
+              <mat-option
+                *ngFor="let p of part; let i = index"
+                value="{{ p.partId }}"
+              >
+                {{ p.partId }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div> -->
+      <hr />
+
+      <h6 class="col-12">
+        <h4>
+          <b>Periodic Schedule</b> &nbsp;
+          <input
+            type="checkbox"
+            name="periodicschelude"
+            [(ngModel)]="periodicschelude"
+            data-md-icheck
+            (change)="showPeriodic($event)"
+          />
+        </h4>
+      </h6>
+
+      <div class="form-row" *ngIf="showRadioButton">
+        <mat-radio-group>
+          <mat-radio-button
+            class="col-6"
+            *ngFor="let r of periodicBox"
+            [value]="r"
+            (change)="periodChange(r)"
+            required
+            (click)="getKey($event, r)"
+            >{{ r }}</mat-radio-button
+          >
+        </mat-radio-group>
+        <!-- <div class="form-group col-4" *ngIf="showShiftWise"> -->
+        <mat-form-field
+          *ngIf="showShiftWise"
+          appearance="outline"
+          class="example-full-width col-3"
+        >
+          <mat-label>Select Period</mat-label>
+          <mat-select
+            name="schelude"
+            id="schelude"
+            (selectionChange)="getShiftSelection($event)"
+            required
+          >
+            <mat-option
+              *ngFor="let selection of shiftwise"
+              [value]="selection"
+              >{{ selection }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+        <!-- </div> -->
+        <!-- <div class="form-row" *ngIf="shiftFlag"> -->
+        <mat-form-field
+          *ngIf="shiftFlag"
+          appearance="outline"
+          class="example-full-width col-3"
+        >
+          <mat-label>Shift</mat-label>
+          <mat-select
+            name="shift1"
+            id="shift1"
+            [(ngModel)]="selectedShift"
+            (ngModelChange)="shiftSelect($event)"
+            required
+          >
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let e of allShifts" value="{{ e.name }}">
+              {{ e.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!-- </div> -->
+        <!-- <div class="form-row" *ngIf="instances"> -->
+        <mat-form-field
+          *ngIf="instances"
+          appearance="outline"
+          class="example-full-width col-3"
+        >
+          <input
+            matInput
+            type="number"
+            name="instances"
+            id="instances"
+            [(ngModel)]="noOfInstances"
+            required
+            (keyup)="getInstances(noOfInstances)"
+          />
+        </mat-form-field>
+        <!-- </div> -->
+      </div>
+      <hr />
+      <h6 class="col-12">
+        <h4>
+          <b>Header</b> &nbsp;
+          <input
+            type="checkbox"
+            name="detail"
+            [(ngModel)]="detail"
+            data-md-icheck
+            (change)="toggleVisibility($event)"
+          />
+        </h4>
+      </h6>
+
+      <div *ngIf="marked">
+        <div *ngIf="periodicValue == 'Daily'">
+          <div class="row">
+            <div class="form-group col-4">
+              <mat-form-field
+                appearance="outline"
+                class="example-full-width col-12"
+              >
+                <mat-label>Name</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  id="format"
+                  name="format"
+                  [(ngModel)]="formatNo"
+                  required
+                />
+              </mat-form-field>
+            </div>
+            <div class="form-group col-3">
+              <mat-form-field class="col-6">
+                <mat-label>Type</mat-label>
+                <mat-select
+                  name="formattype"
+                  id="formattype"
+                  [(ngModel)]="formattype"
+                  style="max-height: 200px; overflow-y: auto"
+                  required
+                >
+                  <mat-option value="text">Text</mat-option>
+                  <mat-option value="number">Number</mat-option>
+                  <mat-option value="date">Date</mat-option>
+                  <mat-option value="file">Image</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="col-6">
+                <mat-label>Fill Page</mat-label>
+                <mat-select
+                  name="pageFillformat"
+                  id="pageFillformat"
+                  [(ngModel)]="pageFillformat"
+                  style="max-height: 200px; overflow-y: auto"
+                  required
+                >
+                  <mat-option value="master">Master</mat-option>
+                  <mat-option value="fillChecklist">Fill Checklist</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-3">
+              <mat-form-field class="col-6">
+                <mat-label>Permission</mat-label>
+                <mat-select
+                  aria-multiselectable="true"
+                  name="permissionFormat"
+                  id="permissionFormat"
+                  [(ngModel)]="permissionFormat"
+                  multiple
+                  required
+                >
+                  <mat-option
+                    *ngFor="let r of role; let i = index"
+                    value="{{ r.name }}"
+                  >
+                    {{ r.name }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="col-6">
+                <mat-label>Fill type</mat-label>
+                <mat-select
+                  name="fillTypeFormat"
+                  id="fillTypeFormat"
+                  [(ngModel)]="fillTypeFormat"
+                  style="max-height: 200px; overflow-y: auto"
+                  required
+                >
+                  <mat-option value="manual">Manual</mat-option>
+                  <mat-option value="auto" [disabled]="true">Auto fill</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-4">
+              <mat-form-field
+                appearance="outline"
+                class="example-full-width col-12"
+              >
+                <mat-label>Name</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  id="revisionNO"
+                  name="revisionNO"
+                  [(ngModel)]="revisionNO"
+                  required
+                />
+              </mat-form-field>
+            </div>
+            <div class="form-group col-3">
+              <mat-form-field class="col-6">
+                <mat-label>Type</mat-label>
+                <mat-select
+                  name="revisionNOType"
+                  id="revisionNOType"
+                  [(ngModel)]="revisionNOType"
+                  style="max-height: 200px; overflow-y: auto"
+                  required
+                >
+                  <mat-option value="text">Text</mat-option>
+                  <mat-option value="number">Number</mat-option>
+                  <mat-option value="date">Date</mat-option>
+                  <mat-option value="file">Image</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="col-6">
+                <mat-label>Fill Page</mat-label>
+                <mat-select
+                  name="pagerevisionNo"
+                  id="pagerevisionNo"
+                  [(ngModel)]="pagerevisionNO"
+                  style="max-height: 200px; overflow-y: auto"
+                  required
+                >
+                  <mat-option value="master">Master</mat-option>
+                  <mat-option value="fillChecklist">Fill Checklist</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-3">
+              <mat-form-field class="col-6">
+                <mat-label>Permission</mat-label>
+                <mat-select
+                  aria-multiselectable="true"
+                  name="permissionRevisionNo"
+                  id="permissionRevisionNO"
+                  [(ngModel)]="permissionRevisionNO"
+                  multiple
+                  required
+                >
+                  <mat-option
+                    *ngFor="let r of role; let i = index"
+                    value="{{ r.name }}"
+                  >
+                    {{ r.name }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="col-6">
+                <mat-label>Fill type</mat-label>
+                <mat-select
+                  name="fillTypeRevisionNo"
+                  id="fillTypeRevisionNo"
+                  [(ngModel)]="fillTypeRevisionNo"
+                  style="max-height: 200px; overflow-y: auto"
+                  required
+                >
+                  <mat-option value="manual">Manual</mat-option>
+                  <mat-option value="auto" [disabled]="true">Auto fill</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-4">
+              <mat-form-field
+                appearance="outline"
+                class="example-full-width col-12"
+              >
+                <mat-label>Name</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  id="revisionDate"
+                  name="revisionDate"
+                  [(ngModel)]="revisionDate"
+                  required
+                />
+              </mat-form-field>
+            </div>
+            <div class="form-group col-3">
+              <mat-form-field class="col-6">
+                <mat-label>Type</mat-label>
+                <mat-select
+                  name="revisionDatetype"
+                  id="revisionDatetype"
+                  [(ngModel)]="revisionDatetype"
+                  style="max-height: 200px; overflow-y: auto"
+                  required
+                >
+                  <mat-option value="text">Text</mat-option>
+                  <mat-option value="number">Number</mat-option>
+                  <mat-option value="date">Date</mat-option>
+                  <mat-option value="file">Image</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="col-6">
+                <mat-label>Fill Page</mat-label>
+                <mat-select
+                  name="pagerevisionDate"
+                  id="pagerevisionDate"
+                  [(ngModel)]="pagerevisionDate"
+                  style="max-height: 200px; overflow-y: auto"
+                  required
+                >
+                  <mat-option value="master">Master</mat-option>
+                  <mat-option value="fillChecklist">Fill Checklist</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-3">
+              <mat-form-field class="col-6">
+                <mat-label>Permission</mat-label>
+                <mat-select
+                  aria-multiselectable="true"
+                  name="permissionRevisionDate"
+                  id="permissionRevisionDate"
+                  [(ngModel)]="permissionRevisionDate"
+                  multiple
+                  required
+                >
+                  <mat-option
+                    *ngFor="let r of role; let i = index"
+                    value="{{ r.name }}"
+                  >
+                    {{ r.name }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="col-6">
+                <mat-label>Fill type</mat-label>
+                <mat-select
+                  name="fillTypeRevisionDate"
+                  id="fillTypeRevisionDate"
+                  [(ngModel)]="fillTypeRevisionDate"
+                  style="max-height: 200px; overflow-y: auto"
+                  required
+                >
+                  <mat-option value="manual">Manual</mat-option>
+                  <mat-option value="auto" [disabled]="true">Auto fill</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="periodicValue == 'Shift'">
+          <div class="row">
+            <div class="form-group col-4">
+              <mat-form-field
+                appearance="outline"
+                class="example-full-width col-12"
+              >
+                <mat-label>Name</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  id="shiftNo"
+                  name="shiftNo"
+                  [(ngModel)]="shiftNo"
+                  required
+                />
+              </mat-form-field>
+            </div>
+            <div class="form-group col-3">
+              <mat-form-field class="col-6">
+                <mat-label>Type</mat-label>
+                <mat-select
+                  name="shiftType"
+                  id="shiftType"
+                  [(ngModel)]="shiftType"
+                  (selectionChange)="shiftTypeChange()"
+                  style="max-height: 200px; overflow-y: auto"
+                  required
+                >
+                  <mat-option value="text">Text</mat-option>
+                  <mat-option value="number">Number</mat-option>
+                  <mat-option value="date">Date</mat-option>
+                  <mat-option value="file">Image</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="col-6">
+                <mat-label>Fill Page</mat-label>
+                <mat-select
+                  name="pageFillShift"
+                  id="pageFillShift"
+                  [(ngModel)]="pageFillShift"
+                  style="max-height: 200px; overflow-y: auto"
+                  required
+                >
+                  <mat-option value="master">Master</mat-option>
+                  <mat-option value="fillChecklist" [disabled]="true"
+                    >Fill Checklist</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-3">
+              <mat-form-field class="col-6">
+                <mat-label>Permission</mat-label>
+                <mat-select
+                  aria-multiselectable="true"
+                  name="permissionshift"
+                  id="permissionshift"
+                  [(ngModel)]="permissionshift"
+                  multiple
+                  required
+                >
+                  <mat-option
+                    *ngFor="let r of role; let i = index"
+                    value="{{ r.name }}"
+                  >
+                    {{ r.name }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="col-6">
+                <mat-label>Fill type</mat-label>
+                <mat-select
+                  name="fillTypeShift"
+                  id="fillTypeShift"
+                  [(ngModel)]="fillTypeShift"
+                  (selectionChange)="fillTypeForShift(shiftNo, fillTypeShift)"
+                  style="max-height: 200px; overflow-y: auto"
+                  required
+                >
+                  <mat-option value="manual">Manual</mat-option>
+                  <mat-option value="auto">Auto fill</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-1" *ngIf="showShiftDrop">
+              <mat-form-field class="col-12">
+                <mat-label>Auto Fill</mat-label>
+                <mat-select
+                  name="fillFromShift"
+                  id="fillFromShift"
+                  [(ngModel)]="fillFromShift"
+                  style="max-height: 200px; overflow-y: auto"
+                  (selectionChange)="selectAutoFillShift(fillFromShift)"
+                  required
+                >
+                  <mat-option value="Configuration">Configuration</mat-option>
+                  <mat-option value="DAQ" [disabled]="true">DAQ</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-1" *ngIf="showShiftDropValue">
+              <mat-form-field class="col-12">
+                <mat-label>Configuration</mat-label>
+                <mat-select
+                  name="autoFillValueShift"
+                  id="autoFillValueShift"
+                  [(ngModel)]="autoFillValueShift"
+                  style="max-height: 200px; overflow-y: auto"
+                  (selectionChange)="
+                    selectAutoFillValueShift(autoFillValueShift)
+                  "
+                  required
+                >
+                  <div *ngFor="let group of autoFillOptions">
+                    <mat-option
+                      *ngIf="!group.children.length"
+                      [value]="group.value"
+                      >{{ group.value }}</mat-option
+                    >
+
+                    <mat-optgroup
+                      *ngIf="group.children.length"
+                      [label]="group.value"
+                      style="color: dimgray"
+                    >
+                      <mat-option
+                        *ngFor="let child of group.children"
+                        [value]="child.value"
+                        >{{ child.value }}</mat-option
+                      >
+                    </mat-optgroup>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-4">
+              <mat-form-field
+                appearance="outline"
+                class="example-full-width col-12"
+              >
+                <mat-label>Name</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  id="Currentdate"
+                  name="Currentdate"
+                  [(ngModel)]="Currentdate"
+                  required
+                />
+              </mat-form-field>
+            </div>
+            <div class="form-group col-3">
+              <mat-form-field class="col-6">
+                <mat-label>Type</mat-label>
+                <mat-select
+                  name="dateType"
+                  id="dateType"
+                  [(ngModel)]="dateType"
+                  (selectionChange)="dateTypeChange()"
+                  style="max-height: 200px; overflow-y: auto"
+                  required
+                >
+                  <mat-option value="text">Text</mat-option>
+                  <mat-option value="number">Number</mat-option>
+                  <mat-option value="date">Date</mat-option>
+                  <mat-option value="file">Image</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="col-6">
+                <mat-label>Fill Page</mat-label>
+                <mat-select
+                  name="pageFillDate"
+                  id="pageFillDate"
+                  [(ngModel)]="pageFillDate"
+                  style="max-height: 200px; overflow-y: auto"
+                  required
+                >
+                  <mat-option value="master">Master</mat-option>
+                  <mat-option value="fillChecklist">Fill Checklist</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-3">
+              <mat-form-field class="col-6">
+                <mat-label>Permission</mat-label>
+                <mat-select
+                  aria-multiselectable="true"
+                  name="permissionDate"
+                  id="permissionDate"
+                  [(ngModel)]="permissionDate"
+                  multiple
+                  required
+                >
+                  <mat-option
+                    *ngFor="let r of role; let i = index"
+                    value="{{ r.name }}"
+                  >
+                    {{ r.name }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="col-6">
+                <mat-label>Fill type</mat-label>
+                <mat-select
+                  name="fillTypeDate"
+                  id="fillTypeDate"
+                  [(ngModel)]="fillTypeDate"
+                  (selectionChange)="fillTypeForDate(Currentdate, fillTypeDate)"
+                  style="max-height: 200px; overflow-y: auto"
+                  required
+                >
+                  <mat-option value="manual">Manual</mat-option>
+                  <mat-option value="auto" [disabled]="dateType != 'date'"
+                    >Auto fill</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-1" *ngIf="showDateDrop">
+              <mat-form-field class="col-12">
+                <mat-label>Select Format</mat-label>
+                <mat-select
+                  name="dateAutoFill"
+                  id="dateAutoFill"
+                  [(ngModel)]="dateAutoFill"
+                  (selectionChange)="selectionDate(dateAutoFill)"
+                  style="max-height: 200px; overflow-y: auto"
+                  required
+                >
+                  <mat-option value="all">All</mat-option>
+                  <mat-option value="month">Month</mat-option>
+                  <mat-option value="year">Year</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="form-row" *ngFor="let e of mainData; let i = index">
+          <div class="form-group col-3">
+            <mat-form-field
+              appearance="outline"
+              class="example-full-width col-12"
+            >
+              <mat-label>Name</mat-label>
+              <input
+                matInput
+                type="text"
+                id="mName+{{ i }}"
+                name="mName+{{ i }}"
+                [(ngModel)]="e.mName"
+                required
+              />
+            </mat-form-field>
+          </div>
+          <div class="form-group col-2">
+            <mat-form-field class="col-6">
+              <mat-label>Type</mat-label>
+              <mat-select
+                name="mtype+{{ i }}"
+                id="mtype+{{ i }}"
+                [(ngModel)]="e.mtype"
+                (selectionChange)="headerTypeChange(e, i)"
+                style="max-height: 200px; overflow-y: auto"
+                required
+              >
+                <mat-option value="text">Text</mat-option>
+                <mat-option value="number">Number</mat-option>
+                <mat-option value="date">Date</mat-option>
+                <mat-option value="file">Image</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-6">
+              <mat-label>Fill Page</mat-label>
+              <mat-select
+                name="pageFill+{{ i }}"
+                id="pageFill+{{ i }}"
+                [(ngModel)]="e.pageFill"
+                style="max-height: 200px; overflow-y: auto"
+                required
+              >
+                <mat-option value="master">Master</mat-option>
+                <mat-option value="fillChecklist">Fill Checklist</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="form-group col-2">
+            <!-- <mat-form-field
+              appearance="outline"
+              class="example-full-width col-12"
+            >
+              <mat-label>Value</mat-label>
+              <input
+                matInput
+                type="text"
+                name="mvalue+{{ i }}"
+                [(ngModel)]="e.mvalue"
+              />
+            </mat-form-field> -->
+            <!-- <mat-form-field class="col-6" *ngIf="!customBool[i]">
+              <mat-label>Permission</mat-label>
+              <mat-select
+                aria-multiselectable="true"
+                name="permissionDetail+{{ i }}"
+                id="permissionDetail+{{ i }}"
+                [(ngModel)]="e.permission"
+              >
+                <mat-option>----</mat-option>
+                <mat-option
+                  *ngFor="let r of role; let i = index"
+                  value="{{ r.name }}"
+                >
+                  {{ r.name }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field> -->
+            <mat-form-field class="col-6" *ngIf="!customBool[i]">
+              <mat-label>Permission</mat-label>
+              <mat-select
+                aria-multiselectable="true"
+                name="permissionDetail+{{ i }}"
+                id="permissionDetail+{{ i }}"
+                [(ngModel)]="e.permission"
+                multiple
+                required
+              >
+                <mat-option
+                  *ngFor="let r of role; let i = index"
+                  value="{{ r.name }}"
+                >
+                  {{ r.name }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-6">
+              <mat-label>Fill type</mat-label>
+              <mat-select
+                name="fillType+{{ i }}"
+                id="fillType+{{ i }}"
+                [(ngModel)]="e.fillType"
+                style="max-height: 200px; overflow-y: auto"
+                (selectionChange)="fillTypeSelect(e, i)"
+                required
+              >
+                <mat-option value="manual">Manual</mat-option>
+                <mat-option value="auto" [disabled]="e.mtype == 'file'"
+                  >Auto fill</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="form-group col-1" *ngIf="showDateAutoFill[i]">
+            <mat-form-field class="col-12">
+              <mat-label>Select Format</mat-label>
+              <mat-select
+                name="dateFormat+{{ i }}"
+                id="dateFormat+{{ i }}"
+                [(ngModel)]="e.dateFormat"
+                style="max-height: 200px; overflow-y: auto"
+                required
+              >
+                <mat-option value="all">All</mat-option>
+                <mat-option value="month">Month</mat-option>
+                <mat-option value="year">Year</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="form-group col-1" *ngIf="showAutoFillDropDown[i]">
+            <mat-form-field class="col-12">
+              <mat-label>Auto Fill</mat-label>
+              <mat-select
+                name="fillFrom+{{ i }}"
+                id="fillFrom+{{ i }}"
+                [(ngModel)]="e.fillFrom"
+                style="max-height: 200px; overflow-y: auto"
+                (selectionChange)="selectAutoFill(e, i)"
+                required
+              >
+                <mat-option value="Configuration">Configuration</mat-option>
+                <mat-option value="DAQ" [disabled]="true">DAQ</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="form-group col-1" *ngIf="showDropDownValues[i]">
+            <mat-form-field class="col-12">
+              <mat-label>Configuration</mat-label>
+              <mat-select
+                name="autoFillValue+{{ i }}"
+                id="autoFillValue+{{ i }}"
+                [(ngModel)]="e.autoFillValue"
+                style="max-height: 200px; overflow-y: auto"
+                (selectionChange)="selectAutoFillValue(e)"
+                required
+              >
+                <div *ngFor="let group of autoFillOptions">
+                  <mat-option
+                    *ngIf="!group.children.length"
+                    [value]="group.value"
+                    >{{ group.value }}</mat-option
+                  >
+
+                  <mat-optgroup
+                    *ngIf="group.children.length"
+                    [label]="group.value"
+                    style="color: dimgray"
+                  >
+                    <mat-option
+                      *ngFor="let child of group.children"
+                      [value]="child.value"
+                      >{{ child.value }}</mat-option
+                    >
+                  </mat-optgroup>
+                </div>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="form-group col-1">
+            <button mat-raised-button color="warn" (click)="deleteMainRow(i)">
+              <!-- [disabled]="i <= 0" -->
+              Delete
+            </button>
+          </div>
+          <div class="form-group col-1">
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="MasterHead()"
+              [hidden]="i + 1 != mainData.length"
+            >
+              Add
+            </button>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <!-- <h6 class="col-12">
+        <h4>
+          <b>Meta Data</b>
+          &nbsp;
+          <input
+            type="checkbox"
+            name="meta"
+            [(ngModel)]="meta"
+            data-md-icheck
+            (change)="toggleMeta($event)"
+          />
+        </h4>
+      </h6> -->
+      <!-- <div *ngIf="metaMarked">
+        <div class="mt-2" *ngFor="let e of addRows; let i = index">
+          <div class="form-row row">
+            <mat-form-field class="col-5" *ngIf="!customBool[i]">
+              <mat-label>User</mat-label>
+              <mat-select
+                name="field+{{ i }}"
+                id="field+{{ i }}"
+                [(ngModel)]="e.field"
+                style="max-height: 250px; overflow-y: auto"
+                (ngModelChange)="fieldSelect($event, i)"
+              >
+                <mat-option>----</mat-option>
+                <mat-option value="Custom">Custom</mat-option>
+                <mat-option value="Plant">Plant</mat-option>
+                <mat-option value="Shift">Shift</mat-option>
+                <mat-option value="Zone">Zone</mat-option>
+                <mat-option value="Machine">Machine</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="col-5" *ngIf="!customBool[i]">
+              <mat-label>Permission</mat-label>
+              <mat-select
+                aria-multiselectable="true"
+                name="permission1+{{ i }}"
+                id="permission1+{{ i }}"
+                [(ngModel)]="e.permission"
+              >
+                <mat-option>----</mat-option>
+                <mat-option
+                  *ngFor="let r of role; let i = index"
+                  value="{{ r.name }}"
+                >
+                  {{ r.name }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="col-3" *ngIf="customBool[i]">
+              <mat-label>User</mat-label>
+              <mat-select
+                name="field+{{ i }}"
+                id="field+{{ i }}"
+                [(ngModel)]="e.field"
+                style="max-height: 250px; overflow-y: auto"
+                (ngModelChange)="fieldSelect($event, i)"
+              >
+                <mat-option>----</mat-option>
+                <mat-option value="Custom">Custom</mat-option>
+                <mat-option value="Plant">Plant</mat-option>
+                <mat-option value="Shift">Shift</mat-option>
+                <mat-option value="Zone">Zone</mat-option>
+                <mat-option value="Machine">Machine</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div class="form-group col-2" *ngIf="customBool[i]">
+              <mat-form-field
+                appearance="outline"
+                class="example-full-width col-12"
+              >
+                <mat-label>Name</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  name="name+{{ i }}"
+                  id="name+{{ i }}"
+                  [(ngModel)]="e.name"
+                />
+              </mat-form-field>
+            </div>
+            <div class="form-group col-2" *ngIf="customBool[i]">
+              <mat-form-field class="col-12">
+                <mat-label>Type</mat-label>
+                <mat-select
+                  name="type+{{ i }}"
+                  id="type+{{ i }}"
+                  [(ngModel)]="e.type"
+                  style="max-height: 200px; overflow-y: auto"
+                >
+                  <mat-option>----</mat-option>
+                  <mat-option value="text">Text</mat-option>
+                  <mat-option value="number">Number</mat-option>
+                  <mat-option value="select">Select</mat-option>
+                <mat-option value="date">Date</mat-option>
+                <mat-option value="muli-select">Muli-Select</mat-option>
+                <mat-option value="file">Image</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-2" *ngIf="customBool[i]">
+              <mat-form-field class="col-12">
+                <mat-label>Permission</mat-label>
+                <mat-select
+                  name="permission2+{{ i }}"
+                  id="permission2+{{ i }}"
+                  [(ngModel)]="e.permission"
+                  style="max-height: 200px; overflow-y: auto"
+                >
+                  <mat-option>----</mat-option>
+                  <mat-option
+                    *ngFor="let r of role; let i = index"
+                    value="{{ r.name }}"
+                  >
+                    {{ r.name }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-0.5">
+              <button
+                mat-raised-button
+                color="warn"
+                [disabled]="i <= 0"
+                (click)="deleteRow(i)"
+              >
+                Delete
+              </button>
+            </div>
+            <div class="form-group col-0.5">
+              <button mat-raised-button color="primary" (click)="addrow()">
+                Add
+              </button>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <!-- <hr /> -->
+      <!-- <h6 class="col-12">
+        <h4>
+          <b>Sub MetaData</b>
+          &nbsp;
+          <input
+            type="checkbox"
+            name="subMeta"
+            [(ngModel)]="subMeta"
+            data-md-icheck
+            (change)="togglesubMeta($event)"
+          />
+        </h4>
+      </h6> -->
+      <!-- <div *ngIf="!showRadioButton">
+        <div *ngIf="submetaMarked">
+          <div class="mt-4" *ngFor="let a of subAddrows; let i = index">
+            <div class="form-row row">
+              <div class="form-group col-3">
+                <mat-form-field
+                  appearance="outline"
+                  class="example-full-width col-12"
+                >
+                  <mat-label>Name</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    name="names+{{ i }}"
+                    [(ngModel)]="a.sName"
+                    placeholder="Name"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="form-group col-3">
+                <mat-form-field class="col-12">
+                  <mat-label>Type</mat-label>
+                  <mat-select
+                    name="types+{{ i }}"
+                    id="types+{{ i }}"
+                    [(ngModel)]="a.type"
+                    style="max-height: 250px; overflow-y: auto"
+                    (ngModelChange)="fieldSelect($event, i)"
+                  >
+                    <mat-option>----</mat-option>
+                    <mat-option value="text">Text</mat-option>
+                    <mat-option value="number">Number</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="form-group col-3">
+                <mat-form-field class="col-12">
+                  <mat-label>Permission</mat-label>
+                  <mat-select
+                    aria-multiselectable="true"
+                    name="permission3+{{ i }}"
+                    id="permission3+{{ i }}"
+                    [(ngModel)]="a.permission"
+                  >
+                    <mat-option>----</mat-option>
+                    <mat-option
+                      *ngFor="let r of role; let i = index"
+                      value="{{ r.name }}"
+                    >
+                      {{ r.name }}</mat-option
+                    >
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="form-group col-0.5">
+                <button
+                  mat-raised-button
+                  color="warn"
+                  [disabled]="i <= 0"
+                  (click)="subDeleteRow(i)"
+                >
+                  Delete
+                </button>
+              </div>
+              <div class="form-group col-0.5">
+                <button mat-raised-button color="primary" (click)="subAdd()">
+                  Add
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="showRadioButton">
+        <div *ngIf="submetaMarked">
+          <div *ngIf="selectDaily">
+            <div class="mt-4" *ngFor="let d of subAddrows; let i = index">
+              <div class="form-row row">
+                <div class="form-group col-3">
+                  <mat-form-field appearance="outline" class="example-full-width col-12">
+                  <mat-label *ngIf="i+1 <= numberofDays">Days</mat-label>
+                  <mat-label *ngIf="i+1 > numberofDays">Enter the Value</mat-label>
+                    <input matInput [disabled]="i+1 <= numberofDays" type="number" name="days+{{ i + 1 }}"  [(ngModel)]="d.sName"/>
+                  </mat-form-field>
+                </div>
+                <div class="form-group col-3">
+                  <mat-form-field class="col-12">
+                    <mat-label>Type</mat-label>
+                    <mat-select name="types+{{ i + 1}}" id="types+{{ i + 1}}" [(ngModel)]="d.type" style="max-height: 250px; overflow-y: auto" (ngModelChange)="fieldSelect($event, i+1)">
+                      <mat-option>----</mat-option>
+                      <mat-option value="text">Text</mat-option>
+                      <mat-option value="number">Number</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="form-group col-3">
+                  <mat-form-field class="col-12">
+                    <mat-label>Permission</mat-label>
+                    <mat-select aria-multiselectable="true" name="permission3+{{ i + 1 }}" id="permission3+{{ i + 1 }}" [(ngModel)]="d.permission">
+                      <mat-option>----</mat-option>
+                      <mat-option *ngFor="let r of role; let i = index" value="{{ r.name }}">{{ r.name }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              <div class="form-group col-0.5">
+                <button mat-raised-button color="warn" [hidden]="i+1 <= numberofDays" (click)="deleteDaily(i)">Delete</button>
+              </div>
+              <div class="form-group col-0.5">
+                <button mat-raised-button color="primary" [hidden]="i+1 != subAddrows.length" (click)="dailyAdd()">Add</button>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- <hr /> -->
+      <h6 class="col-12">
+        <h4>
+          <b>Body</b>
+          &nbsp;
+          <input
+            type="checkbox"
+            name="mainHeaderCheck"
+            id="mainHeaderCheck"
+            [(ngModel)]="mainHeaderCheck"
+            data-md-icheck
+            (change)="togglemainHeaderCheck($event)"
+          />
+        </h4>
+      </h6>
+      <div *ngIf="mainheaderMarked">
+        <!-- <mat-form-field appearance="outline" class="example-full-width col-5">
+          <mat-label>Title</mat-label>
+          <input
+            matInput
+            type="text"
+            name="mainHeader"
+            class="col-3 floatingName"
+            [(ngModel)]="mainHeader"
+          />
+        </mat-form-field> -->
+
+        <div class="mt-2">
+          <table>
+            <thead class="table-bordered table-sm">
+              <tr>
+                <th *ngFor="let e of addColumns; let i = index" colspan="2">
+                  {{ e.cName }}
+                </th>
+                <button
+                  mat-raised-button
+                  color="accent"
+                  style="cursor: pointer"
+                  (click)="openWidgetEditorDialog(template, '', 'Add')"
+                >
+                  Add
+                </button>
+              </tr>
+            </thead>
+          </table>
+        </div>
+      </div>
+      <hr />
+      <!-- <h6 class="col-12">
+        <h4>
+          <b>Sub Header</b>&nbsp;
+          <input type="checkbox" name="subHeaderCheck" [(ngModel)]="subHeaderCheck" data-md-icheck
+            (change)="togglesubHeaderCheck($event)" />
+        </h4>
+      </h6>
+      <div *ngIf="subheaderMarked">
+        <mat-form-field appearance="outline" class="example-full-width col-5">
+          <mat-label>Title</mat-label>
+          <input matInput type="text" name="subHeader" class="col-3 floatingName" [(ngModel)]="subHeader" />
+        </mat-form-field>
+
+        <div class="mt-3">
+          <table>
+            <thead class="table-bordered table-md">
+              <tr>
+                <th *ngFor="let e of addsubColfirst; let i = index" colspan="2">
+                  {{ e.fcName }}
+                </th>
+                <button mat-raised-button color="accent" style="cursor: pointer"
+                  (click)="openWidgetEditorDialog(template1, '', 'Add')">
+                  Add
+                </button>
+              </tr>
+            </thead>
+          </table>
+        </div>
+      </div>
+      <hr /> -->
+      <!-- <h6 class="col-2"><b>Sub Header</b></h6>
+
+      <div class="p-float-label mt-4">
+        <input
+          pInputText
+          type="text"
+          id="float-input"
+          name="subSecHeader"
+          class="col-3 floatingName"
+          [(ngModel)]="subSecHeader"
+          placeholder=""
+          required
+        />
+        <label for="float-input">Title</label>
+      </div>
+
+      <div
+        class="mt-3"
+        id="contentInside{{ k }}"
+        class="content-inside"
+        *ngFor="let container of containers; let k = index"
+      >
+        <table>
+          <thead class="table-bordered table-sm">
+            <tr>
+              <th *ngFor="let e of container; let i = index" colspan="2">
+                {{ e.secName }}
+              </th>
+              <th
+                style="cursor: pointer"
+                (click)="openModal(template2, '', 'Add')"
+              >
+                Add Column
+              </th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <button (click)="addMe()">Add</button> -->
+
+      <!-- <hr /> -->
+      <h6 class="col-12">
+        <h4>
+          <b>Footer</b>
+          &nbsp;
+          <input
+            type="checkbox"
+            name="footerCheck"
+            [(ngModel)]="footerCheck"
+            data-md-icheck
+            (change)="toggleFooterCheck($event)"
+          />
+        </h4>
+      </h6>
+      <div *ngIf="footerMarked">
+        <!-- <mat-form-field appearance="outline" class="example-full-width col-5">
+          <mat-label>Title</mat-label>
+          <input
+            matInput
+            type="text"
+            name="footerTitle"
+            class="col-3 floatingName"
+            [(ngModel)]="footerTitle"
+          />
+        </mat-form-field> -->
+        <table class="mt-3">
+          <thead class="table-bordered table-md">
+            <tr>
+              <th *ngFor="let f of addFooterData; let i = index" colspan="2">
+                {{ f.fName }}
+              </th>
+              <button
+                mat-raised-button
+                color="accent"
+                style="cursor: pointer"
+                (click)="openWidgetEditorDialog(templatefooter, '', 'Add')"
+              >
+                Add
+              </button>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div *ngIf="periodicValue == 'Daily'">
+        <!-- <hr /> -->
+        <!-- <h4><b>Instruction:</b></h4> -->
+        <!-- <mat-form-field appearance="outline" class="example-full-width col-12">
+          <mat-label>Instruction</mat-label>
+          <input
+            matInput
+            type="text"
+            name="footerInstruction"
+            class="col-3 floatingName"
+            [(ngModel)]="footerInstruction"
+          />
+        </mat-form-field> -->
+        <hr />
+        <h4 class="col-12">
+          <b>Problem List</b>&nbsp;
+          <input
+            type="checkbox"
+            name="fprobCheck"
+            [(ngModel)]="fprobCheck"
+            data-md-icheck
+            (change)="togglefprobCheck($event)"
+          />
+        </h4>
+        <div *ngIf="fprobMarked">
+          <div class="mt-3">
+            <table>
+              <thead class="table-bordered table-md">
+                <tr>
+                  <th
+                    *ngFor="let e of footerProbArr; let i = index"
+                    colspan="2"
+                  >
+                    {{ e.probName }}
+                  </th>
+                  <button
+                    mat-raised-button
+                    color="accent"
+                    style="cursor: pointer"
+                    (click)="openWidgetEditorDialog(templateProb, '', 'Add')"
+                  >
+                    Add
+                  </button>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- <div *ngIf="periodicValue == 'Shift'">
+        <mat-form-field appearance="outline" class="example-full-width col-12">
+          <mat-label>Note:</mat-label>
+          <input
+            matInput
+            type="text"
+            name="shiftNote"
+            class="col-3 floatingName"
+            [(ngModel)]="shiftNote"
+          />
+        </mat-form-field>
+      </div> -->
+      <hr />
+      <h6 class="col-12 mt-3">
+        <h4>
+          <b>Approval Sequence</b>
+          &nbsp;
+          <input
+            type="checkbox"
+            name="approvalCheck"
+            [(ngModel)]="approvalCheck"
+            data-md-icheck
+            (change)="toggleapprovalCheck($event)"
+          />
+        </h4>
+      </h6>
+      <div *ngIf="approvalMarked">
+        <div class="mt-2">
+          <div
+            class="form-row row"
+            *ngFor="let e of approvalList; let i = index"
+          >
+            <div class="form-group col-3">
+              <mat-form-field class="col-12">
+                <mat-label>Type</mat-label>
+                <mat-select
+                  name="approvalPersonName+{{ i }}"
+                  id="approvalPersonName+{{ i }}"
+                  [(ngModel)]="e.approvalPersonName"
+                  style="max-height: 250px; overflow-y: auto"
+                >
+                  <mat-option value="">Level {{ i + 1 }}</mat-option>
+                  <mat-option
+                    *ngFor="let r of role; let i = index"
+                    value="{{ r.name }}"
+                  >
+                    {{ r.name }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="form-group text-center col-1 mt-4">
+              <i
+                class="fa fa-trash"
+                style="color: red"
+                (click)="approvalDelete(i)"
+              ></i>
+            </div>
+          </div>
+          <div class="form-row row">
+            <div class="form-group col-5 text-right">
+              <button
+                mat-raised-button
+                color="accent"
+                (click)="addApprovalList()"
+              >
+                + Add new
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row row">
+        <div class="col text-right">
+          <button mat-raised-button color="warn" (click)="returnToTemplate()">
+            Cancel</button
+          >&nbsp;&nbsp;
+          <button mat-raised-button color="primary" (click)="submit()">
+            Create Template
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- </div> -->
+<ng-template class="modal" #template>
+  <div class="modal-header card-header header-style">
+    <div class="modal-title pull-left">Add column headers</div>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      matDialogClose
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body card-body">
+    <form class="mt-2" #gform="ngForm">
+      <div
+        class="form-row mt-2 row"
+        *ngFor="let e of addColumns; let i = index"
+      >
+        <mat-form-field appearance="outline" class="example-full-width col-2">
+          <mat-label>ColumnName</mat-label>
+          <input
+            matInput
+            type="text"
+            name="cName+{{ i }}"
+            id="cName+{{ i }}"
+            [disabled]="e.periodic"
+            [(ngModel)]="e.cName"
+            required
+          />
+        </mat-form-field>
+        <div class="form-group col-2" *ngIf="!togglesubheaderMarked[i]">
+          <mat-form-field class="col-6">
+            <mat-label>Type</mat-label>
+            <mat-select
+              name="type+{{ i }}"
+              id="type+{{ i }}"
+              [(ngModel)]="e.ctype"
+              (selectionChange)="contentTypeChange(e, i)"
+              required
+              style="max-height: 250px; overflow-y: auto"
+            >
+              <mat-option value="text">Text</mat-option>
+              <mat-option value="number">Number</mat-option>
+              <mat-option value="date">Date</mat-option>
+              <mat-option value="file">Image</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="col-6">
+            <mat-label>Fill Page</mat-label>
+            <mat-select
+              name="pageFill+{{ i }}"
+              id="pageFill+{{ i }}"
+              required
+              [(ngModel)]="e.pageFill"
+              style="max-height: 200px; overflow-y: auto"
+            >
+              <mat-option value="master">Master</mat-option>
+              <mat-option value="fillChecklist">Fill Checklist</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-1" *ngIf="!togglesubheaderMarked[i]">
+          <mat-form-field class="col-12">
+            <mat-label>Threshold</mat-label>
+            <mat-select
+              name="threshold+{{ i }}"
+              id="threshold+{{ i }}"
+              required
+              [(ngModel)]="e.threshold"
+              (selectionChange)="getThresholdFlag($event,i)"
+              [disabled]="e.threshold == 'false'"
+              style="max-height: 200px; overflow-y: auto"
+            >
+              <mat-option value="false">No</mat-option>
+              <mat-option value="true">Yes</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-2" *ngIf="!togglesubheaderMarked[i]">
+          <mat-form-field class="col-6">
+            <mat-label>Permission</mat-label>
+            <mat-select
+              aria-multiselectable="true"
+              name="permission4+{{ i }}"
+              id="permission4+{{ i }}"
+              [(ngModel)]="e.permission"
+              multiple
+              required
+            >
+              <mat-option
+                *ngFor="let r of role; let i = index"
+                value="{{ r.name }}"
+              >
+                {{ r.name }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="col-6">
+            <mat-label>Fill type</mat-label>
+            <mat-select
+              name="fillType+{{ i }}"
+              id="fillType+{{ i }}"
+              required
+              [(ngModel)]="e.fillType"
+              (selectionChange)="contentFillTypeSelect(e, i)"
+              style="max-height: 200px; overflow-y: auto"
+            >
+              <mat-option value="manual">Manual</mat-option>
+              <mat-option value="auto" [disabled]="true">Auto fill</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div
+          class="form-group col-1"
+          *ngIf="selectedperiod && headerbool && !showSubheader"
+        >
+          <input
+            type="checkbox"
+            name="applytoallheader+{{ i }}"
+            id="applytoallheader+{{ i }}"
+            [hidden]="
+              !e.periodic ||
+              !e.applytoall ||
+              e.ctype == '' ||
+              e.pageFill == '' ||
+              e.permission == [] ||
+              e.threshold == '' ||
+              e.fillType == ''
+            "
+            [checked]="e[i]"
+            (change)="applyToAllHeader($event)"
+            data-md-icheck
+          />
+          <h4 [hidden]="!e.periodic || !e.applytoall">Appy to All</h4>
+        </div>
+        <div class="form-group col-1" *ngIf="showSubheader">
+          <input
+            type="checkbox"
+            name="subHeaderPeriodic+{{ i }}"
+            id="subHeaderPeriodic+{{ i }}"
+            [checked]="e[i]"
+            data-md-icheck
+            (change)="showSubPeriodic($event, i)"
+            [disabled]="e.checked == 'false'"
+          />
+          <h4>Is Periodic Schelude</h4>
+        </div>
+        <div class="form-group col-1">
+          <h4>SubHeader</h4>
+
+          <input
+            type="checkbox"
+            name="togglesHead+{{ i }}"
+            id="togglesHead+{{ i }}"
+            [checked]="e[i]"
+            data-md-icheck
+            (change)="togglesubHeader($event, i, e)"
+          />
+          &nbsp;&nbsp;
+        </div>
+        <div class="form-group col-2">
+          <button
+            mat-raised-button
+            color="primary"
+            [hidden]="i + 1 != addColumns.length"
+            (click)="addColumn()"
+          >
+            Add
+          </button>
+          &nbsp;
+          <button
+            mat-raised-button
+            color="warn"
+            [disabled]="i === 0 || e.periodic"
+            (click)="deleteColumnRow(i)"
+          >
+            Delete
+          </button>
+        </div>
+        <div class="row" *ngIf="togglesubheaderMarked[i]">
+          <div
+            class="form-row ml-5 row"
+            *ngFor="let f of addSubHeaderArr[i]; let j = index"
+          >
+            <!-- <div class="col-6"></div> -->
+            <mat-form-field
+              appearance="outline"
+              class="example-full-width col-2"
+            >
+              <mat-label>SubColumnName</mat-label>
+              <input
+                matInput
+                type="text"
+                [disabled]="f.periodic"
+                name="csName+{{ i }}+{{ j }}"
+                id="csName+{{ i }}+{{ j }}"
+                [(ngModel)]="f.csName"
+                required
+              />
+            </mat-form-field>
+            <div class="form-group col-3">
+              <mat-form-field class="col-6">
+                <mat-label>Type</mat-label>
+                <mat-select
+                  name="cstype+{{ i }}+{{ j }}"
+                  id="cstype+{{ i }}+{{ j }}"
+                  [(ngModel)]="f.cstype"
+                  required
+                  style="max-height: 250px; overflow-y: auto"
+                >
+                  <mat-option value="text">Text</mat-option>
+                  <mat-option value="number">Number</mat-option>
+                  <mat-option value="date">Date</mat-option>
+                  <mat-option value="file">Image</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="col-6">
+                <mat-label>Fill Page</mat-label>
+                <mat-select
+                  name="pageFill+{{ i }}+{{ j }}"
+                  id="pageFill+{{ i }}+{{ j }}"
+                  required
+                  [(ngModel)]="f.pageFill"
+                  style="max-height: 200px; overflow-y: auto"
+                >
+                  <mat-option value="master">Master</mat-option>
+                  <mat-option value="fillChecklist">Fill Checklist</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-3">
+              <mat-form-field class="col-6">
+                <mat-label>Permission</mat-label>
+                <mat-select
+                  aria-multiselectable="true"
+                  name="permission5+{{ i }}+{{ j }}"
+                  id="permission5+{{ i }}+{{ j }}"
+                  [(ngModel)]="f.permission"
+                  multiple
+                  required
+                >
+                  <mat-option
+                    *ngFor="let r of role; let i = index"
+                    value="{{ r.name }}"
+                  >
+                    {{ r.name }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="col-6">
+                <mat-label>Fill type</mat-label>
+                <mat-select
+                  name="fillType+{{ i }}+{{ j }}"
+                  id="fillType+{{ i }}+{{ j }}"
+                  required
+                  [(ngModel)]="f.fillType"
+                  (selectionChange)="subContentFillTypeSelect(f, j)"
+                  style="max-height: 200px; overflow-y: auto"
+                >
+                  <mat-option value="manual">Manual</mat-option>
+                  <mat-option value="auto" [disabled]="true"
+                    >Auto fill</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div
+              class="form-group col-1"
+              *ngIf="selectedperiod && headerbool && this.showSubheader"
+            >
+              <input
+                type="checkbox"
+                name="applytoallsubheader+{{ i }}"
+                id="applytoallsubheader+{{ i }}"
+                [hidden]="
+                  !f.periodic ||
+                  !f.applytoall ||
+                  f.cstype == '' ||
+                  f.pageFill == '' ||
+                  f.permission == [] ||
+                  f.fillType == ''
+                "
+                [checked]="e[i]"
+                (change)="applyToAllsubHeader($event, i)"
+                data-md-icheck
+              />
+              <h4 [hidden]="!f.periodic || !f.applytoall">Appy to All</h4>
+            </div>
+            <div class="form-group col-2">
+              <button
+                mat-raised-button
+                color="primary"
+                [hidden]="j + 1 != this.addSubHeaderArr[i].length"
+                (click)="addsubHeadColumn(i)"
+              >
+                Add
+              </button>
+              &nbsp;
+              <button
+                mat-raised-button
+                color="warn"
+                [disabled]="j === 0 || f.periodic"
+                (click)="deleteColumnRoWHeaders(i, j)"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+
+          <!-- <h4>SubHeaderTwo</h4>
+            <input
+              type="checkbox"
+              name="togglesHeadtwo+{{ i }}"
+              id="togglesHeadtwo+{{ i }}"
+              [checked]="e[i]"
+              data-md-icheck
+              (change)="togglesubHeadertwo($event, i)"
+            />
+            <div class="row" *ngIf="togglesubheaderTwoMarked[i]">
+              <mat-form-field
+                appearance="outline"
+                class="example-full-width col-3"
+              >
+                <mat-label>ColumnName</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  name="cssName+{{ i }}"
+                  [(ngModel)]="e.cssName"
+                  required
+                />
+              </mat-form-field>
+              <div class="form-group col-3">
+                <mat-form-field class="col-12">
+                  <mat-label>Type</mat-label>
+                  <mat-select
+                    name="csstype+{{ i }}"
+                    id="csstype+{{ i }}"
+                    [(ngModel)]="e.csstype"
+                    required
+                    style="max-height: 250px; overflow-y: auto"
+                  >
+                    <mat-option>----</mat-option>
+                    <mat-option value="text">Text</mat-option>
+                    <mat-option value="number">Number</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="form-group col-3">
+                <mat-form-field class="col-12">
+                  <mat-label>Permission</mat-label>
+                  <mat-select
+                    aria-multiselectable="true"
+                    name="permission5+{{ i }}"
+                    id="permission5+{{ i }}"
+                    [(ngModel)]="e.permission"
+                    required
+                  >
+                    <mat-option>----</mat-option>
+                    <mat-option
+                      *ngFor="let r of role; let i = index"
+                      value="{{ r.name }}"
+                    >
+                      {{ r.name }}</mat-option
+                    >
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div> -->
+        </div>
+      </div>
+      <div class="form-row row" *ngIf="selectedperiod && showRadioButton">
+        <h4>Is Periodic Schelude</h4>
+        <mat-radio-group>
+          <mat-radio-button
+            class="col-6"
+            *ngFor="let header of periodicHeader"
+            [value]="header"
+            (change)="selectHeader(header)"
+            >{{ header }}</mat-radio-button
+          >
+        </mat-radio-group>
+      </div>
+      <br />
+      <div class="modal-footer">
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!gform.form.valid"
+          matDialogClose
+          (click)="colSubmit()"
+        >
+          {{ action == "Edit" ? "Update" : "Save" }}
+        </button>
+        &nbsp;
+        <button
+          mat-raised-button
+          color="warn"
+          matDialogClose
+          (click)="cancel()"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template class="modal" #template1>
+  <div class="modal-header card-header header-style">
+    <div class="modal-title pull-left">Add column</div>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      matDialogClose
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body card-body">
+    <form class="mt-2" #gform="ngForm">
+      <div
+        class="form-row mt-2 row"
+        *ngFor="let e of addsubColfirst; let i = index"
+      >
+        <mat-form-field appearance="outline" class="example-full-width col-3">
+          <mat-label>ColumnName</mat-label>
+          <input
+            matInput
+            type="text"
+            name="fcName+{{ i }}"
+            [(ngModel)]="e.fcName"
+            required
+          />
+        </mat-form-field>
+        <div class="form-group col-3">
+          <mat-form-field class="col-12">
+            <mat-label>Type</mat-label>
+            <mat-select
+              name="type+{{ i }}"
+              id="type+{{ i }}"
+              [(ngModel)]="e.ctype"
+              required
+              style="max-height: 250px; overflow-y: auto"
+            >
+              <mat-option value="text">Text</mat-option>
+              <mat-option value="number">Number</mat-option>
+              <mat-option value="date">Date</mat-option>
+              <mat-option value="file">Image</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-3">
+          <mat-form-field class="col-12">
+            <mat-label>Permission</mat-label>
+            <mat-select
+              aria-multiselectable="true"
+              name="permission5+{{ i }}"
+              id="permission5+{{ i }}"
+              [(ngModel)]="e.permission"
+              multiple
+              required
+            >
+              <mat-option
+                *ngFor="let r of role; let i = index"
+                value="{{ r.name }}"
+              >
+                {{ r.name }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group col-3">
+          <button mat-raised-button color="primary" (click)="addsubColumn1()">
+            Add
+          </button>
+          &nbsp;
+          <button
+            mat-raised-button
+            color="warn"
+            [disabled]="i === 0"
+            (click)="deleteColumnOne(i)"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+      <br />
+      <div class="modal-footer">
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!gform.form.valid"
+          (click)="subcolSubmit()"
+          matDialogClose
+        >
+          {{ action == "Edit" ? "Update" : "Save" }}
+        </button>
+        &nbsp;
+        <button mat-raised-button color="warn" matDialogClose>Cancel</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template class="modal" #template2>
+  <div class="modal-header card-header header-style">
+    <div class="modal-title pull-left">Add column</div>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="cancel()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <form class="mt-2" #gform="ngForm">
+    <div
+      class="form-row mt-2 row"
+      *ngFor="let e of addsubColsec; let i = index"
+    >
+      <div class="form-group p-float-label col-3">
+        <input
+          pInputText
+          type="text"
+          id="float-input"
+          required
+          name="secName+{{ i }}"
+          class="floatingName form-control"
+          [(ngModel)]="e.secName"
+        />
+        <label for="float-input">ColumnName</label>
+      </div>
+      <div class="form-group col-3">
+        <select
+          class="selectpicker form-control"
+          data-live-search="true"
+          required
+          name="type+{{ i }}"
+          id="type+{{ i }}"
+          [(ngModel)]="e.sectype"
+          style="max-height: 200px; overflow-y: auto"
+        >
+          <option value="" selected disabled>Type</option>
+          <option value="text">Text</option>
+          <option value="number">Number</option>
+          <option value="date">Date</option>
+          <option value="file" type="ty">Image</option>
+        </select>
+      </div>
+      <div class="form-group col-3">
+        <select
+          class="selectpicker form-control"
+          data-live-search="true"
+          name="permission6+{{ i }}"
+          id="permission6+{{ i }}"
+          required
+          [(ngModel)]="e.permission"
+          multiple
+          style="max-height: 200px; overflow-y: auto"
+        >
+          <option value="" selected disabled>Permission</option>
+          <option *ngFor="let r of role; let i = index" value="{{ r.name }}">
+            {{ r.name }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group col-2">
+        <button mat-raised-button color="primary" (click)="addsubColumnsec()">
+          Add
+        </button>
+        &nbsp;
+        <button
+          mat-raised-button
+          color="warn"
+          [disabled]="i === 0"
+          (click)="deleteColumnSec(i)"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+    <br />
+    <div class="modal-footer">
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="!gform.form.valid"
+        (click)="subColSecSubmit()"
+      >
+        {{ action == "Edit" ? "Update" : "Save" }}
+      </button>
+      &nbsp;
+      <button mat-raised-button color="warn" (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template class="modal" #templatefooter>
+  <div class="modal-header card-header header-style">
+    <div class="modal-title pull-left">Add Footer</div>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      matDialogClose
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body card-body">
+    <form class="mt-2" #gform="ngForm">
+      <div
+        class="form-row mt-2 row"
+        *ngFor="let f of addFooterData; let i = index"
+      >
+        <mat-form-field appearance="outline" class="example-full-width col-3">
+          <mat-label>ColumnName</mat-label>
+          <input
+            matInput
+            type="text"
+            name="fName+{{ i }}"
+            [(ngModel)]="f.fName"
+            required
+          />
+        </mat-form-field>
+        <div class="form-group col-3">
+          <mat-form-field class="col-6">
+            <mat-label>Type</mat-label>
+            <mat-select
+              name="type+{{ i }}"
+              id="type+{{ i }}"
+              [(ngModel)]="f.ftype"
+              required
+              style="max-height: 250px; overflow-y: auto"
+            >
+              <mat-option value="text">Text</mat-option>
+              <mat-option value="number">Number</mat-option>
+              <mat-option value="date">Date</mat-option>
+              <mat-option value="file">Image</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="col-6">
+            <mat-label>Fill Page</mat-label>
+            <mat-select
+              name="pageFill+{{ i }}"
+              id="pageFill+{{ i }}"
+              [(ngModel)]="f.pageFill"
+              required
+              style="max-height: 200px; overflow-y: auto"
+            >
+              <mat-option value="master">Master</mat-option>
+              <mat-option value="fillChecklist">Fill Checklist</mat-option>
+              <mat-option value="approval">Approval</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-3">
+          <mat-form-field class="col-6">
+            <mat-label>Permission</mat-label>
+            <mat-select
+              aria-multiselectable="true"
+              name="permissionf+{{ i }}"
+              id="permissionf+{{ i }}"
+              [(ngModel)]="f.permission"
+              multiple
+              required
+            >
+              <mat-option
+                *ngFor="let r of role; let i = index"
+                value="{{ r.name }}"
+              >
+                {{ r.name }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="col-6">
+            <mat-label>Fill type</mat-label>
+            <mat-select
+              name="fillType+{{ i }}"
+              id="fillType+{{ i }}"
+              [(ngModel)]="f.fillType"
+              style="max-height: 200px; overflow-y: auto"
+              required
+            >
+              <mat-option value="manual">Manual</mat-option>
+              <mat-option value="auto">Auto fill</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group col-3">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="addFooter()"
+            [hidden]="i + 1 !== addFooterData.length"
+          >
+            Add
+          </button>
+          &nbsp;
+          <button
+            mat-raised-button
+            color="warn"
+            [disabled]="i === 0"
+            (click)="footerDelete(i)"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+      <br />
+      <div class="modal-footer">
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!gform.form.valid"
+          matDialogClose
+        >
+          {{ action == "Edit" ? "Update" : "Save" }}
+        </button>
+        &nbsp;
+        <button
+          mat-raised-button
+          color="warn"
+          matDialogClose
+          (click)="footerCancel()"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template class="modal" #templateProb>
+  <div class="modal-header card-header header-style">
+    <div class="modal-title pull-left">Add column</div>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      matDialogClose
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body card-body">
+    <form class="mt-2" #gform="ngForm">
+      <div
+        class="form-row mt-2 row"
+        *ngFor="let fp of footerProbArr; let i = index"
+      >
+        <mat-form-field appearance="outline" class="example-full-width col-2">
+          <mat-label>ColumnName</mat-label>
+          <input
+            matInput
+            type="text"
+            name="probName+{{ i }}"
+            [(ngModel)]="fp.probName"
+            required
+          />
+        </mat-form-field>
+        <div class="form-group col-2">
+          <mat-form-field class="col-12">
+            <mat-label>Type</mat-label>
+            <mat-select
+              name="probType+{{ i }}"
+              id="probType+{{ i }}"
+              [(ngModel)]="fp.probType"
+              required
+              style="max-height: 250px; overflow-y: auto"
+            >
+              <mat-option value="text">Text</mat-option>
+              <mat-option value="number">Number</mat-option>
+              <mat-option value="date">Date</mat-option>
+              <mat-option value="file">Image</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-2">
+          <mat-form-field class="col-12">
+            <mat-label>Fill Page</mat-label>
+            <mat-select
+              name="pageFillfp+{{ i }}"
+              id="pageFillfp+{{ i }}"
+              [(ngModel)]="fp.pageFill"
+              required
+              style="max-height: 200px; overflow-y: auto"
+            >
+              <mat-option value="master">Master</mat-option>
+              <mat-option value="fillChecklist">Fill Checklist</mat-option>
+              <mat-option value="approval">Approval</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-2">
+          <mat-form-field class="col-12">
+            <mat-label>Permission</mat-label>
+            <mat-select
+              aria-multiselectable="true"
+              name="permissionfp+{{ i }}"
+              id="permissionfp+{{ i }}"
+              [(ngModel)]="fp.permission"
+              multiple
+              required
+            >
+              <mat-option
+                *ngFor="let r of role; let i = index"
+                value="{{ r.name }}"
+              >
+                {{ r.name }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-2">
+          <mat-form-field class="col-12">
+            <mat-label>Fill type</mat-label>
+            <mat-select
+              name="fillTypefb+{{ i }}"
+              id="fillTypefb+{{ i }}"
+              [(ngModel)]="fp.fillType"
+              style="max-height: 200px; overflow-y: auto"
+              required
+            >
+              <mat-option value="manual">Manual</mat-option>
+              <mat-option value="auto" [disabled]="true">Auto fill</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group col-2">
+          <button mat-raised-button color="primary" (click)="footerProb()" [hidden]="i + 1 !== footerProbArr.length">
+            Add
+          </button>
+          &nbsp;
+          <button
+            mat-raised-button
+            color="warn"
+            [disabled]="i === 0"
+            (click)="deleteFooterProb(i)"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+      <br />
+      <div class="modal-footer">
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!gform.form.valid"
+          (click)="subcolSubmit()"
+          matDialogClose
+        >
+          {{ action == "Edit" ? "Update" : "Save" }}
+        </button>
+        &nbsp;
+        <button mat-raised-button color="warn" matDialogClose (click)="footerProbCancel()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</ng-template>

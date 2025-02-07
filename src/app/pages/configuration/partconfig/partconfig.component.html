@@ -1,0 +1,346 @@
+<div class="container-fluid text-center mt-5">
+  <div class="col text-left mt-4">
+    <h2><b>Part Configuration</b></h2>
+    <div class="d-flex justify-content-between">
+      <h4>List</h4>
+      <div>
+        <button
+          type="button"
+          class="btn btn-primary btn-md btns"
+          (click)="openWidgetEditorDialog(temDownload, '', '')"
+        >
+          <i title="Download" class="fas fa-download"></i>
+        </button>
+        &nbsp;
+        <button class="file-upload-button">
+          <input
+            type="file"
+            [disabled]="!partconfigPermission['create']"
+            accept=".xlsx"
+            (change)="onChange($event)"
+            #inputFile
+          />
+        </button>
+        &nbsp;
+        <button
+          style="
+            background-color: rgb(243, 162, 162) !important;
+            border-radius: 50%;
+          "
+           [disabled]="!showSave"
+          title="Save Excel"
+          (click)="saveExcel()"
+        >
+          <i class="fa fa-save"  style="color: green"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col text-right mt-5">
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="!partconfigPermission['create']"
+    (click)="openWidgetEditorDialog(templateAdd, '', 'Add')"
+  >
+    Add
+  </button>
+</div>
+<div
+  class="container-fluid text-center row mt-4 justify-content-center text-center"
+>
+  <div class="col-lg-12">
+    <table
+      class="table table-centered table-borderless datatable dt-responsive nowrap ml-2"
+      style="border-collapse: collapse; border-spacing: 0; width: 100%"
+    >
+      <thead class="theme-dependent-colors" style="color: aliceblue">
+        <th>SI.NO</th>
+        <th>PartId</th>
+        <th>PartName</th>
+        <th>ProgramName</th>
+        <th>ProgramNumber</th>
+        <th>stageNo</th>
+        <th>RunningTime</th>
+        <th>HandlingTime</th>
+        <th>Total CycleTime</th>
+        <th>Actions</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let a of paginateData; let i = index">
+          <td>{{ a.index }}</td>
+          <td>{{ a.partId }}</td>
+          <td>{{ a.partName }}</td>
+          <td>{{ a.programName }}</td>
+          <td>{{ a.programNumber }}</td>
+          <td>{{ a.stageNo }}</td>
+          <td>{{ a.runningTime }}</td>
+          <td>{{ a.handlingTime }}</td>
+          <td>{{ a.totalcycleTime }}</td>
+          <td>
+            <button
+              mat-raised-button
+              color="primary"
+              [disabled]="!partconfigPermission['modify']"
+              (click)="openWidgetEditorDialog(templateAdd, a, 'edit')"
+            >
+              Edit
+            </button>
+            &nbsp;
+            <button
+              mat-raised-button
+              color="warn"
+              (click)="openWidgetEditorDialog(template1, a, 'del')"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div style="padding-left: 20px">
+  <ngb-pagination
+    [collectionSize]="mainData?.length"
+    #numPagesExp1
+    [(page)]="currentPage"
+    [maxSize]="maxSize"
+    [rotate]="true"
+    [pageSize]="itemsPerPage"
+    (pageChange)="loadPage()"
+    [directionLinks]="true"
+    [boundaryLinks]="true"
+  ></ngb-pagination>
+
+  <!-- <pre><span class="float-md-left mr-4">Page: {{ currentPage }} / {{ numPagesExp1.pageCount }}</span></pre> -->
+</div>
+<!-- </div> -->
+<ng-template class="modal" #templateAdd>
+  <div class="modal-header card-header header-style">
+    <h4 class="modal-title pull-left">
+      Part Configuration {{ action == "Add" ? "Add" : "Edit" }}
+    </h4>
+    <button type="button" class="close" aria-label="Close" matDialogClose>
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body card-body">
+    <form class="mt-2" #gform="ngForm" autocomplete="off">
+      <div class="form-row ml-5 row">
+        <div class="form-group col-6">
+          <mat-form-field
+            appearance="outline"
+            type="text"
+            class="example-full-width"
+          >
+            <mat-label>PartId</mat-label>
+            <input
+              matInput
+              type="text"
+              required
+              name="partId"
+              [(ngModel)]="partId"
+            />
+          </mat-form-field>
+        </div>
+        <div class="form-group col-6">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>PartName</mat-label>
+            <input
+              matInput
+              type="text"
+              [required]="action == 'Add'"
+              [disabled]="action == 'Edit'"
+              name="partName"
+              required
+              [(ngModel)]="partName"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="form-row mt-2 ml-5 row">
+        <div class="form-group col-6">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>ProgramName</mat-label>
+            <input
+              matInput
+              type="text"
+              [required]="action == 'Add'"
+              [disabled]="action == 'Edit'"
+              name="programName"
+              required
+              [(ngModel)]="programName"
+            />
+          </mat-form-field>
+        </div>
+        <div class="form-group col-6">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>ProgramNumber</mat-label>
+            <input
+              matInput
+              type="text"
+              [required]="action == 'Add'"
+              [disabled]="action == 'Edit'"
+              name="programNumber"
+              required
+              [(ngModel)]="programNumber"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="form-row mt-2 ml-5 row">
+        <div class="form-group col-6">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>StageNo</mat-label>
+            <input
+              matInput
+              type="number"
+              [required]="action == 'Add'"
+              [disabled]="action == 'Edit'"
+              name="stageNo"
+              required
+              [(ngModel)]="stageNo"
+            />
+          </mat-form-field>
+        </div>
+        <div class="form-group col-6">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>RunningTime</mat-label>
+            <input
+              matInput
+              type="number"
+              [required]="action == 'Add'"
+              [disabled]="action == 'Edit'"
+              name="runningTime"
+              required
+              [(ngModel)]="runningTime"
+              (change)="addTotalTime('RunningTime', runningTime)"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="form-row mt-2 ml-5 row">
+        <div class="form-group col-6">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>HandlingTime</mat-label>
+            <input
+              matInput
+              type="number"
+              [required]="action == 'Add'"
+              [disabled]="action == 'Edit'"
+              name="handlingTime"
+              required
+              [(ngModel)]="handlingTime"
+              (change)="addTotalTime('handlingTime', handlingTime)"
+            />
+          </mat-form-field>
+        </div>
+        <div class="form-group col-6">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Total CycleTime</mat-label>
+            <input
+              matInput
+              type="number"
+              disabled="true"
+              name="totalCycleTime"
+              required
+              [(ngModel)]="totalcycleTime"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!gform.form.valid"
+          (click)="save()"
+          matDialogClose
+        >
+          {{ action == "edit" ? "Update" : "Save" }}
+        </button>
+        &nbsp;
+        <button mat-raised-button color="warn" matDialogClose>Cancel</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template class="modal" #template1>
+  <div class="modal-header card-header header-style">
+    <h4 class="modal-title pull-left">Delete</h4>
+    <button
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      aria-label="Close"
+      matDialogClose
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body card-body">
+    <div class="example-container">
+      <form>
+        <div>
+          <p>Are you sure to delete?</p>
+        </div>
+        <button
+          type="submit"
+          mat-raised-button
+          color="warn"
+          matDialogClose
+          (click)="deletePart()"
+        >
+          Delete</button
+        >&nbsp;&nbsp;
+        <button
+          type="submit"
+          mat-raised-button
+          color="primary"
+          class="btn"
+          matDialogClose
+        >
+          Cancel
+        </button>
+      </form>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template class="modal" #temDownload>
+  <div class="modal-header card-header header-style">
+    <h4 class="modal-title pull-left">Download</h4>
+    <button
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      aria-label="Close"
+      matDialogClose
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body card-body">
+    <div class="example-container">
+      <form>
+        <button type="submit" mat-raised-button color="warn" (click)="export()">
+          Export</button
+        >&nbsp;&nbsp;
+        <button
+          type="submit"
+          mat-raised-button
+          color="primary"
+          class="btn"
+          matDialogClose
+        >
+          Cancel
+        </button>
+      </form>
+    </div>
+  </div>
+</ng-template>

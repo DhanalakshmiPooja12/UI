@@ -1,0 +1,113 @@
+<div class="container-fluid mt-3 mb-5" [ngStyle]="{ width: dynamicTableWidth }">
+  <div>
+    <table>
+      <tr>
+        <td>
+          <h3 class="text-center">{{ tempName }}</h3>
+          <span style="float: right" *ngIf="periodicSchedule == 'Daily'">
+            <tr>
+              <td>{{ formatData }}:</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>{{ revisionNOData }}:</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>{{ revisionDateData }}:</td>
+              <td></td>
+            </tr>
+          </span>
+          <span style="float: right" *ngIf="periodicSchedule != 'Daily'">
+            <tr>
+              <td>
+                <b>{{ currentDateValue?.date }}</b>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <b>{{ shiftData?.shift }}</b>
+              </td>
+              <td></td>
+            </tr>
+          </span>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <table *ngIf="headBool">
+    <tr>
+      <td *ngFor="let th of header; let h = index">{{ th.mName }}</td>
+    </tr>
+    <tr>
+      <td *ngFor="let th of header; let h = index"></td>
+    </tr>
+  </table>
+
+  <table *ngIf="bodyBool" #dynamicTable>
+    <tr>
+      <td id="tableO" *ngFor="let tb of body; let b = index">
+        {{ tb.cName }}
+      </td>
+    </tr>
+    <tr *ngIf="subHeadBool">
+      <td *ngFor="let ts of subHeader; let s = index">
+        <table>
+          <td class="tabborder" *ngFor="let t of ts; let j = index">
+            <span
+              [ngClass]="{
+                bordertd: t.csName !== '',
+                bordert: j === ts.length - 1
+              }"
+            >
+              {{ t.csName }} {{ t.length }}
+            </span>
+          </td>
+        </table>
+      </td>
+    </tr>
+
+    <tr>
+      <td *ngFor="let tb of body; let b = index"></td>
+    </tr>
+  </table>
+
+  <!-- <table>
+      <tr>
+        <span *ngFor="let tb of body; let b = index">
+          <td *ngFor="let ts of tb.subheader; let b = index">
+            {{ ts.csName }}
+          </td>
+        </span>
+      </tr>
+    </table> -->
+  <span *ngIf="periodicSchedule != 'Daily'">
+    <table *ngIf="footBool">
+      <td *ngFor="let tf of footer; let f = index">
+        {{ tf.fName }}
+      </td>
+      <tr>
+        <td *ngFor="let tf of footer; let f = index"></td>
+      </tr>
+    </table>
+  </span>
+  <span *ngIf="periodicSchedule == 'Daily'">
+    <table *ngIf="footBool">
+      <tr *ngFor="let tf of footer; let f = index">
+        <td>
+          {{ tf.fName }}
+        </td>
+        <td *ngFor="let tf of footerData; let f = index"></td>
+      </tr>
+    </table>
+    <table>
+      <tr>
+        <td *ngFor="let probFoot of problemFooter">{{ probFoot.probName }}</td>
+      </tr>
+      <tr>
+        <td *ngFor="let probFoot of problemFooter"></td>
+      </tr>
+    </table>
+  </span>
+</div>

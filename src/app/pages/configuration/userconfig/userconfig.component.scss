@@ -1,0 +1,50 @@
+.floatingName::placeholder {
+  opacity: 0;
+}
+/* 2. Show placeholder on focus */
+.floatingName:focus::placeholder {
+  opacity: 1;
+}
+.eyeicon {
+  position: absolute;
+  left: 162px;
+  margin-top: -1px;
+}
+// Your SCSS code
+.btn {
+  &.btn-secondary {
+    &.btn-xs {
+      // Common button styles
+      padding: 5px 10px;
+      border-radius: 3px;
+      font-size: 12px;
+      background-color: #ccc;
+      color: #fff;
+      border: 1px solid #ccc;
+
+      // Icon styles
+      i {
+        margin-right: 5px; 
+        /* Adjust the space between icon and text */
+        // margin-left:208px;
+        // margin-top: -125px;
+      }
+
+
+      // Hover and focus styles
+      &:hover, &:focus {
+        background-color: #aaa;
+        color: #fff;
+        border-color: #aaa;
+      }
+
+      // Active state styles
+      &:active {
+        background-color: #888;
+        border-color: #888;
+        color: #fff;
+      }
+    }
+  }
+}
+

@@ -1,0 +1,167 @@
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+// @import "../variables/colors.scss";
+
+html {
+  font-size: 10px;
+  font-family: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica,
+    Arial, "Lucida Grande", sans-serif;
+}
+
+body {
+  font-size: 14px;
+}
+
+// // Theme Overrides
+// // Import library functions for theme creation.
+// @import "~@angular/material/theming";
+
+// // Include non-theme styles for core.
+// @include mat-core();
+
+// // Define your application's custom theme.
+// $primary: mat-palette($vt-primary);
+// $accent: mat-palette($mat-pink, A200, A100, A400);
+
+// // SWAPPING THEMES
+
+// .theme {
+//   &--light {
+//     $theme: mat-light-theme($primary, $accent);
+
+//     // background: #8c2020;
+
+//     mat-icon {
+//       color: #00695c;
+//     }
+//     .modal {
+//       color: black;
+//     }
+//     mat-sidenav-container {
+//       background: #bdbdbd;
+//     }
+
+//     @include angular-material-theme($theme);
+//   }
+
+//   &--dark {
+//     $theme: mat-dark-theme($primary, $accent);
+//     background: #303030;
+//     color: white;
+//     table,
+//     h4 {
+//       //   background: #9e9e9e;
+//       color: rgb(230, 218, 218);
+//     }
+//     .card {
+//       background: #171616;
+//     }
+//     mat-icon {
+//       color: #90a4ae;
+//     }
+//     .modal {
+//       color: black;
+//     }
+//     @include angular-material-theme($theme);
+//   }
+// }
+
+@import "~@angular/material/theming";
+@include mat-core();
+
+@mixin define-css-classes($theme) {
+  @include angular-material-theme($theme);
+
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  // CSS THEME-DEPENDENT-STYLES ARE HERE:
+  .theme-dependent-colors {
+    background: mat-color($primary);
+    color: mat-color($accent);
+  }
+}
+
+$app-themes: (
+  indigo-pink: (
+    primary-base: $mat-teal,
+    accent-base: $mat-green,
+    warn-base: $mat-pink,
+  ),
+  deeppurple-amber: (
+    primary-base: $mat-deep-purple,
+    accent-base: $mat-amber,
+    warn-base: $mat-green,
+  ),
+  pink-bluegrey: (
+    primary-base: $mat-pink,
+    accent-base: $mat-blue-gray,
+    warn-base: $mat-orange,
+  ),
+  purple-green: (
+    primary-base: $mat-purple,
+    accent-base: $mat-green,
+    warn-base: $mat-blue-gray,
+  ),
+);
+
+@each $css-class, $theme in $app-themes {
+  $primary: if(
+    map-has-key($theme, primary),
+    map-get($theme, primary),
+    mat-palette(map-get($theme, primary-base))
+  );
+
+  $accent: if(
+    map-has-key($theme, accent),
+    map-get($theme, accent),
+    mat-palette(map-get($theme, accent-base))
+  );
+
+  $warn: if(
+    map-has-key($theme, warn),
+    map-get($theme, warn),
+    mat-palette(
+      if(map-has-key($theme, warn-base), map-get($theme, warn-base), $mat-red)
+    )
+  );
+
+  .#{$css-class} {
+    @include define-css-classes(mat-light-theme($primary, $accent, $warn));
+    .app-sidenav {
+      color: mat-color($primary);
+    }
+    mat-icon {
+      color: #00695c;
+    }
+  }
+
+  .#{$css-class}-dark {
+    @include define-css-classes(mat-dark-theme($primary, $accent, $warn));
+    table,
+    h4 {
+      //   background: #9e9e9e;
+      color: rgb(230, 218, 218);
+    }
+    .card {
+      background: #171616;
+    }
+    mat-icon {
+      color: #90a4ae;
+    }
+  }
+
+  .theme-primary.#{$css-class} {
+    background-color: mat-color($primary);
+  }
+
+  .theme-accent.#{$css-class} {
+    background-color: mat-color($accent);
+  }
+  .theme-warn.#{$css-class} {
+    background-color: mat-color($warn);
+  }
+}

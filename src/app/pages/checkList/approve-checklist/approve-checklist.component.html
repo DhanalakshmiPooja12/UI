@@ -1,0 +1,1545 @@
+<div class="mt-5 col text-right">
+  <button
+    mat-raised-button
+    style="margin-right: 20px"
+    color="primary"
+    (click)="returnToMaster()"
+  >
+    Back
+  </button>
+</div>
+<div class="container-fluid">
+  <div class="example-container">
+    <div class="row mt-4">
+      <form class="col-12" #uform="ngForm" autocomplete="off">
+        <div class="mr-2" style="overflow-x: scroll">
+          <table
+            [ngStyle]="{ width: dynamicTableWidth }"
+            class="table-bordered"
+          >
+            <img
+              *ngIf="imageHeaderBool"
+              class="text-left ml-3"
+              [src]="imageUrl"
+              alt="Image Source"
+              height="70px !important"
+              width="50px"
+              style="display: fit-content; float: left"
+            />
+            <h3 *ngIf="periodicSchedule == 'Hourly'" class="text-center col-9">
+              HOURLY INPROCESS INSPECTION REPORT
+            </h3>
+
+            <h3 *ngIf="periodicSchedule == 'Daily'" class="text-center col-10">
+              DAILY MACHINE CHECK SHEET
+            </h3>
+
+            <span *ngIf="periodicSchedule == 'Daily'" style="float: right">
+              <tr *ngFor="let e of formatData; let i = index">
+                <td>
+                  <mat-form-field
+                    appearance="outline"
+                    class="example-full-width col-12"
+                  >
+                    <mat-label>Name</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      required
+                      name="formatNo"
+                      [(ngModel)]="e.formatNo"
+                      [disabled]="true"
+                    />
+                  </mat-form-field>
+                </td>
+                <td>
+                  <mat-form-field
+                    MatFormFieldControl
+                    appearance="outline"
+                    class="example-full-width col-12"
+                    *ngIf="
+                      e.formattype != 'select' && e.formattype != 'multi-select'
+                    "
+                  >
+                    <mat-label *ngIf="e.formattype !== 'file'">Value</mat-label>
+                    <div>
+                      <input
+                        *ngIf="e.formattype != 'file'"
+                        matInput
+                        [type]="getInputType(e.formattype)"
+                        [(ngModel)]="e.formatValue"
+                        name="formatValue"
+                        [disabled]="true"
+                      />
+                      <input
+                        *ngIf="
+                          e.formattype != 'file' && e.fillTypeFormat == 'auto'
+                        "
+                        matInput
+                        [(ngModel)]="e.formatValue"
+                        name="formatValue"
+                        [disabled]="true"
+                      />
+                      <input
+                        *ngIf="e.formattype == ''"
+                        matInput
+                        [type]="getInputType(e.formattype)"
+                        [(ngModel)]="e.formatValue"
+                        name="e.formatValue"
+                        [disabled]="true"
+                      />
+                    </div>
+                    <div>
+                      <!-- <mat-form-field class="col-6"> -->
+                      <!-- <mat-label>select the {{ e.autoFillValue }}</mat-label> -->
+                      <mat-select
+                        *ngIf="
+                          e.formattype != 'file' && e.fillTypeFormat == 'auto'
+                        "
+                        name="formatValue"
+                        multiple
+                        [(ngModel)]="e.formatValue"
+                        [disabled]="true"
+                        style="max-height: 200px; overflow-y: auto"
+                      >
+                        <!-- <mat-option
+                  *ngFor="let selection of getval(e.autoFillValue)"
+                  [value]="selection"
+                  >{{ selection }}</mat-option
+                > -->
+                      </mat-select>
+                      <!-- </mat-form-field> -->
+                    </div>
+                    <div
+                      class="row"
+                      *ngIf="e.formattype === 'file'"
+                      style="display: flex; height: 15px"
+                    >
+                      <div>
+                        <button
+                          mat-icon-button
+                          matPrefix
+                          (click)="f_input.click()"
+                        >
+                          <mat-icon style="margin-top: -29px"
+                            >attach_file</mat-icon
+                          >
+                        </button>
+                      </div>
+                      <div>
+                        <input
+                          type="text"
+                          name="file-{{ i }}"
+                          readonly
+                          matInput
+                          [disabled]="true"
+                          hidden
+                          [(ngModel)]="e.formatValue"
+                        />
+                        <div style="height: 50px; display: flex">
+                          <span>
+                            {{ showImage(e.formatValue) }}
+                          </span>
+                        </div>
+                        <input
+                          type="file"
+                          name="file-{{ i }}"
+                          multiple
+                          hidden
+                          [disabled]="true"
+                          #f_input
+                          (change)="
+                            handleFileInputChange(
+                              f_input.files,
+                              0,
+                              i,
+                              e.formattype,
+                              'header'
+                            )
+                          "
+                        />
+                      </div>
+                    </div>
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr *ngFor="let e of revisionNOData; let i = index">
+                <td>
+                  <mat-form-field
+                    appearance="outline"
+                    class="example-full-width col-12"
+                  >
+                    <mat-label>Name</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      required
+                      name="revisionNo"
+                      [(ngModel)]="e.revisionNo"
+                      [disabled]="true"
+                    />
+                  </mat-form-field>
+                </td>
+                <td>
+                  <mat-form-field
+                    MatFormFieldControl
+                    appearance="outline"
+                    class="example-full-width col-12"
+                    *ngIf="
+                      e.revisionNOType != 'select' &&
+                      e.revisionNOType != 'multi-select'
+                    "
+                  >
+                    <mat-label *ngIf="e.revisionNOType !== 'file'"
+                      >Value</mat-label
+                    >
+                    <div>
+                      <input
+                        *ngIf="e.revisionNOType != 'file'"
+                        matInput
+                        [type]="getInputType(e.revisionNOType)"
+                        [(ngModel)]="e.revisionNoValue"
+                        name="revisionNoValue"
+                        [disabled]="true"
+                      />
+                      <input
+                        *ngIf="
+                          e.revisionNOType != 'file' &&
+                          e.fillTypeRevisionNo == 'auto'
+                        "
+                        matInput
+                        [(ngModel)]="e.revisionNoValue"
+                        name="revisionNoValue"
+                        [disabled]="true"
+                      />
+                      <input
+                        *ngIf="e.revisionNOType == ''"
+                        matInput
+                        [type]="getInputType(e.revisionNOType)"
+                        [(ngModel)]="e.revisionNoValue"
+                        name="revisionNoValue"
+                        [disabled]="true"
+                      />
+                    </div>
+                    <div>
+                      <!-- <mat-form-field class="col-6"> -->
+                      <!-- <mat-label>select the {{ e.autoFillValue }}</mat-label> -->
+                      <mat-select
+                        *ngIf="
+                          e.revisionNOType != 'file' &&
+                          e.fillTypeRevisionNo == 'auto'
+                        "
+                        name="revisionNoValue"
+                        multiple
+                        [(ngModel)]="e.revisionNoValue"
+                        [disabled]="true"
+                        style="max-height: 200px; overflow-y: auto"
+                      >
+                        <!-- <mat-option
+                  *ngFor="let selection of getval(e.autoFillValue)"
+                  [value]="selection"
+                  >{{ selection }}</mat-option
+                > -->
+                      </mat-select>
+                      <!-- </mat-form-field> -->
+                    </div>
+                    <div
+                      class="row"
+                      *ngIf="e.revisionNOType === 'file'"
+                      style="display: flex; height: 15px"
+                    >
+                      <div>
+                        <button
+                          mat-icon-button
+                          matPrefix
+                          (click)="f_input.click()"
+                        >
+                          <mat-icon style="margin-top: -29px"
+                            >attach_file</mat-icon
+                          >
+                        </button>
+                      </div>
+                      <div>
+                        <input
+                          type="text"
+                          name="file-{{ i }}"
+                          readonly
+                          matInput
+                          [disabled]="true"
+                          hidden
+                          [(ngModel)]="e.revisionNoValue"
+                        />
+                        <div style="height: 50px; display: flex">
+                          <span>
+                            {{ showImage(e.revisionNoValue) }}
+                          </span>
+                        </div>
+                        <input
+                          type="file"
+                          name="file1-{{ i }}"
+                          multiple
+                          hidden
+                          [disabled]="true"
+                          #f_input
+                          (change)="
+                            handleFileInputChange(
+                              f_input.files,
+                              0,
+                              i,
+                              e.revisionNOType,
+                              'header'
+                            )
+                          "
+                        />
+                      </div>
+                    </div>
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr *ngFor="let e of revisionDateData; let i = index">
+                <td>
+                  <mat-form-field
+                    appearance="outline"
+                    class="example-full-width col-12"
+                  >
+                    <mat-label>Name</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      required
+                      name="revisionDate"
+                      [(ngModel)]="e.revisionDate"
+                      [disabled]="true"
+                    />
+                  </mat-form-field>
+                </td>
+                <td>
+                  <mat-form-field
+                    MatFormFieldControl
+                    appearance="outline"
+                    class="example-full-width col-12"
+                    *ngIf="
+                      e.revisionDatetype != 'select' &&
+                      e.revisionDatetype != 'multi-select'
+                    "
+                  >
+                    <mat-label *ngIf="e.revisionDatetype !== 'file'"
+                      >Value</mat-label
+                    >
+                    <div>
+                      <input
+                        *ngIf="e.revisionDatetype != 'file'"
+                        matInput
+                        [type]="getInputType(e.revisionDatetype)"
+                        [(ngModel)]="e.revisionDateValue"
+                        name="revisionDateValue"
+                        [disabled]="true"
+                      />
+                      <input
+                        *ngIf="
+                          e.revisionDatetype != 'file' &&
+                          e.fillTypeRevisionDate == 'auto'
+                        "
+                        matInput
+                        [(ngModel)]="e.revisionDateValue"
+                        name="revisionDateValue"
+                        [disabled]="true"
+                      />
+                      <input
+                        *ngIf="e.revisionDatetype == ''"
+                        matInput
+                        [type]="getInputType(e.revisionDatetype)"
+                        [(ngModel)]="e.revisionDateValue"
+                        name="revisionDateValue"
+                        [disabled]="true"
+                      />
+                    </div>
+                    <div>
+                      <!-- <mat-form-field class="col-6"> -->
+                      <!-- <mat-label>select the {{ e.autoFillValue }}</mat-label> -->
+                      <mat-select
+                        *ngIf="
+                          e.revisionDatetype != 'file' &&
+                          e.fillTypeRevisionDate == 'auto'
+                        "
+                        name="revisionDateValue"
+                        multiple
+                        [(ngModel)]="e.revisionDateValue"
+                        [disabled]="true"
+                        style="max-height: 200px; overflow-y: auto"
+                      >
+                        <!-- <mat-option
+                  *ngFor="let selection of getval(e.autoFillValue)"
+                  [value]="selection"
+                  >{{ selection }}</mat-option
+                > -->
+                      </mat-select>
+                      <!-- </mat-form-field> -->
+                    </div>
+                    <div
+                      class="row"
+                      *ngIf="e.revisionDatetype === 'file'"
+                      style="display: flex; height: 15px"
+                    >
+                      <div>
+                        <button
+                          mat-icon-button
+                          matPrefix
+                          (click)="f_input.click()"
+                        >
+                          <mat-icon style="margin-top: -29px"
+                            >attach_file</mat-icon
+                          >
+                        </button>
+                      </div>
+                      <div>
+                        <input
+                          type="text"
+                          name="file-{{ i }}"
+                          readonly
+                          matInput
+                          [disabled]="true"
+                          hidden
+                          [(ngModel)]="e.revisionDateValue"
+                        />
+                        <div style="height: 50px; display: flex">
+                          <span>
+                            {{ showImage(e.revisionDateValue) }}
+                          </span>
+                        </div>
+                        <input
+                          type="file"
+                          name="file-{{ i }}"
+                          multiple
+                          hidden
+                          [disabled]="true"
+                          #f_input
+                          (change)="
+                            handleFileInputChange(
+                              f_input.files,
+                              0,
+                              i,
+                              e.revisionDatetype,
+                              'header'
+                            )
+                          "
+                        />
+                      </div>
+                    </div>
+                  </mat-form-field>
+                </td>
+              </tr>
+            </span>
+            <span *ngIf="periodicSchedule != 'Daily'" style="float: right">
+              <tr *ngFor="let e of currentDateValue; let i = index">
+                <td>
+                  <mat-form-field
+                    appearance="outline"
+                    class="example-full-width col-12"
+                  >
+                    <mat-label>Name</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      required
+                      name="date"
+                      [(ngModel)]="e.date"
+                      [disabled]="true"
+                    />
+                  </mat-form-field>
+                </td>
+                <td>
+                  <mat-form-field
+                    MatFormFieldControl
+                    appearance="outline"
+                    class="example-full-width col-12"
+                    *ngIf="
+                      e.dateType != 'select' && e.dateType != 'multi-select'
+                    "
+                  >
+                    <mat-label *ngIf="e.dateType !== 'file'">Value</mat-label>
+                    <div>
+                      <input
+                        *ngIf="e.dateType != 'file'"
+                        matInput
+                        [type]="getInputType(e.dateType)"
+                        [(ngModel)]="e.dateValue"
+                        name="dateValue"
+                        [disabled]="true"
+                      />
+                      <input
+                        *ngIf="e.dateType != 'file' && e.fillTypeDate == 'auto'"
+                        matInput
+                        [(ngModel)]="e.dateValue"
+                        name="dateValue"
+                        [disabled]="true"
+                      />
+                      <input
+                        *ngIf="e.dateType == ''"
+                        matInput
+                        [type]="getInputType(e.dateType)"
+                        [(ngModel)]="e.dateValue"
+                        name="e.dateValue"
+                        [disabled]="true"
+                      />
+                    </div>
+                    <div>
+                      <!-- <mat-form-field class="col-6"> -->
+                      <!-- <mat-label>select the {{ e.autoFillValue }}</mat-label> -->
+                      <mat-select
+                        *ngIf="e.dateType != 'file' && e.fillTypeDate == 'auto'"
+                        name="dateValue"
+                        multiple
+                        [(ngModel)]="e.dateValue"
+                        [disabled]="true"
+                        style="max-height: 200px; overflow-y: auto"
+                      >
+                        <!-- <mat-option
+                *ngFor="let selection of getval(e.autoFillValue)"
+                [value]="selection"
+                >{{ selection }}</mat-option
+              > -->
+                      </mat-select>
+                      <!-- </mat-form-field> -->
+                    </div>
+                    <div
+                      class="row"
+                      *ngIf="e.dateType === 'file'"
+                      style="display: flex; height: 15px"
+                    >
+                      <div>
+                        <button
+                          mat-icon-button
+                          matPrefix
+                          (click)="f_input.click()"
+                        >
+                          <mat-icon style="margin-top: -29px"
+                            >attach_file</mat-icon
+                          >
+                        </button>
+                      </div>
+                      <div>
+                        <input
+                          type="text"
+                          name="file-{{ i }}"
+                          readonly
+                          matInput
+                          [disabled]="true"
+                          hidden
+                          [(ngModel)]="e.dateValue"
+                        />
+                        <div style="height: 50px; display: flex">
+                          <span>
+                            {{ showImage(e.dateValue) }}
+                          </span>
+                        </div>
+                        <input
+                          type="file"
+                          name="file-{{ i }}"
+                          multiple
+                          hidden
+                          [disabled]="true"
+                          #f_input
+                          (change)="
+                            handleFileInputChange(
+                              f_input.files,
+                              0,
+                              i,
+                              e.dateType,
+                              'header'
+                            )
+                          "
+                        />
+                      </div>
+                    </div>
+                  </mat-form-field>
+                </td>
+              </tr>
+
+              <tr *ngFor="let e of shiftData; let i = index">
+                <td class="form-group col-5 mt-3">
+                  <mat-form-field
+                    appearance="outline"
+                    class="example-full-width col-12"
+                  >
+                    <mat-label>Name</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      required
+                      name="shift"
+                      [(ngModel)]="e.shift"
+                      [disabled]="true"
+                    />
+                  </mat-form-field>
+                </td>
+                <td class="form-group col-5 mt-3">
+                  <mat-form-field
+                    MatFormFieldControl
+                    appearance="outline"
+                    class="example-full-width col-12"
+                    *ngIf="
+                      e.shiftType != 'select' && e.shiftType != 'multi-select'
+                    "
+                  >
+                    <mat-label *ngIf="e.shiftType !== 'file'">Value</mat-label>
+                    <div>
+                      <input
+                        *ngIf="e.shiftType != 'file'"
+                        matInput
+                        [type]="getInputType(e.shiftType)"
+                        [(ngModel)]="e.shiftValue"
+                        name="shiftValue"
+                        [disabled]="true"
+                      />
+                      <input
+                        *ngIf="
+                          e.shiftType != 'file' && e.fillTypeShift == 'auto'
+                        "
+                        matInput
+                        [(ngModel)]="e.shiftValue"
+                        name="shiftValue"
+                        [disabled]="true"
+                      />
+                      <input
+                        *ngIf="e.shiftType == ''"
+                        matInput
+                        [type]="getInputType(e.shiftType)"
+                        [(ngModel)]="e.shiftValue"
+                        name="e.shiftValue"
+                        [disabled]="true"
+                      />
+                    </div>
+                    <div>
+                      <!-- <mat-form-field class="col-6"> -->
+                      <!-- <mat-label>select the {{ e.autoFillValue }}</mat-label> -->
+                      <mat-select
+                        *ngIf="
+                          e.shiftType != 'file' && e.fillTypeShift == 'auto'
+                        "
+                        name="shiftValue"
+                        multiple
+                        [(ngModel)]="e.shiftValue"
+                        [disabled]="true"
+                        style="max-height: 200px; overflow-y: auto"
+                      >
+                        <!-- <mat-option
+                *ngFor="let selection of getval(e.autoFillValue)"
+                [value]="selection"
+                >{{ selection }}</mat-option
+              > -->
+                      </mat-select>
+                      <!-- </mat-form-field> -->
+                    </div>
+                    <div
+                      class="row"
+                      *ngIf="e.shiftType === 'file'"
+                      style="display: flex; height: 15px"
+                    >
+                      <div>
+                        <button
+                          mat-icon-button
+                          matPrefix
+                          (click)="f_input.click()"
+                        >
+                          <mat-icon style="margin-top: -29px"
+                            >attach_file</mat-icon
+                          >
+                        </button>
+                      </div>
+                      <div>
+                        <input
+                          type="text"
+                          name="file-{{ i }}"
+                          readonly
+                          matInput
+                          [disabled]="true"
+                          hidden
+                          [(ngModel)]="e.shiftValue"
+                        />
+                        <div style="height: 50px; display: flex">
+                          <span>
+                            {{ showImage(e.shiftValue) }}
+                          </span>
+                        </div>
+                        <input
+                          type="file"
+                          name="file-{{ i }}"
+                          multiple
+                          hidden
+                          [disabled]="
+                            e.fillTypeShift == 'auto' ||
+                            e.pageFillShift == 'fillChecklist'
+                          "
+                          #f_input
+                          (change)="
+                            handleFileInputChange(
+                              f_input.files,
+                              0,
+                              i,
+                              e.shiftType,
+                              'header'
+                            )
+                          "
+                        />
+                      </div>
+                    </div>
+                  </mat-form-field>
+                </td>
+              </tr>
+            </span>
+          </table>
+          <table
+            class="table-bordered"
+            [ngStyle]="{ width: dynamicTableWidth }"
+          >
+            <td *ngFor="let e of mainData; let i = index">
+              <b class="mt-5 ml-2"> {{ e.mName }}: </b>
+              <mat-form-field
+                appearance="outline"
+                class="example-full-width col-12"
+                *ngIf="e.mtype != 'select' && e.mtype != 'multi-select'"
+              >
+                <mat-label *ngIf="e.mtype !== 'file'">Value</mat-label>
+                <div>
+                  <input
+                    *ngIf="
+                      e.mtype != 'file' &&
+                      e.dateFormat == '' &&
+                      e.fillFrom == ''
+                    "
+                    matInput
+                    [type]="getInputType(e.mtype)"
+                    [(ngModel)]="e.mvalue"
+                    required
+                    [disabled]="true"
+                    name="mvalue+{{ i }}"
+                  />
+                  <input
+                    *ngIf="
+                      e.mtype != 'file' &&
+                      e.fillType == 'auto' &&
+                      e.dateFormat !== '' &&
+                      e.fillFrom == ''
+                    "
+                    matInput
+                    [(ngModel)]="e.mvalue"
+                    required
+                    [disabled]="true"
+                    name="mvalue+{{ i }}"
+                  />
+                  <input
+                    *ngIf="e.mtype == ''"
+                    matInput
+                    [type]="getInputType(e.mtype)"
+                    [(ngModel)]="e.mvalue"
+                    name="mvalue+{{ i }}"
+                    [disabled]="true"
+                  />
+                </div>
+                <div
+                  *ngIf="
+                    e.mtype != 'file' &&
+                    e.fillType == 'auto' &&
+                    e.fillFrom == 'Configuration'
+                  "
+                >
+                  <mat-select
+                    name="mvalue+{{ i }}"
+                    multiple
+                    [(ngModel)]="e.mvalue"
+                    [disabled]="true"
+                    style="max-height: 200px; overflow-y: auto"
+                  >
+                    <mat-option
+                      *ngFor="let selection of getval(e.autoFillValue)"
+                      [value]="selection"
+                      >{{ selection }}</mat-option
+                    >
+                  </mat-select>
+                </div>
+                <div
+                  class="row"
+                  *ngIf="e.mtype === 'file'"
+                  style="display: flex; height: 15px"
+                >
+                  <div>
+                    <button mat-icon-button matPrefix (click)="f_input.click()">
+                      <mat-icon style="margin-top: -29px">attach_file</mat-icon>
+                    </button>
+                  </div>
+                  <div>
+                    <input
+                      type="text"
+                      name="file-{{ i }}"
+                      readonly
+                      matInput
+                      hidden
+                      [(ngModel)]="e.mvalue"
+                      [disabled]="true"
+                    />
+                    <div style="height: 50px; display: flex">
+                      <span>{{ showImage(e.mvalue) }}</span>
+                    </div>
+                    <input
+                      type="file"
+                      disabled
+                      name="file-{{ i }}"
+                      multiple
+                      hidden
+                      #f_input
+                      (change)="
+                        handleFileInputChange(
+                          f_input.files,
+                          0,
+                          i,
+                          e.mtype,
+                          'header'
+                        )
+                      "
+                    />
+                  </div>
+                </div>
+              </mat-form-field>
+            </td>
+          </table>
+
+          <table #myTable>
+            <thead
+              class="table-bordered table-sm"
+              *ngFor="let e of tempArray; let i = index"
+            >
+              <tr
+                *ngIf="
+                  selectTempname == e.Tempname && periodFlag && !shiftPeriod
+                "
+              >
+                <th
+                  *ngFor="let a of e.columns; let i = index"
+                  [attr.colspan]="a.subheader ? a.subheader.length : 1"
+                  [hidden]="a.periodic == true && a.cName != current_value"
+                >
+                  {{ a.cName }}
+                </th>
+              </tr>
+              <tr
+                *ngIf="
+                  selectTempname == e.Tempname && periodFlag && shiftPeriod
+                "
+              >
+                <th
+                  *ngFor="let a of e.columns; let i = index"
+                  [attr.colspan]="a.subheader ? a.subheader.length : 1"
+                  [hidden]="a.periodic == true && !shiftPeriod"
+                >
+                  {{ a.cName }}
+                </th>
+              </tr>
+              <tr
+                *ngIf="
+                  selectTempname == e.Tempname && !periodFlag && !shiftPeriod
+                "
+              >
+                <th
+                  *ngFor="let a of e.columns; let i = index"
+                  [attr.colspan]="a.subheader ? a.subheader.length : 1"
+                >
+                  {{ a.cName }}
+                </th>
+              </tr>
+              <tr *ngIf="selectTempname == e.Tempname">
+                <th *ngFor="let b of subHeaderMain; let k = index">
+                  {{ b.csName }}
+                </th>
+              </tr>
+            </thead>
+            <tbody class="table-bordered table-sm">
+              <tr *ngFor="let e of rows; let j = index">
+                <td *ngFor="let row of subHeaderMain; let i = index">
+                  <mat-form-field
+                    appearance="outline"
+                    class="example-full-width col-12"
+                    *ngIf="
+                      row.cstype != 'select' &&
+                      row.cstype != 'multi-select' &&
+                      row.cstype != 'file' &&
+                      subHbool
+                    "
+                  >
+                    <mat-label>Name</mat-label>
+                    <div *ngIf="periodFlag">
+                      <div *ngIf="row.csName != ''">
+                        <input
+                          matInput
+                          [disabled]="true"
+                          [type]="row.cstype"
+                          [(ngModel)]="e[row.csName]"
+                          name="{{ 'cellsh-' + i + '-' + j }}"
+                        />
+                      </div>
+                      <div *ngIf="row.csName == ''">
+                        <input
+                          matInput
+                          [disabled]="true"
+                          [type]="row.cstype"
+                          [(ngModel)]="e[row.csName + 'csName!@#%!$' + i]"
+                          name="{{ 'cellnsh-' + i + '-' + j + '-' + 1 }}"
+                          id="{{ 'cellnsh-' + i + '-' + j + '-' + 1 }}"
+                        />
+                      </div>
+                    </div>
+                    <div *ngIf="!periodFlag">
+                      <div *ngIf="row.csName != ''">
+                        <input
+                          matInput
+                          disabled
+                          [type]="row.cstype"
+                          [(ngModel)]="e[row.csName]"
+                          name="{{ 'cellsh-' + i + '-' + j }}"
+                        />
+                      </div>
+                      <div *ngIf="row.csName == ''">
+                        <input
+                          matInput
+                          disabled
+                          [type]="row.cstype"
+                          [(ngModel)]="e[row.csName + 'csName!@#%!$' + i]"
+                          name="{{ 'cellnsh-' + i + '-' + j + '-' + 1 }}"
+                          id="{{ 'cellnsh-' + i + '-' + j + '-' + 1 }}"
+                        />
+                      </div>
+                    </div>
+                  </mat-form-field>
+                  <mat-form-field
+                    MatFormFieldControl
+                    appearance="outline"
+                    class="example-full-width col-12"
+                    *ngIf="row.cstype == 'file'"
+                  >
+                    <mat-label *ngIf="row.cstype !== 'file'">Name</mat-label>
+                    <div class="import">
+                      <div *ngIf="row.cstype != 'file'">
+                        <input
+                          matInput
+                          disabled
+                          [type]="getInputType(row.cstype)"
+                          [(ngModel)]="e[row.csName]"
+                          name="{{ 'cellh-' + i + '-' + j }}"
+                          id="{{ 'cellh-' + i + '-' + j }}"
+                        />
+                      </div>
+                      <div
+                        class="row"
+                        *ngIf="row.cstype === 'file'"
+                        style="height: 15px; display: flex"
+                      >
+                        <div>
+                          <button
+                            mat-icon-button
+                            matPrefix
+                            disabled
+                            (click)="f_input.click()"
+                          >
+                            <mat-icon style="margin-top: -30px"
+                              >attach_file</mat-icon
+                            >
+                          </button>
+                        </div>
+                        <div>
+                          <input
+                            type="text"
+                            readonly
+                            matInput
+                            disabled
+                            name="{{ 'SE-' + i + '-' + j }}"
+                            id="{{ 'SR-' + i + '-' + j }}"
+                            hidden
+                            [(ngModel)]="e[row.csName]"
+                          />
+                          <div style="height: 50px; display: flex">
+                            <span>{{ showImage(e[row.csName]) }}</span>
+                          </div>
+
+                          <input
+                            type="file"
+                            multiple
+                            disabled
+                            hidden
+                            #f_input
+                            (change)="
+                              handleFileInputChange(
+                                f_input.files,
+                                j,
+                                i,
+                                row.csName,
+                                'subheader'
+                              )
+                            "
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </mat-form-field>
+                </td>
+                <td *ngFor="let row of addData1; let i = index">
+                  <mat-form-field
+                    appearance="outline"
+                    class="example-full-width col-12"
+                    *ngIf="
+                      row.ctype != 'select' &&
+                      row.ctype != 'multi-select' &&
+                      row.ctype != 'file' &&
+                      subHbool1
+                    "
+                  >
+                    <mat-label>Name</mat-label>
+                    <input
+                      *ngIf="periodFlag"
+                      matInput
+                      disabled
+                      [type]="row.ctype"
+                      [(ngModel)]="e[row.cName]"
+                      name="{{ 'cell2-' + i + '-' + j }}"
+                    />
+                    <input
+                      *ngIf="!periodFlag"
+                      matInput
+                      disabled
+                      [type]="row.ctype"
+                      [(ngModel)]="e[row.cName]"
+                      name="{{ 'cell2-' + i + '-' + j }}"
+                    />
+                  </mat-form-field>
+                  <!-- <mat-form-field
+                  appearance="outline"
+                  class="example-full-width col-12"
+                  *ngIf="row.ctype == 'file' && subHbool1"
+                >
+                  <mat-label>Type</mat-label>
+                  <input
+                    matInput
+                    [type]="row.ctype"
+                    [(ngModel)]="e[row.cName]"
+                    name="{{ 'cell2-' + i + '-' + j }}"
+                  />
+                </mat-form-field>
+                <mat-form-field
+                  class="col-12"
+                  *ngIf="row.ctype == 'select' && subHbool1"
+                >
+                  <mat-label>select</mat-label>
+                  <mat-select
+                    [(ngModel)]="e[row.cName]"
+                    data-live-search="true"
+                    required
+                    name="{{ 'cell2-' + i + '-' + j }}"
+                  >
+                    <mat-option value="fsaasd">fsaasd</mat-option>
+                  </mat-select>
+                </mat-form-field> -->
+                  <mat-form-field
+                    MatFormFieldControl
+                    appearance="outline"
+                    class="example-full-width col-12"
+                    *ngIf="row.ctype == 'file'"
+                  >
+                    <mat-label *ngIf="row.ctype !== 'file'">Name</mat-label>
+                    <div class="import">
+                      <div *ngIf="row.ctype != 'file'">
+                        <input
+                          matInput
+                          disabled
+                          [type]="getInputType(row.ctype)"
+                          [(ngModel)]="e[row.cName]"
+                          name="{{ 'cell2-' + i + '-' + j }}"
+                          id="{{ 'cell2-' + i + '-' + j }}"
+                        />
+                      </div>
+                      <div
+                        class="row"
+                        *ngIf="row.ctype === 'file'"
+                        style="height: 15px; display: flex"
+                      >
+                        <div>
+                          <button
+                            mat-icon-button
+                            matPrefix
+                            disabled
+                            (click)="f_input.click()"
+                          >
+                            <mat-icon style="margin-top: -30px"
+                              >attach_file</mat-icon
+                            >
+                          </button>
+                        </div>
+                        <div>
+                          <input
+                            type="text"
+                            readonly
+                            matInput
+                            name="{{ 'DE-' + i + '-' + j }}"
+                            id="{{ 'DR-' + i + '-' + j }}"
+                            hidden
+                            [(ngModel)]="e[row.cName]"
+                            disabled
+                          />
+                          <div style="height: 50px; display: flex">
+                            <span>{{ showImage(e[row.cName]) }}</span>
+                          </div>
+                          <input
+                            type="file"
+                            multiple
+                            disabled
+                            hidden
+                            #f_input
+                            (change)="
+                              handleFileInputChange(
+                                f_input.files,
+                                j,
+                                i,
+                                row.ctype,
+                                'body'
+                              )
+                            "
+                          />
+                        </div>
+                      </div>
+                      <div
+                        class="row"
+                        *ngIf="row.ctype === 'file'"
+                        style="height: 15px; display: flex"
+                      >
+                        <div>
+                          <button
+                            mat-icon-button
+                            matPrefix
+                            (click)="f_input.click()"
+                          >
+                            <!-- <mat-icon style="margin-top: -30px"
+                            >attach_file</mat-icon
+                          > -->
+                          </button>
+                        </div>
+                        <div>
+                          <input
+                            type="text"
+                            readonly
+                            matInput
+                            name="{{ 'DE-' + i + '-' + j }}"
+                            id="{{ 'DR-' + i + '-' + j }}"
+                            hidden
+                            [(ngModel)]="e[row.cName]"
+                            disabled
+                          />
+                          <input
+                            type="file"
+                            multiple
+                            hidden
+                            disabled
+                            #f_input
+                            (change)="
+                              handleFileInputChange(
+                                f_input.files,
+                                j,
+                                i,
+                                row.ctype,
+                                'body'
+                              )
+                            "
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </mat-form-field>
+                </td>
+                <td>
+                  <mat-form-field
+                    appearance="outline"
+                    class="example-full-width col-5"
+                  >
+                    <mat-label>Remarks</mat-label>
+                    <input
+                      matInput
+                      name="remarks + {{ j }}"
+                      [(ngModel)]="e.remarks"
+                    />
+                  </mat-form-field>
+
+                  <button
+                    mat-raised-button
+                    *ngIf="!e.rejected"
+                    style="color: red"
+                    (click)="rejectHead(e)"
+                  >
+                    reject
+                  </button>
+                  <button
+                    mat-raised-button
+                    disabled
+                    *ngIf="e.rejected"
+                    (click)="rejectHead(e)"
+                  >
+                    rejected
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table
+            [ngStyle]="{ width: dynamicTableWidth }"
+            style="overflow-x: scroll; width: 100%"
+            *ngIf="periodicSchedule != 'Daily'"
+          >
+            <thead
+              class="table-bordered table-sm"
+              *ngFor="let e of tempArray; let i = index"
+            >
+              <tr *ngIf="selectTempname == e.Tempname">
+                <th *ngFor="let a of e.footer; let i = index">
+                  {{ a.fName }}
+                </th>
+              </tr>
+            </thead>
+            <tbody class="table-bordered table-sm">
+              <tr *ngFor="let e of footerData; let j = index">
+                <td *ngFor="let row of footerCol; let i = index">
+                  <mat-form-field
+                    appearance="outline"
+                    class="example-full-width col-12"
+                  >
+                    <mat-label *ngIf="row.ftype !== 'file'">Value</mat-label>
+                    <div *ngIf="row.ftype != 'file'">
+                      <input
+                        matInput
+                        autocomplete="off"
+                        [type]="getInputType(row.ftype)"
+                        [(ngModel)]="e[row.fName]"
+                        [disabled]="
+                          !row.permission?.includes(role) ||
+                          row.pageFill !== 'approval' ||
+                          row.fillType == 'auto'
+                        "
+                        name="{{ 'cell3-' + i + '-' + j }}"
+                        id="{{ 'cell3-' + i + '-' + j }}"
+                      />
+                    </div>
+                    <div
+                      class="row"
+                      *ngIf="row.ftype === 'file'"
+                      style="height: 15px; display: flex"
+                    >
+                      <div>
+                        <button
+                          mat-icon-button
+                          matPrefix
+                          [disabled]="
+                            !row.permission?.includes(role) ||
+                            row.pageFill !== 'approval' ||
+                            row.fillType == 'auto'
+                          "
+                          (click)="f_input.click()"
+                        >
+                          <mat-icon style="margin-top: -30px"
+                            >attach_file</mat-icon
+                          >
+                        </button>
+                      </div>
+                      <div>
+                        <input
+                          type="text"
+                          readonly
+                          matInput
+                          name="{{ 'HF-' + i + '-' + j }}"
+                          id="{{ 'HJ-' + i + '-' + j }}"
+                          hidden
+                          [(ngModel)]="e[row.fName]"
+                        />
+                        <div style="height: 50px; display: flex">
+                          <span>{{ showImage(e[row.fName]) }}</span>
+                        </div>
+                        <input
+                          type="file"
+                          id="{{ 'ce-' + i + '-' + j }}"
+                          multiple
+                          hidden
+                          #f_input
+                          (change)="
+                            handleFileInputChange(
+                              f_input.files,
+                              j,
+                              i,
+                              row.ftype,
+                              'footer'
+                            )
+                          "
+                        />
+                      </div>
+                    </div>
+                  </mat-form-field>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div *ngIf="periodicSchedule == 'Daily'">
+            <table
+              class="table-bordered table-sm"
+              [ngStyle]="{ width: dynamicTableWidth }"
+              *ngFor="let e of tempArray; let i = index"
+            >
+              <th class="classinherit" *ngIf="selectTempname == e.Tempname">
+                <tr
+                  class="classinherit"
+                  *ngFor="let row of footerCol; let i = index"
+                >
+                  <td class="classinherit">
+                    {{ row.fName }}
+                  </td>
+
+                  <span *ngFor="let f of footerData; let j = index">
+                    <td class="classinherit" *ngIf="current_value == f.day">
+                      <!-- <td *ngFor="let row of footerCol; let i = index"> -->
+                      <mat-form-field
+                        appearance="outline"
+                        class="example-full-width col-12"
+                      >
+                        <mat-label *ngIf="row.ftype !== 'file'"
+                          >Value</mat-label
+                        >
+                        <div *ngIf="row.ftype != 'file'">
+                          <input
+                            matInput
+                            autocomplete="off"
+                            [type]="getInputType(row.ftype)"
+                            [(ngModel)]="f[row.fName]"
+                            [disabled]="
+                              !row.permission?.includes(role) ||
+                              row.pageFill !== 'approval' ||
+                              row.fillType == 'auto'
+                            "
+                            name="{{ 'cell3-' + i + '-' + j }}"
+                            id="{{ 'cell3-' + i + '-' + j }}"
+                          />
+                        </div>
+                        <div
+                          class="row"
+                          *ngIf="row.ftype === 'file'"
+                          style="height: 15px; display: flex"
+                        >
+                          <div>
+                            <button
+                              mat-icon-button
+                              matPrefix
+                              [disabled]="
+                                !row.permission?.includes(role) ||
+                                row.pageFill !== 'approval' ||
+                                row.fillType == 'auto'
+                              "
+                              (click)="f_input.click()"
+                            >
+                              <mat-icon style="margin-top: -30px"
+                                >attach_file</mat-icon
+                              >
+                            </button>
+                          </div>
+                          <div>
+                            <input
+                              type="text"
+                              readonly
+                              matInput
+                              name="{{ 'HF-' + i + '-' + j }}"
+                              id="{{ 'HJ-' + i + '-' + j }}"
+                              hidden
+                              [(ngModel)]="e[row.fName]"
+                            />
+                            <div style="height: 50px; display: flex">
+                              <span>{{ showImage(e[row.fName]) }}</span>
+                            </div>
+                            <input
+                              type="file"
+                              id="{{ 'ce-' + i + '-' + j }}"
+                              multiple
+                              hidden
+                              #f_input
+                              (change)="
+                                handleFileInputChange(
+                                  f_input.files,
+                                  j,
+                                  i,
+                                  row.ftype,
+                                  'footer'
+                                )
+                              "
+                            />
+                          </div>
+                        </div>
+                      </mat-form-field>
+                      <!-- </td> -->
+                    </td>
+                  </span>
+                </tr>
+              </th>
+            </table>
+            <table [ngStyle]="{ width: dynamicTableWidth }">
+              <mat-form-field
+                appearance="outline"
+                class="example-full-width col-12"
+              >
+                <mat-label>Instruction</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  name="footerInstruction"
+                  class="col-3 floatingName"
+                  [(ngModel)]="footerInstruction"
+                  [disabled]="true"
+                />
+              </mat-form-field>
+            </table>
+            <table [ngStyle]="{ width: dynamicTableWidth }">
+              <thead
+                class="table-bordered"
+                *ngFor="let e of tempArray; let i = index"
+              >
+                <tr *ngIf="selectTempname == e.Tempname">
+                  <th *ngFor="let a of e.problemFooter; let i = index">
+                    {{ a.probName }}
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody class="table-bordered table-sm">
+                <tr *ngFor="let e of probFootArr; let j = index">
+                  <td *ngFor="let row of problemFooter; let i = index">
+                    <mat-form-field
+                      MatFormFieldControl
+                      appearance="outline"
+                      class="example-full-width col-12"
+                    >
+                      <mat-label *ngIf="row.probType !== 'file'"
+                        >Value</mat-label
+                      >
+                      <div *ngIf="row.probType != 'file'">
+                        <input
+                          matInput
+                          [type]="getInputType(row.probType)"
+                          [(ngModel)]="e[row.probName]"
+                          name="{{ 'cellpN-' + i + '-' + j }}"
+                          id="{{ 'cellpN-' + i + '-' + j }}"
+                          [disabled]="
+                            !row.permission?.includes(role) ||
+                            row.pageFill !== 'approval'
+                          "
+                        />
+                      </div>
+                      <div
+                        class="row"
+                        *ngIf="row.probType === 'file'"
+                        style="height: 15px; display: flex"
+                      >
+                        <div>
+                          <button
+                            mat-icon-button
+                            matPrefix
+                            (click)="f_input.click()"
+                          >
+                            <mat-icon style="margin-top: -30px"
+                              >attach_file</mat-icon
+                            >
+                          </button>
+                        </div>
+                        <div>
+                          <input
+                            type="text"
+                            readonly
+                            matInput
+                            name="{{ 'HF-' + i + '-' + j }}"
+                            id="{{ 'HJ-' + i + '-' + j }}"
+                            hidden
+                            [(ngModel)]="e[row.probName]"
+                            [disabled]="
+                              !row.permission?.includes(role) ||
+                              row.pageFill !== 'approval'
+                            "
+                          />
+                          <div style="height: 50px; display: flex">
+                            <span>{{ showImage(e[row.probName]) }}</span>
+                          </div>
+
+                          <input
+                            type="file"
+                            id="{{ 'ce-' + i + '-' + j }}"
+                            multiple
+                            hidden
+                            #f_input
+                            (change)="
+                              handleFileInputChange(
+                                f_input.files,
+                                j,
+                                i,
+                                row.probType,
+                                'footer'
+                              )
+                            "
+                          />
+                        </div>
+                      </div>
+                    </mat-form-field>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div *ngIf="periodicSchedule != 'Daily'">
+            <table [ngStyle]="{ width: dynamicTableWidth }">
+              <mat-form-field
+                appearance="outline"
+                class="example-full-width col-12"
+              >
+                <mat-label>Note:</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  name="shiftNote"
+                  class="col-12 floatingName"
+                  [(ngModel)]="shiftNote"
+                  [disabled]="true"
+                />
+              </mat-form-field>
+            </table>
+          </div>
+        </div>
+        <div class="form-row row">
+          <div class="col text-right">
+            <button
+              mat-raised-button
+              color="accent"
+              (click)="approve()"
+              [disabled]="rejected"
+            >
+              Approve
+            </button>
+            &nbsp;&nbsp;
+            <button
+              mat-raised-button
+              color="warn"
+              (click)="reject()"
+              [disabled]="!rejected"
+            >
+              send back to operator
+            </button>
+            &nbsp;&nbsp;
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="returnToMaster()"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

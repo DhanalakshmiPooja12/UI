@@ -1,0 +1,485 @@
+<div class="container-fluid mt-3 mb-5" [ngStyle]="{ width: dynamicTableWidth }">
+  <div>
+    <table>
+      <tr>
+        <td>
+          <img
+            *ngIf="imageHeaderBool"
+            class="text-left"
+            [src]="imageUrl"
+            alt="Image Source"
+            height="30px !important"
+            width="50px"
+            style="display: fit-content"
+          />
+          <h3 class="text-center">{{ localChecklistName }}</h3>
+          <span style="float: right" *ngIf="periodicSchedule == 'Daily'">
+            <tr>
+              <td>
+                <b>{{ formatNO }}</b>
+              </td>
+              <td aria-label="Button that displays a tooltip when focused or hovered over"
+              [matTooltip]="toolbind" >{{ formatData }}</td>
+            </tr>
+            <tr>
+              <td>
+                <b>{{ revisionNO }}</b>
+              </td>
+              <td aria-label="Button that displays a tooltip when focused or hovered over"
+              [matTooltip]="toolbind" >{{ revisionNOData }}</td>
+            </tr>
+            <tr>
+              <td>
+                <b>{{ revisionDate }}</b>
+              </td>
+              <td aria-label="Button that displays a tooltip when focused or hovered over"
+              [matTooltip]="toolbind" >{{ revisionDateData }}</td>
+            </tr>
+          </span>
+          <span style="float: right" *ngIf="periodicSchedule != 'Daily'">
+            <tr>
+              <td>
+                <b>{{ currentDateValue?.date }}</b>
+              </td>
+              <td aria-label="Button that displays a tooltip when focused or hovered over"
+              [matTooltip]="toolbind" >{{ currentDateValue?.dateValue }}</td>
+            </tr>
+            <tr>
+              <td>
+                <b>{{ shiftData?.shift }}</b>
+              </td>
+              <td aria-label="Button that displays a tooltip when focused or hovered over"
+              [matTooltip]="toolbind" >{{ shiftData?.shiftValue }}</td>
+            </tr>
+          </span>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- <table>
+      <tr>
+        <td *ngFor="let k of getObjectKeys(partData)">
+          <b>{{ k }}:</b> {{ partData[0][k] }}
+        </td>
+      </tr>
+    </table> -->
+  <table [hidden]="!partBool">
+    <tr
+      cdkDropList
+      cdkDropListOrientation="horizontal"
+      #todoList="cdkDropList"
+      [cdkDropListData]="mainDataPartpush"
+      (cdkDropListDropped)="drop($event)"
+      [cdkDropListConnectedTo]="[doneList]"
+      style="cursor: pointer"
+    >
+      <td *ngFor="let item of mainDataPartpush; let i = index" cdkDrag>
+        <b> {{ arrayheaderkey[i] }}</b>
+        <span *ngIf="!urlsPresent(arrayheaderval[i])"
+          >:{{ arrayheaderval[i] }}</span
+        >
+        <img
+          *ngIf="urlsPresent(arrayheaderval[i])"
+          [src]="arrayheaderval[i]"
+          alt=""
+          height="50px !important"
+          width="100px"
+        />
+        <span *ngIf="!urlsPresent(arrayheaderval[i])"></span>
+      </td>
+
+      <!-- <td class="col-6"><b> Part Name </b>: {{ partNameValue }}</td> -->
+    </tr>
+  </table>
+  <table [hidden]="!mainDatabool">
+    <tr
+      cdkDropList
+      cdkDropListOrientation="horizontal"
+      #doneList="cdkDropList"
+      [cdkDropListData]="subheaderArray"
+      (cdkDropListDropped)="drop($event)"
+      [cdkDropListConnectedTo]="[todoList]"
+      style="cursor: pointer"
+    >
+      <td
+        style="display: fit-content"
+        *ngFor="let m of subheaderArray; let j = index"
+        cdkDrag
+      >
+        <b>{{ elementkey[j] }} : </b
+        ><span *ngIf="!urlsPresent(elementval[j])"
+        aria-label="Button that displays a tooltip when focused or hovered over" 
+         [matTooltip]="toolbind"
+        matTooltipClass="example-tooltip-red1"
+        (mouseover)="toolTipStyle('header', j, elementkey[j])">{{ elementval[j] }}</span>
+        <img
+          *ngIf="urlsPresent(elementval[j])"
+          [src]="elementval[j]"
+          alt=""
+          height="auto"
+          width="100px"
+        />
+      </td>
+    </tr>
+  </table>
+  <!--
+    <div class="row" *ngIf="subMetaBool">
+      <div class="col-6">
+        <table *ngIf="metabool">
+          <tr style="width: 100%; height: 100%">
+            <td class="text-left" *ngIf="plantName">
+              <b>Plant:</b>&nbsp;
+              {{ plantName }}
+            </td>
+            <td class="text-left" *ngIf="shiftName">
+              <b>Shift:</b>&nbsp;
+              {{ shiftName }}
+            </td>
+          </tr>
+        </table>
+        <td class="col-12" style="margin-left: inherit">
+          <table style="width: 100%">
+            <tr>
+              <td class="text-left" *ngIf="machineName">
+                <b>Machine Name:</b>&nbsp;
+                {{ machineName }}
+              </td>
+            </tr>
+          </table>
+
+          <div
+            class="table-responsive"
+            style="height: 100% !important; width: 100%"
+          >
+            <table
+              [ngStyle]="
+                mainDatabool
+                  ? { height: '100%' }
+                  : metavalue.length < 4
+                  ? { height: '63%' }
+                  : { height: '75%' }
+              "
+              [ngClass]="{
+                'table-responsive': metavalue.length >= '6',
+                table: metavalue.length <= '6'
+              }"
+              *ngIf="metabool"
+            >
+              <tr style="width: 100%; height: 100%">
+                <td *ngFor="let m of metaHead">
+                  <b>{{ m }}</b>
+                </td>
+              </tr>
+              <tr *ngFor="let mv of metavalue">
+                <td *ngFor="let m of metaHead">
+                  {{ mv[m] }}
+                </td>
+              </tr>
+            </table>
+          </div>
+        </td>
+
+        <table *ngIf="!metabool" style="width: 100%; height: 100%">
+          <tr>
+            <td class="text-left" *ngIf="plantName">
+              <b>Plant:</b>&nbsp;
+              {{ plantName }}
+            </td>
+            <td class="text-left" *ngIf="shiftName">
+              <b>Shift:</b>&nbsp;
+              {{ shiftName }}
+            </td>
+          </tr>
+
+          <tr style="width: 100%; height: 100%">
+            <td class="text-left" *ngIf="machineName">
+              <b>Machine Name:</b>&nbsp;
+              {{ machineName }}
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <td class="col-6" style="margin-left: inherit">
+        <div
+          class="table-responsive"
+          style="height: 100% !important; width: 100%"
+        >
+          <table class="mr-1" style="height: 100% !important; width: 100%">
+            <tr>
+              <td *ngFor="let t of sudMetaHead; let i = index">
+                <b>{{ t }}</b>
+              </td>
+            </tr>
+            <tr *ngFor="let e of subMetaValue; let i = index">
+              <td *ngFor="let t of sudMetaHead">
+                {{ e[t] }}
+              </td>
+            </tr>
+          </table>
+        </div>
+      </td>
+    </div> -->
+  <!-- <div class="row" *ngIf="!subMetaBool">
+      <div class="col-12">
+        <table>
+          <tr>
+            <td class="text-left">
+              <b>Plant:</b>&nbsp;
+              {{ plantName }}
+            </td>
+            <td class="text-left">
+              <b>Shift:</b>&nbsp;
+              {{ shiftName }}
+            </td>
+          </tr>
+          <table>
+            <tr>
+              <td class="text-left">
+                <b>Machine:</b>&nbsp;
+                {{ machineName }}
+              </td>
+            </tr>
+          </table>
+        </table>
+        <table *ngIf="metabool" style="width: 100%">
+          <tr>
+            <td *ngFor="let m of metaHead">
+              <b>{{ m }}</b>
+            </td>
+          </tr>
+          <tr *ngFor="let mv of metavalue">
+            <td *ngFor="let m of metaHead">
+              {{ mv[m] }}
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div> -->
+
+  <table *ngIf="mainheaderBool">
+    <td class="text-center 1" style="width: 100%">
+      <b>{{ mainHeader }}</b>
+    </td>
+  </table>
+  <table *ngIf="colbool" style="width: 100%" #dynamicTable>
+    <tr [attr.rowspan]="columValue?.length">
+      <td
+        *ngFor="let h of tempHeading; let j = index"
+        [attr.colspan]="h.subheader ? h.subheader.length : 1"
+      >
+        <b>{{ h.cName }}</b>
+      </td>
+    </tr>
+    <tr>
+      <td
+        *ngFor="let t of columnData; let i = index"
+        [hidden]="t == 'rejected' || t == 'remarks'"
+        [ngStyle]="getStyleForRejection(i, t)"
+      >
+        <!-- <ng-container >{{ item }}</ng-container> -->
+        <b>{{ checkString(t) }}</b>
+      </td>
+    </tr>
+    <tr *ngFor="let e of columValue; let i = index">
+      <td
+        style="display: fit-content"
+        *ngFor="let t of columnData; let j = index"
+        [hidden]="t == 'rejected' || t == 'remarks'"
+        [ngStyle]="getStyleForIndex(i, t)"
+        aria-label="Button that displays a tooltip when focused or hovered over"
+        [matTooltip]="toolbind"
+        (mouseover)="toolTipStyle('body', i, t)"
+      >
+        <img
+          *ngIf="urlsPresent(e[t])"
+          [src]="e[t]"
+          alt=""
+          height="auto"
+          width="100px"
+        />
+        <span *ngIf="!urlsPresent(e[t])">
+          {{ e[t] }}
+        </span>
+      </td>
+    </tr>
+  </table>
+  <!-- <table *ngIf="subCol">
+      <td class="text-center 2" style="width: 100%">
+        <b>{{ subHeader }}</b>
+      </td>
+    </table> -->
+  <table *ngIf="subCol" style="width: 100%">
+    <tr>
+      <td *ngFor="let s of subColHead">
+        <b>{{ s }}</b>
+      </td>
+    </tr>
+    <tr *ngFor="let e of subColValue; let i = index">
+      <td *ngFor="let s of subColHead">
+        {{ e[s] }}
+        <!-- <img *ngIf="urlsPresent(e[s])" [src]="e[s]" alt="" />
+         <span  *ngIf="!urlsPresent(e[s])"> {{ e[s] }}</span> -->
+      </td>
+    </tr>
+  </table>
+  <!-- <table *ngIf="sudSecbool">
+      <td class="text-center 3" style="width: 100%">
+        <b>{{ subSecHeader }}</b>
+      </td>
+    </table> -->
+  <table *ngIf="sudSecbool" style="width: 100%">
+    <tr>
+      <td *ngFor="let s of subSecHead">
+        <b>{{ s }}</b>
+      </td>
+    </tr>
+    <tr *ngFor="let e of subSecValue; let i = index">
+      <td *ngFor="let s of subSecHead">{{ e[s] }}</td>
+    </tr>
+  </table>
+  <!-- <table *ngIf="footerBool">
+      <td class="text-center 4" style="width: 100%">
+        <b>{{ footerTitle }}</b>
+      </td>
+    </table> -->
+  <span *ngIf="dailyPerodic != 'Daily'">
+    <table *ngIf="!footerBool">
+      <tr>
+        <td *ngFor="let s of tempFooter">
+          <b>{{ s.fName }}</b>
+        </td>
+      </tr>
+    </table>
+    <table *ngIf="footerBool" style="width: 100%">
+      <tr>
+        <!-- <td *ngFor="let s of footerHead">
+          <b>{{ s }}</b>
+        </td> -->
+        <!-- <div  style="width: 100%"> -->
+
+        <td *ngFor="let s of tempFooter">
+          <b>{{ s.fName }}</b>
+        </td>
+
+        <!-- <td
+        *ngIf="imageFooterBool"
+        [attr.rowspan]="footerData.length ? footerData.length + 1 : 1"
+      >
+        <img
+          [src]="imageUrl"
+          alt="Image Source"
+          height="50px !important"
+          width="50px"
+          style="display: fit-content"
+        />
+      </td> -->
+        <!-- </div> -->
+      </tr>
+      <tr class="col-10" *ngFor="let e of footerData; let i = index">
+        <td style="display: fit-content" *ngFor="let s of tempFooter">
+          <div
+            aria-label="Button that displays a tooltip when focused or hovered over"
+            [matTooltip]="toolbind"
+            (mouseover)="toolTipStyle('footer', i, s)"
+          >
+          <img
+            *ngIf="urlsPresent(e[s.fName])"
+            [src]="e[s.fName]"
+            alt=""
+            height="auto"
+            width="100px"
+          />
+          <span *ngIf="!urlsPresent(e[s.fName])"> {{ e[s.fName] }}</span>
+        </div>
+        </td>
+      </tr>
+    </table>
+    <table>
+      <td>
+        <b>Note :</b>
+        {{ shiftNote }}
+      </td>
+    </table>
+  </span>
+  <span *ngIf="dailyPerodic == 'Daily'">
+    <table *ngIf="!footerBool">
+      <tr>
+        <td *ngFor="let s of tempFooter">
+          <b>{{ s.fName }}</b>
+        </td>
+      </tr>
+    </table>
+    <table *ngIf="footerBool" style="width: 100%">
+      <tr *ngFor="let s of tempFooter">
+        <!-- <td *ngFor="let s of footerHead">
+          <b>{{ s }}</b>
+        </td> -->
+        <!-- <div  style="width: 100%"> -->
+
+        <td>
+          <b>{{ s.fName }}</b>
+        </td>
+
+        <!-- <td
+        *ngIf="imageFooterBool"
+        [attr.rowspan]="footerData.length ? footerData.length + 1 : 1"
+      >
+        <img
+          [src]="imageUrl"
+          alt="Image Source"
+          height="50px !important"
+          width="50px"
+          style="display: fit-content"
+        />
+      </td> -->
+        <!-- </div> -->
+
+        <td
+          *ngFor="let e of footerData; let i = index"
+          cellspacing="3"
+          cellpadding="3"
+        >
+        <div
+        aria-label="Button that displays a tooltip when focused or hovered over"
+        [matTooltip]="toolbind"
+        (mouseover)="toolTipStyle('footer', i, s)"
+      >
+          <!-- <td style="display: fit-content" *ngFor="let s of tempFooter"> -->
+          <img
+            *ngIf="urlsPresent(e[s.fName])"
+            [src]="e[s.fName]"
+            alt=""
+            height="auto"
+            width="100px"
+          />
+          <span *ngIf="!urlsPresent(e[s.fName])"> {{ e[s.fName] }}</span>
+          </div>
+          <!-- </td> -->
+        </td>
+      </tr>
+    </table>
+    <table>
+      <td>
+        <b>Instruction :</b>
+        {{ footerInstruction }}
+      </td>
+    </table>
+    <table>
+      <tr>
+        <td *ngFor="let pf of probDataHead">
+          <b>{{ pf.probName }}</b>
+        </td>
+      </tr>
+
+      <tr *ngFor="let probFoot of probData; let i = index">
+        <td *ngFor="let pf of probDataHead;  let j=index" aria-label="Button that displays a tooltip when focused or hovered over"
+        [matTooltip]="toolbind"
+        (mouseover)="toolTipStyle('Instruction', i, probDataHead[j])">
+          {{ probFoot[pf.probName] }}
+        </td>
+      </tr>
+    </table>
+  </span>
+</div>

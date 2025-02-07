@@ -1,0 +1,1675 @@
+<div class="row mt-2 ml-2 mr-2">
+  <div class="col text-left">
+    <h2><b>Fill Checklist</b></h2>
+    <h4>
+      <a href="javascript:void(0)" (click)="returnToMaster()">New Fill</a> >
+      Checklist
+    </h4>
+  </div>
+</div>
+<div class="example-container">
+  <div class="row mt-4 ml-2 mr-2">
+    <form class="col-12" #uform="ngForm" autocomplete="off">
+      <div class="form-row ml-5">
+        <div class="form-group col-5">
+          <mat-form-field
+            appearance="outline"
+            class="example-full-width col-12"
+          >
+            <mat-label>Checklist Name</mat-label>
+            <input
+              matInput
+              type="text"
+              name="checkName"
+              required
+              class="col-12 floatingName"
+              [(ngModel)]="checklistName"
+            />
+          </mat-form-field>
+          <br /><br />
+        </div>
+        <div class="col text-right">
+          <div class="card-body">
+            <b>Note:</b> &nbsp;Use ALT + 0177 or ALT + 241 for ± Symbol
+          </div>
+          <p *ngIf="pdfBool">
+            <button mat-raised-button color="accent">
+              <a href="{{ pdf }}" target="_blank" style="color: white"
+                >Instruction</a
+              >
+            </button>
+          </p>
+        </div>
+      </div>
+
+      <div class="mr-2" style="overflow-x: scroll">
+        <table [ngStyle]="{ width: dynamicTableWidth }" class="table-bordered">
+          <img
+            *ngIf="imageHeaderBool"
+            class="text-left ml-3"
+            [src]="imageUrl"
+            alt="Image Source"
+            height="70px !important"
+            width="50px"
+            style="display: fit-content; float: left"
+          />
+          <h3 *ngIf="periodicSchedule == 'Hourly'" class="text-center col-9">
+            HOURLY INPROCESS INSPECTION REPORT
+          </h3>
+
+          <h3 *ngIf="periodicSchedule == 'Daily'" class="text-center col-10">
+            DAILY MACHINE CHECK SHEET
+          </h3>
+          <h3
+            *ngIf="periodicSchedule == 'Number of Instances'"
+            class="text-center col-10"
+          >
+            FIRST OFF / MIDDLE OFF / LAST OFF INSPECTION REPORT
+          </h3>
+
+          <span *ngIf="periodicSchedule == 'Daily'" style="float: right">
+            <tr *ngFor="let e of formatData; let i = index">
+              <td>
+                <mat-form-field
+                  appearance="outline"
+                  class="example-full-width col-12"
+                >
+                  <mat-label>Name</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    required
+                    name="formatNo"
+                    [(ngModel)]="e.formatNo"
+                    [disabled]="true"
+                    (onModalchange)="toolTip('header', i, e.formatNo)"
+                  />
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field
+                  MatFormFieldControl
+                  appearance="outline"
+                  class="example-full-width col-12"
+                  *ngIf="
+                    e.formattype != 'select' && e.formattype != 'multi-select'
+                  "
+                >
+                  <mat-label *ngIf="e.formattype !== 'file'">Value</mat-label>
+                  <div>
+                    <input
+                      *ngIf="e.formattype != 'file'"
+                      matInput
+                      [type]="getInputType(e.formattype)"
+                      [(ngModel)]="e.formatValue"
+                      (onModalchange)="toolTip('header', i, e.formatNo)"
+                      name="formatValue"
+                      [disabled]="e.pageFillformat == 'master'"
+                    />
+                    <input
+                      *ngIf="
+                        e.formattype != 'file' && e.fillTypeFormat == 'auto'
+                      "
+                      matInput
+                      [(ngModel)]="e.formatValue"
+                      (onModalchange)="toolTip('header', i, e.formatNo)"
+                      name="formatValue"
+                      [disabled]="e.pageFillformat == 'master'"
+                    />
+                    <input
+                      *ngIf="e.formattype == ''"
+                      matInput
+                      [type]="getInputType(e.formattype)"
+                      [(ngModel)]="e.formatValue"
+                      (change)="toolTip('header', i, e.formatNo)"
+                      name="e.formatValue"
+                      [disabled]="true"
+                    />
+                  </div>
+                  <div>
+                    <!-- <mat-form-field class="col-6"> -->
+                    <!-- <mat-label>select the {{ e.autoFillValue }}</mat-label> -->
+                    <mat-select
+                      *ngIf="
+                        e.formattype != 'file' && e.fillTypeFormat == 'auto'
+                      "
+                      name="formatValue"
+                      multiple
+                      [(ngModel)]="e.formatValue"
+                      (change)="toolTip('header', i, e.formatNo)"
+                      [disabled]="e.pageFillformat == 'master'"
+                      style="max-height: 200px; overflow-y: auto"
+                    >
+                      <!-- <mat-option
+                        *ngFor="let selection of getval(e.autoFillValue)"
+                        [value]="selection"
+                        >{{ selection }}</mat-option
+                      > -->
+                    </mat-select>
+                    <!-- </mat-form-field> -->
+                  </div>
+                  <div
+                    class="row"
+                    *ngIf="e.formattype === 'file'"
+                    style="display: flex; height: 15px"
+                  >
+                    <div>
+                      <button
+                        mat-icon-button
+                        matPrefix
+                        (click)="f_input.click()"
+                      >
+                        <mat-icon style="margin-top: -29px"
+                          >attach_file</mat-icon
+                        >
+                      </button>
+                    </div>
+                    <div>
+                      <input
+                        type="text"
+                        name="file-{{ i }}"
+                        readonly
+                        matInput
+                        [disabled]="
+                          e.fillTypeFormat == 'auto' ||
+                          e.pageFillformat == 'master'
+                        "
+                        hidden
+                        [(ngModel)]="e.formatValue"
+                      />
+                      <div style="height: 50px; display: flex">
+                        <span>
+                          {{ showImage(e.formatValue) }}
+                        </span>
+                      </div>
+                      <input
+                        type="file"
+                        name="file-{{ i }}"
+                        multiple
+                        hidden
+                        [disabled]="
+                          e.fillTypeFormat == 'auto' ||
+                          e.pageFillformat == 'master'
+                        "
+                        #f_input
+                        (change)="
+                          handleFileInputChange(
+                            f_input.files,
+                            0,
+                            i,
+                            e.formattype,
+                            'header'
+                          )
+                        "
+                      />
+                    </div>
+                  </div>
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr *ngFor="let e of revisionNOData; let i = index">
+              <td>
+                <mat-form-field
+                  appearance="outline"
+                  class="example-full-width col-12"
+                >
+                  <mat-label>Name</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    required
+                    name="revisionNo"
+                    [(ngModel)]="e.revisionNo"
+                    (change)="toolTip('header', i, e.revisionNo)"
+                    [disabled]="true"
+                  />
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field
+                  MatFormFieldControl
+                  appearance="outline"
+                  class="example-full-width col-12"
+                  *ngIf="
+                    e.revisionNOType != 'select' &&
+                    e.revisionNOType != 'multi-select'
+                  "
+                >
+                  <mat-label *ngIf="e.revisionNOType !== 'file'"
+                    >Value</mat-label
+                  >
+                  <div>
+                    <input
+                      *ngIf="e.revisionNOType != 'file'"
+                      matInput
+                      [type]="getInputType(e.revisionNOType)"
+                      [(ngModel)]="e.revisionNoValue"
+                      (change)="toolTip('header', i, e.revisionNo)"
+                      name="revisionNoValue"
+                      [disabled]="e.pagerevisionNO == 'master'"
+                    />
+                    <input
+                      *ngIf="
+                        e.revisionNOType != 'file' &&
+                        e.fillTypeRevisionNo == 'auto'
+                      "
+                      matInput
+                      [(ngModel)]="e.revisionNoValue"
+                      (change)="toolTip('header', i, e.revisionNo)"
+                      name="revisionNoValue"
+                      [disabled]="e.pagerevisionNO == 'master'"
+                    />
+                    <input
+                      *ngIf="e.revisionNOType == ''"
+                      matInput
+                      [type]="getInputType(e.revisionNOType)"
+                      [(ngModel)]="e.revisionNoValue"
+                      (change)="toolTip('header', i, e.revisionNo)"
+                      name="revisionNoValue"
+                      [disabled]="true"
+                    />
+                  </div>
+                  <div>
+                    <!-- <mat-form-field class="col-6"> -->
+                    <!-- <mat-label>select the {{ e.autoFillValue }}</mat-label> -->
+                    <mat-select
+                      *ngIf="
+                        e.revisionNOType != 'file' &&
+                        e.fillTypeRevisionNo == 'auto'
+                      "
+                      name="revisionNoValue"
+                      multiple
+                      [(ngModel)]="e.revisionNoValue"
+                      (change)="toolTip('header', i, e.revisionNo)"
+                      [disabled]="e.pagerevisionNO == 'master'"
+                      style="max-height: 200px; overflow-y: auto"
+                    >
+                      <!-- <mat-option
+                        *ngFor="let selection of getval(e.autoFillValue)"
+                        [value]="selection"
+                        >{{ selection }}</mat-option
+                      > -->
+                    </mat-select>
+                    <!-- </mat-form-field> -->
+                  </div>
+                  <div
+                    class="row"
+                    *ngIf="e.revisionNOType === 'file'"
+                    style="display: flex; height: 15px"
+                  >
+                    <div>
+                      <button
+                        mat-icon-button
+                        matPrefix
+                        (click)="f_input.click()"
+                      >
+                        <mat-icon style="margin-top: -29px"
+                          >attach_file</mat-icon
+                        >
+                      </button>
+                    </div>
+                    <div>
+                      <input
+                        type="text"
+                        name="file-{{ i }}"
+                        readonly
+                        matInput
+                        [disabled]="
+                          e.fillTypeRevisionNo == 'auto' ||
+                          e.pagerevisionNO == 'master'
+                        "
+                        hidden
+                        [(ngModel)]="e.revisionNoValue"
+                        (change)="toolTip('header', i, e.revisionNo)"
+                      />
+                      <div style="height: 50px; display: flex">
+                        <span>
+                          {{ showImage(e.revisionNoValue) }}
+                        </span>
+                      </div>
+                      <input
+                        type="file"
+                        name="file1-{{ i }}"
+                        multiple
+                        hidden
+                        [disabled]="
+                          e.fillTypeRevisionNo == 'auto' ||
+                          e.pagerevisionNO == 'master'
+                        "
+                        #f_input
+                        (change)="
+                          handleFileInputChange(
+                            f_input.files,
+                            0,
+                            i,
+                            e.revisionNOType,
+                            'header'
+                          )
+                        "
+                      />
+                    </div>
+                  </div>
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr *ngFor="let e of revisionDateData; let i = index">
+              <td>
+                <mat-form-field
+                  appearance="outline"
+                  class="example-full-width col-12"
+                >
+                  <mat-label>Name</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    required
+                    name="revisionDate"
+                    [(ngModel)]="e.revisionDate"
+                    [disabled]="true"
+                    (change)="toolTip('header', i,e.revisionDate)"
+                  />
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field
+                  MatFormFieldControl
+                  appearance="outline"
+                  class="example-full-width col-12"
+                  *ngIf="
+                    e.revisionDatetype != 'select' &&
+                    e.revisionDatetype != 'multi-select'
+                  "
+                >
+                  <mat-label *ngIf="e.revisionDatetype !== 'file'"
+                    >Value</mat-label
+                  >
+                  <div>
+                    <input
+                      *ngIf="e.revisionDatetype != 'file'"
+                      matInput
+                      [type]="getInputType(e.revisionDatetype)"
+                      [(ngModel)]="e.revisionDateValue"
+                      name="revisionDateValue"
+                      (change)="toolTip('header', i,e.revisionDate)"
+                      [disabled]="e.pagerevisionDate == 'master'"
+                    />
+                    <input
+                      *ngIf="
+                        e.revisionDatetype != 'file' &&
+                        e.fillTypeRevisionDate == 'auto'
+                      "
+                      matInput
+                      [(ngModel)]="e.revisionDateValue"
+                      (change)="toolTip('header', i,e.revisionDate)"
+                      name="revisionDateValue"
+                      [disabled]="e.pagerevisionDate == 'master'"
+                    />
+                    <input
+                      *ngIf="e.revisionDatetype == ''"
+                      matInput
+                      [type]="getInputType(e.revisionDatetype)"
+                      [(ngModel)]="e.revisionDateValue"
+                      (change)="toolTip('header', i,e.revisionDate)"
+                      name="revisionDateValue"
+                      [disabled]="true"
+                    />
+                  </div>
+                  <div>
+                    <!-- <mat-form-field class="col-6"> -->
+                    <!-- <mat-label>select the {{ e.autoFillValue }}</mat-label> -->
+                    <mat-select
+                      *ngIf="
+                        e.revisionDatetype != 'file' &&
+                        e.fillTypeRevisionDate == 'auto'
+                      "
+                      name="revisionDateValue"
+                      multiple
+                      [(ngModel)]="e.revisionDateValue"
+                      (change)="toolTip('header', i,e.revisionDate)"
+                      [disabled]="e.pagerevisionDate == 'master'"
+                      style="max-height: 200px; overflow-y: auto"
+                    >
+                      <!-- <mat-option
+                        *ngFor="let selection of getval(e.autoFillValue)"
+                        [value]="selection"
+                        >{{ selection }}</mat-option
+                      > -->
+                    </mat-select>
+                    <!-- </mat-form-field> -->
+                  </div>
+                  <div
+                    class="row"
+                    *ngIf="e.revisionDatetype === 'file'"
+                    style="display: flex; height: 15px"
+                  >
+                    <div>
+                      <button
+                        mat-icon-button
+                        matPrefix
+                        (click)="f_input.click()"
+                      >
+                        <mat-icon style="margin-top: -29px"
+                          >attach_file</mat-icon
+                        >
+                      </button>
+                    </div>
+                    <div>
+                      <input
+                        type="text"
+                        name="file-{{ i }}"
+                        readonly
+                        matInput
+                        [disabled]="
+                          e.fillTypeRevisionDate == 'auto' ||
+                          e.pagerevisionDate == 'master'
+                        "
+                        hidden
+                        [(ngModel)]="e.revisionDateValue"
+                        (change)="toolTip('header', i,e.revisionDate)"
+                      />
+                      <div style="height: 50px; display: flex">
+                        <span>
+                          {{ showImage(e.revisionDateValue) }}
+                        </span>
+                      </div>
+                      <input
+                        type="file"
+                        name="file-{{ i }}"
+                        multiple
+                        hidden
+                        [disabled]="
+                          e.fillTypeRevisionDate == 'auto' ||
+                          e.pagerevisionDate == 'master'
+                        "
+                        #f_input
+                        (change)="
+                          handleFileInputChange(
+                            f_input.files,
+                            0,
+                            i,
+                            e.revisionDatetype,
+                            'header'
+                          )
+                        "
+                      />
+                    </div>
+                  </div>
+                </mat-form-field>
+              </td>
+            </tr>
+          </span>
+          <span *ngIf="periodicSchedule != 'Daily'" style="float: right">
+            <tr *ngFor="let e of currentDateValue; let i = index">
+              <td>
+                <mat-form-field
+                  appearance="outline"
+                  class="example-full-width col-12"
+                >
+                  <mat-label>Name</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    required
+                    name="date"
+                    [(ngModel)]="e.date"
+                    [disabled]="true"
+                    (change)="toolTip('header', i, e.date)"
+                  />
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field
+                  MatFormFieldControl
+                  appearance="outline"
+                  class="example-full-width col-12"
+                  *ngIf="e.dateType != 'select' && e.dateType != 'multi-select'"
+                >
+                  <mat-label *ngIf="e.dateType !== 'file'">Value</mat-label>
+                  <div>
+                    <input
+                      *ngIf="e.dateType != 'file' && e.dateAutoFill == ''"
+                      matInput
+                      [type]="getInputType(e.dateType)"
+                      [(ngModel)]="e.dateValue"
+                      (change)="toolTip('header', i, e.date)"
+                      name="dateValue"
+                      [disabled]="e.pageFillDate == 'master'"
+                    />
+                    <input
+                      *ngIf="
+                        e.dateType != 'file' &&
+                        e.fillTypeDate == 'auto' &&
+                        e.dateAutoFill != ''
+                      "
+                      matInput
+                      [(ngModel)]="e.dateValue"
+                      name="dateValue"
+                      (change)="toolTip('header', i, e.date)"
+                      [disabled]="e.pageFillDate == 'master'"
+                    />
+                    <input
+                      *ngIf="e.dateType == ''"
+                      matInput
+                      [type]="getInputType(e.dateType)"
+                      [(ngModel)]="e.dateValue"
+                      (change)="toolTip('header', i, e.date)"
+                      name="e.dateValue"
+                      [disabled]="true"
+                    />
+                  </div>
+
+                  <div
+                    class="row"
+                    *ngIf="e.dateType === 'file'"
+                    style="display: flex; height: 15px"
+                  >
+                    <div>
+                      <button
+                        mat-icon-button
+                        matPrefix
+                        (click)="f_input.click()"
+                      >
+                        <mat-icon style="margin-top: -29px"
+                          >attach_file</mat-icon
+                        >
+                      </button>
+                    </div>
+                    <div>
+                      <input
+                        type="text"
+                        name="file-{{ i }}"
+                        readonly
+                        matInput
+                        [disabled]="
+                          e.fillTypeDate == 'auto' || e.pageFillDate == 'master'
+                        "
+                        hidden
+                        [(ngModel)]="e.dateValue"
+                        (change)="toolTip('header', i, e.date)"
+                      />
+                      <div style="height: 50px; display: flex">
+                        <span>
+                          {{ showImage(e.dateValue) }}
+                        </span>
+                      </div>
+                      <input
+                        type="file"
+                        name="file-{{ i }}"
+                        multiple
+                        hidden
+                        [disabled]="
+                          e.fillTypeDate == 'auto' || e.pageFillDate == 'master'
+                        "
+                        #f_input
+                        (change)="
+                          handleFileInputChange(
+                            f_input.files,
+                            0,
+                            i,
+                            e.dateType,
+                            'header'
+                          )
+                        "
+                      />
+                    </div>
+                  </div>
+                </mat-form-field>
+              </td>
+            </tr>
+
+            <tr *ngFor="let e of shiftData; let i = index">
+              <td class="form-group col-5 mt-3">
+                <mat-form-field
+                  appearance="outline"
+                  class="example-full-width col-12"
+                >
+                  <mat-label>Name</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    required
+                    name="shift"
+                    [(ngModel)]="e.shift"
+                    [disabled]="true"
+                    (change)="toolTip('header', i, e.shift)"
+                  />
+                </mat-form-field>
+              </td>
+              <td class="form-group col-5 mt-3">
+                <mat-form-field
+                  MatFormFieldControl
+                  appearance="outline"
+                  class="example-full-width col-12"
+                  *ngIf="
+                    e.shiftType != 'select' && e.shiftType != 'multi-select'
+                  "
+                >
+                  <mat-label *ngIf="e.shiftType !== 'file'">Value</mat-label>
+                  <div>
+                    <input
+                      *ngIf="e.shiftType != 'file' && e.fillFromShift == ''"
+                      matInput
+                      [type]="getInputType(e.shiftType)"
+                      [(ngModel)]="e.shiftValue"
+                      (change)="toolTip('header', i, e.shift)"
+                      name="shiftValue"
+                      [disabled]="e.pageFillShift == 'master'"
+                    />
+                    <input
+                      *ngIf="
+                        e.shiftType != 'file' &&
+                        e.fillTypeShift == 'auto' &&
+                        e.fillFromShift != ''
+                      "
+                      matInput
+                      [(ngModel)]="e.shiftValue"
+                      (change)="toolTip('header', i, e.shift)"
+                      name="shiftValue"
+                      [disabled]="e.pageFillShift == 'master'"
+                    />
+                    <input
+                      *ngIf="e.shiftType == ''"
+                      matInput
+                      [type]="getInputType(e.shiftType)"
+                      [(ngModel)]="e.shiftValue"
+                      name="e.shiftValue"
+                      (change)="toolTip('header', i, e.shift)"
+                      [disabled]="true"
+                    />
+                  </div>
+
+                  <div
+                    class="row"
+                    *ngIf="e.shiftType === 'file'"
+                    style="display: flex; height: 15px"
+                  >
+                    <div>
+                      <button
+                        mat-icon-button
+                        matPrefix
+                        (click)="f_input.click()"
+                      >
+                        <mat-icon style="margin-top: -29px"
+                          >attach_file</mat-icon
+                        >
+                      </button>
+                    </div>
+                    <div>
+                      <input
+                        type="text"
+                        name="file-{{ i }}"
+                        readonly
+                        matInput
+                        [disabled]="
+                          e.fillTypeShift == 'auto' ||
+                          e.pageFillShift == 'master'
+                        "
+                        hidden
+                        [(ngModel)]="e.shiftValue"
+                      />
+                      <div style="height: 50px; display: flex">
+                        <span>
+                          {{ showImage(e.shiftValue) }}
+                        </span>
+                      </div>
+                      <input
+                        type="file"
+                        name="file-{{ i }}"
+                        multiple
+                        hidden
+                        [disabled]="
+                          e.fillTypeShift == 'auto' ||
+                          e.pageFillShift == 'master'
+                        "
+                        #f_input
+                        (change)="
+                          handleFileInputChange(
+                            f_input.files,
+                            0,
+                            i,
+                            e.shiftType,
+                            'header'
+                          )
+                        "
+                      />
+                    </div>
+                  </div>
+                </mat-form-field>
+              </td>
+            </tr>
+          </span>
+        </table>
+        <table class="table-bordered" [ngStyle]="{ width: dynamicTableWidth }">
+          <td *ngFor="let e of mainData; let i = index">
+            <!-- <div class="form-group col-5 mt-3">
+          <mat-form-field
+            appearance="outline"
+            class="example-full-width col-12"
+          >
+            <mat-label>Name</mat-label>
+            <input
+              matInput
+              type="text"
+              [disabled]="true"
+              required
+              name="mName+{{ i }}"
+              [(ngModel)]="e.mName"
+              (change)="toolTip('header', i, e.mName)"
+            />
+          </mat-form-field>
+        </div> -->
+            <b class="mt-5 ml-2"> {{ e.mName }}: </b>
+
+            <mat-form-field
+              MatFormFieldControl
+              appearance="outline"
+              class="example-full-width"
+              *ngIf="e.mtype != 'select' && e.mtype != 'multi-select'"
+            >
+              <mat-label *ngIf="e.mtype !== 'file'">Value</mat-label>
+              <div>
+                <input
+                  matInput
+                  *ngIf="
+                    e.mtype != 'file' && e.dateFormat == '' && e.fillFrom == ''
+                  "
+                  [type]="getInputType(e.mtype)"
+                  [(ngModel)]="e.mvalue"
+                  [disabled]="
+                    !e.permission?.includes(localPermission) ||
+                    e.pageFill == 'master'
+                  "
+                  required
+                  name="mvalue+{{ i }}"
+                />
+                <input
+                  matInput
+                  *ngIf="
+                    e.mtype != 'file' &&
+                    e.fillType == 'auto' &&
+                    e.dateFormat !== '' &&
+                    e.fillFrom == ''
+                  "
+                  [(ngModel)]="e.mvalue"
+                  [disabled]="
+                    !e.permission?.includes(localPermission) ||
+                    e.pageFill == 'master'
+                  "
+                  required
+                  name="mvalue+{{ i }}"
+                />
+                <input
+                  *ngIf="e.mtype == ''"
+                  matInput
+                  [type]="getInputType(e.mtype)"
+                  [(ngModel)]="e.mvalue"
+                  (change)="toolTip('header', i, e.mName)"
+                  name="mvalue+{{ i }}"
+                  [disabled]="true"
+                />
+              </div>
+              <div
+                *ngIf="
+                  e.mtype != 'file' &&
+                  e.fillType == 'auto' &&
+                  e.fillFrom == 'Configuration'
+                "
+              >
+                <mat-select
+                  name="mvalue+{{ i }}"
+                  [type]="getInputType(e.mtype)"
+                  [(ngModel)]="e.mvalue"
+                  (change)="toolTip('header', i, e.mName)"
+                  [disabled]="e.pageFill == 'master'"
+                  style="max-height: 200px; overflow-y: auto"
+                >
+                  <mat-option
+                    *ngFor="let selection of getval(e.autoFillValue)"
+                    [value]="selection"
+                    >{{ selection }}</mat-option
+                  >
+                </mat-select>
+              </div>
+              <div
+                class="row"
+                *ngIf="e.mtype === 'file'"
+                style="display: flex; height: 15px"
+              >
+                <div>
+                  <button
+                    [disabled]="
+                      !e.permission.includes(localPermission) ||
+                      e.fillType == 'auto' ||
+                      e.pageFill == 'master' ||
+                      e.pageFill == 'approval'
+                    "
+                    mat-icon-button
+                    matPrefix
+                    (click)="f_input.click()"
+                  >
+                    <mat-icon style="margin-top: -29px">attach_file</mat-icon>
+                  </button>
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    name="file-{{ i }}"
+                    readonly
+                    matInput
+                    hidden
+                    [(ngModel)]="e.mvalue"
+                    (onchange)="toolTip('header', i, e.mName)"
+                    [disabled]="
+                      !e.permission?.includes(localPermission) ||
+                      e.fillType == 'auto' ||
+                      e.pageFill == 'fillChecklist'
+                    "
+                  />
+                  <div style="height: 50px; display: flex">
+                    <span>{{ showImage(e.mvalue) }}</span>
+                  </div>
+                  <input
+                    type="file"
+                    name="file-{{ i }}"
+                    multiple
+                    hidden
+                    #f_input
+                    (change)="
+                      handleFileInputChange(
+                        f_input.files,
+                        0,
+                        i,
+                        e.mtype,
+                        'header'
+                      )
+                    "
+                  />
+                </div>
+              </div>
+            </mat-form-field>
+          </td>
+        </table>
+
+        <!-- <div class="mt-2" style="overflow-x: scroll; width: 100%"> -->
+        <table #myTable>
+          <thead
+            class="table-bordered"
+            *ngFor="let e of tempArray; let i = index"
+          >
+            <tr
+              *ngIf="selectTempname == e.Tempname && periodFlag && !shiftPeriod"
+            >
+              <th
+                *ngFor="let a of e.columns; let i = index"
+                [attr.colspan]="a.subheader ? a.subheader.length : 1"
+                [hidden]="a.periodic == true && a.cName != current_value"
+              >
+                {{ a.cName }}
+              </th>
+            </tr>
+            <tr
+              *ngIf="selectTempname == e.Tempname && periodFlag && shiftPeriod"
+            >
+              <th
+                *ngFor="let a of e.columns; let i = index"
+                [attr.colspan]="a.subheader ? a.subheader.length : 1"
+                [hidden]="a.periodic == true && !shiftPeriod"
+              >
+                {{ a.cName }}
+              </th>
+            </tr>
+            <tr
+              *ngIf="
+                selectTempname == e.Tempname && !periodFlag && !shiftPeriod
+              "
+            >
+              <th
+                *ngFor="let a of e.columns; let i = index"
+                [attr.colspan]="a.subheader ? a.subheader.length : 1"
+              >
+                {{ a.cName }}
+              </th>
+            </tr>
+            <tr *ngIf="selectTempname == e.Tempname">
+              <th *ngFor="let b of subHeaderMain; let k = index">
+                {{ b.csName }}
+              </th>
+            </tr>
+          </thead>
+          <tbody class="table-bordered table-sm">
+            <tr *ngFor="let e of rows; let j = index">
+              <!-- <td>{{ j + 1 }}</td> -->
+              <td *ngFor="let row of subHeaderMain; let i = index">
+                <mat-form-field
+                  appearance="outline"
+                  class="example-full-width col-12"
+                  *ngIf="
+                    row.cstype != 'select' &&
+                    row.cstype != 'multi-select' &&
+                    row.cstype != 'file' &&
+                    subHbool
+                  "
+                >
+                  <mat-label>Name</mat-label>
+                  <div *ngIf="periodFlag && !hourFlag && !subInstanceFlag">
+                    <div *ngIf="row.csName != ''">
+                      <input
+                        matInput
+                        [disabled]="
+                          (current_value == row.csName && !current_date) ||
+                          !row.permission?.includes(localPermission) ||
+                          row.fillType == 'auto' ||
+                          row.pageFill == 'master'
+                        "
+                        [type]="row.cstype"
+                        [(ngModel)]="e[row.csName]"
+                        (change)="toolTip('body', j, [row.csName])"
+                        name="{{ 'cellsh-' + i + '-' + j }}"
+                      />
+                    </div>
+                    <div *ngIf="row.csName == ''">
+                      <input
+                        matInput
+                        [disabled]="
+                          (current_value == row.csName && !current_date) ||
+                          !row.permission?.includes(localPermission) ||
+                          row.fillType == 'auto' ||
+                          row.pageFill == 'master'
+                        "
+                        [type]="row.cstype"
+                        [(ngModel)]="e[row.csName + 'csName!@#%!$' + i]"
+                        (change)="
+                        toolTip('body', j, [row.csName + 'csName!@#%!$' + i])
+                      "
+                        name="{{ 'cellnsh-' + i + '-' + j + '-' + 1 }}"
+                        id="{{ 'cellnsh-' + i + '-' + j + '-' + 1 }}"
+                        [disabled]="
+                          row.fillType == 'auto' ||
+                          row.pageFill == 'fillChecklist'
+                        "
+                      />
+                    </div>
+                  </div>
+                  <div *ngIf="periodFlag && hourFlag && !subInstanceFlag">
+                    <div *ngIf="row.csName != ''">
+                      <input
+                        matInput
+                        [disabled]="
+                          (current_value !== row.csName && !current_date) ||
+                          !row.permission?.includes(localPermission) ||
+                          row.fillType == 'auto' ||
+                          row.pageFill == 'master'
+                        "
+                        [type]="row.cstype"
+                        [(ngModel)]="e[row.csName]"
+                        (change)="toolTip('body', j, [row.csName])"
+                        name="{{ 'cellsh-' + i + '-' + j }}"
+                      />
+                    </div>
+                    <div *ngIf="row.csName == ''">
+                      <input
+                        matInput
+                        [disabled]="
+                          (current_value !== row.csName && !current_date) ||
+                          !row.permission?.includes(localPermission) ||
+                          row.fillType == 'auto' ||
+                          row.pageFill == 'master'
+                        "
+                        [type]="row.cstype"
+                        [(ngModel)]="e[row.csName + 'csName!@#%!$' + i]"
+                        
+                        name="{{ 'cellnsh-' + i + '-' + j + '-' + 1 }}"
+                        id="{{ 'cellnsh-' + i + '-' + j + '-' + 1 }}"
+                        (change)="
+                        toolTip('body', j, [row.csName + 'csName!@#%!$' + i])"
+                        [disabled]="
+                          row.fillType == 'auto' ||
+                          row.pageFill == 'fillChecklist'
+                        "
+                      />
+                    </div>
+                  </div>
+                  <div *ngIf="!periodFlag && !hourFlag && !subInstanceFlag">
+                    <div *ngIf="row.csName != ''">
+                      <input
+                        matInput
+                        [disabled]="
+                          !row.permission?.includes(localPermission) ||
+                          row.fillType == 'auto' ||
+                          row.pageFill == 'master'
+                        "
+                        [type]="row.cstype"
+                        [(ngModel)]="e[row.csName]"
+                        name="{{ 'cellsh-' + i + '-' + j }}"
+                        id="{{ 'cellsh-' + i + '-' + j }}"
+                        (change)="toolTip('body', j, [row.csName])"
+                      />
+                    </div>
+                    <div *ngIf="row.csName == ''">
+                      <input
+                        matInput
+                        [disabled]="
+                          !row.permission?.includes(localPermission) ||
+                          row.fillType == 'auto' ||
+                          row.pageFill == 'master'
+                        "
+                        [type]="row.cstype"
+                        [(ngModel)]="e[row.csName + 'csName!@#%!$' + i]"
+                        name="{{ 'cellnsh-' + i + '-' + j + '-' + 1 }}"
+                        id="{{ 'cellnsh-' + i + '-' + j + '-' + 1 }}"
+                        (change)="toolTip('body', j,[row.csName + 'csName!@#%!$' + i])"
+                        [disabled]="
+                          row.fillType == 'auto' ||
+                          row.pageFill == 'fillChecklist'
+                        "
+                      />
+                    </div>
+                  </div>
+                  <div *ngIf="!periodFlag && !hourFlag && subInstanceFlag">
+                    <div *ngIf="row.csName != ''">
+                      <input
+                        matInput
+                        [disabled]="
+                          !row.permission?.includes(localPermission) ||
+                          row.fillType == 'auto' ||
+                          row.pageFill == 'master' || (readOnly[i] && readOnly1[j])
+                        "
+                        [type]="row.cstype"
+                        [(ngModel)]="e[row.csName]"
+                        name="{{ 'cellsh-' + i + '-' + j }}"
+                        id="{{ 'cellsh-' + i + '-' + j }}"
+                        (keyup)="autoTime(i,j,row.csName)"
+                      />
+                    </div>
+                    <div *ngIf="row.csName == ''">
+                      <input
+                        matInput
+                        [disabled]="
+                          !row.permission?.includes(localPermission) ||
+                          row.fillType == 'auto' ||
+                          row.pageFill == 'master' || (readOnly[i] && readOnly1[j])
+                        "
+                        [type]="row.cstype"
+                        [(ngModel)]="e[row.csName + 'csName!@#%!$' + i]"
+                        name="{{ 'cellnsh-' + i + '-' + j + '-' + 1 }}"
+                        id="{{ 'cellnsh-' + i + '-' + j + '-' + 1 }}"
+                        (keyup)="autoTime(i,j,row.csName)"
+                      />
+                    </div>
+                  </div>
+                </mat-form-field>
+                <mat-form-field
+                  MatFormFieldControl
+                  appearance="outline"
+                  class="example-full-width col-12"
+                  *ngIf="row.cstype == 'file'"
+                >
+                  <mat-label *ngIf="row.cstype !== 'file'">Name</mat-label>
+                  <div class="import">
+                    <div *ngIf="row.cstype != 'file'">
+                      <input
+                        matInput
+                        [type]="getInputType(row.cstype)"
+                        [(ngModel)]="e[row.csName]"
+                        name="{{ 'cellh-' + i + '-' + j }}"
+                        id="{{ 'cellh-' + i + '-' + j }}"
+                        (change)="toolTip('body', j, [row.csName])"
+                      />
+                    </div>
+                    <div
+                      class="row"
+                      *ngIf="row.cstype === 'file'"
+                      style="height: 15px; display: flex"
+                    >
+                      <div>
+                        <button
+                          [disabled]="
+                            !row.permission.includes(localPermission) ||
+                            row.fillType == 'auto' ||
+                            row.pageFill == 'master' ||
+                            row.pageFill == 'approval'
+                          "
+                          mat-icon-button
+                          matPrefix
+                          (click)="f_input.click()"
+                        >
+                          <mat-icon style="margin-top: -30px"
+                            >attach_file</mat-icon
+                          >
+                        </button>
+                      </div>
+                      <div>
+                        <input
+                          type="text"
+                          readonly
+                          matInput
+                          name="{{ 'SE-' + i + '-' + j }}"
+                          id="{{ 'SR-' + i + '-' + j }}"
+                          hidden
+                          [(ngModel)]="e[row.csName]"
+                          (change)="toolTip('body', j, [row.csName])"
+                        />
+                        <div style="height: 50px; display: flex">
+                          <span>{{ showImage(e[row.csName]) }}</span>
+                        </div>
+
+                        <input
+                          type="file"
+                          multiple
+                          hidden
+                          #f_input
+                          (change)="
+                            handleFileInputChange(
+                              f_input.files,
+                              j,
+                              i,
+                              row.csName,
+                              'subheader'
+                            )
+                          "
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </mat-form-field>
+              </td>
+
+              <td *ngFor="let row of addData1; let i = index">
+                <mat-form-field
+                  appearance="outline"
+                  class="example-full-width col-12"
+                  *ngIf="
+                    row.ctype != 'select' &&
+                    row.ctype != 'multi-select' &&
+                    row.ctype != 'file' &&
+                    subHbool1
+                  "
+                >
+                  <mat-label>Name</mat-label>
+                  <input *ngIf="periodFlag && !hourFlag && !instanceFlag"
+                  matInput [disabled]="
+                      (current_value == row.cName && !current_date) ||
+                      !row.permission.includes(localPermission) ||
+                      row.fillType == 'auto' ||
+                      row.pageFill == 'master'
+                    "
+                    [type]="row.ctype"
+                    [(ngModel)]="e[row.cName]"
+                    (change)="toolTip('body', j,[row.cName])"
+                    name="{{ 'cell2-' + i + '-' + j }}"
+                  />
+                  <input *ngIf="periodFlag && hourFlag && !instanceFlag"
+                    matInput [disabled]="
+                      (current_value !== row.cName && !current_date) ||
+                      !row.permission.includes(localPermission) ||
+                      row.fillType == 'auto' ||
+                      row.pageFill == 'master'
+                    "
+                    [type]="row.ctype"
+                    [(ngModel)]="e[row.cName]"
+                    (change)="toolTip('body', j, [row.cName])"
+                    name="{{ 'cell2-' + i + '-' + j }}"
+                  />
+                  <input *ngIf="!periodFlag && !hourFlag && !instanceFlag" matInput
+                    [disabled]="
+                      !row.permission.includes(localPermission) ||
+                      row.fillType == 'auto' ||
+                      row.pageFill == 'master'
+                    "
+                    [type]="row.ctype"
+                    [(ngModel)]="e[row.cName]"
+                    (change)="toolTip('body', j,[row.cName])"
+                    name="{{ 'cell2-' + i + '-' + j }}"
+                  />
+                  <input *ngIf="!periodFlag && !hourFlag && instanceFlag" matInput
+                    [disabled]="
+                      !row.permission.includes(localPermission) ||
+                      row.fillType == 'auto' ||
+                      row.pageFill == 'master' || (readOnly[i] && readOnly1[j])
+                    "
+                    [type]="row.ctype"
+                    [(ngModel)]="e[row.cName]"
+                    name="{{ 'cell2-' + i + '-' + j }}"
+                    (keyup)="autoTime(i,j,row.cName)"
+
+                  />
+                </mat-form-field>
+
+                <mat-form-field
+                  MatFormFieldControl
+                  appearance="outline"
+                  class="example-full-width col-12"
+                  *ngIf="row.ctype == 'file'"
+                >
+                  <mat-label *ngIf="row.ctype !== 'file'">Name</mat-label>
+                  <div class="import">
+                    <div *ngIf="row.ctype != 'file'">
+                      <input
+                        matInput
+                        [type]="getInputType(row.ctype)"
+                        [(ngModel)]="e[row.cName]"
+                        name="{{ 'cell2-' + i + '-' + j }}"
+                        id="{{ 'cell2-' + i + '-' + j }}"
+                        (change)="toolTip('body', j,[row.cName])"
+                      />
+                    </div>
+                    <div
+                      class="row"
+                      *ngIf="row.ctype === 'file'"
+                      style="height: 15px; display: flex"
+                    >
+                      <div>
+                        <button
+                          [disabled]="
+                            !row.permission.includes(localPermission) ||
+                            row.fillType == 'auto' ||
+                            row.pageFill == 'master' ||
+                            row.pageFill == 'approval'
+                          "
+                          mat-icon-button
+                          matPrefix
+                          (click)="f_input.click()"
+                        >
+                          <mat-icon style="margin-top: -30px"
+                            >attach_file</mat-icon
+                          >
+                        </button>
+                      </div>
+                      <div>
+                        <input
+                          type="text"
+                          readonly
+                          matInput
+                          name="{{ 'DE-' + i + '-' + j }}"
+                          id="{{ 'DR-' + i + '-' + j }}"
+                          hidden
+                          [(ngModel)]="e[row.cName]"
+                          (change)="toolTip('body', j, [row.cName])"
+                          [disabled]="!row.permission.includes(localPermission)"
+                        />
+                        <div style="height: 50px; display: flex">
+                          <span>{{ showImage(e[row.cName]) }}</span>
+                        </div>
+                        <input
+                          type="file"
+                          multiple
+                          hidden
+                          #f_input
+                          (change)="
+                            handleFileInputChange(
+                              f_input.files,
+                              j,
+                              i,
+                              row.ctype,
+                              'body'
+                            )
+                          "
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </mat-form-field>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- </div> -->
+        <table
+          [ngStyle]="{ width: dynamicTableWidth }"
+          style="overflow-x: scroll; width: 100%"
+          *ngIf="periodicSchedule != 'Daily'"
+        >
+          <thead
+            class="table-bordered table-sm"
+            *ngFor="let e of tempArray; let i = index"
+          >
+            <tr *ngIf="selectTempname == e.Tempname">
+              <th *ngFor="let a of e.footer; let i = index">
+                {{ a.fName }}
+              </th>
+            </tr>
+          </thead>
+          <tbody class="table-bordered table-sm">
+            <tr *ngFor="let e of footerData; let j = index">
+              <td *ngFor="let row of footerCol; let i = index">
+                <mat-form-field
+                  MatFormFieldControl
+                  appearance="outline"
+                  class="example-full-width col-12"
+                >
+                  <mat-label *ngIf="row.ftype !== 'file'">Value</mat-label>
+                  <div *ngIf="row.ftype != 'file'">
+                    <input
+                      matInput
+                      [type]="getInputType(row.ftype)"
+                      [(ngModel)]="e[row.fName]"
+                      [disabled]="
+                        !row.permission.includes(localPermission) ||
+                        row.fillType == 'auto' ||
+                        row.pageFill == 'master' ||
+                        row.pageFill == 'approval'
+                      "
+                      name="{{ 'cell3-' + i + '-' + j }}"
+                      id="{{ 'cell3-' + i + '-' + j }}"
+                      (change)="toolTip('footer', j, row.fName)"
+                    />
+                  </div>
+                  <div
+                    class="row"
+                    *ngIf="row.ftype === 'file'"
+                    style="height: 15px; display: flex"
+                  >
+                    <div>
+                      <button
+                        mat-icon-button
+                        matPrefix
+                        [disabled]="
+                          !row.permission.includes(localPermission) ||
+                          row.fillType == 'auto' ||
+                          row.pageFill == 'master' ||
+                          row.pageFill == 'approval'
+                        "
+                        (click)="f_input.click()"
+                      >
+                        <mat-icon style="margin-top: -30px"
+                          >attach_file</mat-icon
+                        >
+                      </button>
+                    </div>
+                    <div>
+                      <input
+                        type="text"
+                        readonly
+                        matInput
+                        name="{{ 'HF-' + i + '-' + j }}"
+                        id="{{ 'HJ-' + i + '-' + j }}"
+                        hidden
+                        [(ngModel)]="e[row.fName]"
+                        (change)="toolTip('footer', j, row.fName)"
+                        [disabled]="
+                          !row.permission.includes(localPermission) ||
+                          row.fillType == 'auto' ||
+                          row.pageFill == 'master' ||
+                          row.pageFill == 'approval'
+                        "
+                      />
+                      <div style="height: 50px; display: flex">
+                        <span>{{ showImage(e[row.fName]) }}</span>
+                      </div>
+                      <input
+                        type="file"
+                        id="{{ 'ce-' + i + '-' + j }}"
+                        multiple
+                        hidden
+                        #f_input
+                        (change)="
+                          handleFileInputChange(
+                            f_input.files,
+                            j,
+                            i,
+                            row.ftype,
+                            'footer'
+                          )
+                        "
+                      />
+                    </div>
+                  </div>
+                </mat-form-field>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div *ngIf="periodicSchedule == 'Daily'">
+          <table
+            class="table-bordered"
+            [ngStyle]="{ width: dynamicTableWidth }"
+            *ngFor="let e of tempArray; let i = index"
+          >
+            <!-- <thead> -->
+            <th class="classinherit" *ngIf="selectTempname == e.Tempname">
+              <tr
+                class="classinherit"
+                *ngFor="let row of footerCol; let k = index"
+              >
+                <td class="classinherit">
+                  {{ row.fName }}
+                </td>
+                <span *ngFor="let f of footerData; let j = index">
+                  <td class="classinherit" *ngIf="current_value == f.day">
+                    <!-- <tr *ngFor="let fo of footer; let i = index"> -->
+                    <mat-form-field
+                      MatFormFieldControl
+                      appearance="outline"
+                      class="example-full-width col-12"
+                    >
+                      <mat-label *ngIf="row.ftype !== 'file'">Value</mat-label>
+                      <div *ngIf="row.ftype != 'file'">
+                        <input
+                          matInput
+                          [type]="getInputType(row.ftype)"
+                          [(ngModel)]="f[row.fName]"
+                          name="{{ 'cell3-' + k + '-' + j }}"
+                          id="{{ 'cell3-' + k + '-' + j }}"
+                          (change)="toolTip('footer', j, row.fName)"
+                          [disabled]="
+                            !row.permission?.includes(localPermission) ||
+                            row.fillType == 'auto' ||
+                            row.pageFill == 'master' ||
+                            row.pageFill == 'approval'
+                          "
+                        />
+                      </div>
+                      <div
+                        class="row"
+                        *ngIf="row.ftype === 'file'"
+                        style="height: 15px; display: flex"
+                      >
+                        <div>
+                          <button
+                            mat-icon-button
+                            matPrefix
+                            (click)="f_input.click()"
+                            [disabled]="
+                              !row.permission.includes(localPermission) ||
+                              row.fillType == 'auto' ||
+                              row.pageFill == 'master' ||
+                              row.pageFill == 'approval'
+                            "
+                          >
+                            <mat-icon style="margin-top: -30px"
+                              >attach_file</mat-icon
+                            >
+                          </button>
+                        </div>
+                        <div>
+                          <input
+                            type="text"
+                            readonly
+                            matInput
+                            name="{{ 'HF-' + i + '-' + j }}"
+                            id="{{ 'HJ-' + i + '-' + j }}"
+                            hidden
+                            [(ngModel)]="e[row.fName]"
+                            (change)="toolTip('footer', j, row.fName)"
+                            [disabled]="
+                              !row.permission.includes(localPermission) ||
+                              row.fillType == 'auto' ||
+                              row.pageFill == 'master' ||
+                              row.pageFill == 'approval'
+                            "
+                          />
+                          <div style="height: 50px; display: flex">
+                            <span>{{ showImage(e[row.fName]) }}</span>
+                          </div>
+
+                          <input
+                            type="file"
+                            id="{{ 'ce-' + i + '-' + j }}"
+                            multiple
+                            hidden
+                            #f_input
+                            (change)="
+                              handleFileInputChange(
+                                f_input.files,
+                                j,
+                                i,
+                                row.ftype,
+                                'footer'
+                              )
+                            "
+                          />
+                        </div>
+                      </div>
+                    </mat-form-field>
+                    <!-- </tr> -->
+                  </td>
+                </span>
+              </tr>
+            </th>
+            <!-- </thead> -->
+          </table>
+
+          <table [ngStyle]="{ width: dynamicTableWidth }">
+            <mat-form-field
+              appearance="outline"
+              class="example-full-width col-12"
+            >
+              <mat-label>Instruction</mat-label>
+              <input
+                matInput
+                type="text"
+                name="footerInstruction"
+                class="col-3 floatingName"
+                [(ngModel)]="footerInstruction"
+              />
+            </mat-form-field>
+          </table>
+          <table [ngStyle]="{ width: dynamicTableWidth }">
+            <thead
+              class="table-bordered table-sm"
+              *ngFor="let e of tempArray; let i = index"
+            >
+              <tr *ngIf="selectTempname == e.Tempname">
+                <th *ngFor="let a of e.problemFooter; let i = index">
+                  {{ a.probName }}
+                </th>
+              </tr>
+            </thead>
+            <tbody class="table-bordered table-sm">
+              <tr *ngFor="let e of probFootArr; let j = index">
+                <td *ngFor="let row of problemFooter; let i = index">
+                  <mat-form-field
+                    MatFormFieldControl
+                    appearance="outline"
+                    class="example-full-width col-12"
+                  >
+                    <mat-label *ngIf="row.probType !== 'file'">Value</mat-label>
+                    <div *ngIf="row.probType != 'file'">
+                      <input
+                        matInput
+                        [type]="getInputType(row.probType)"
+                        [(ngModel)]="e[row.probName]"
+                        (change)="toolTip('Instruction', j,[row.probName])"
+                        name="{{ 'cellpN-' + i + '-' + j }}"
+                        id="{{ 'cellpN-' + i + '-' + j }}"
+                        [disabled]="
+                          row.fillType == 'auto' ||
+                          row.pageFill == 'master' ||
+                          row.pageFill == 'approval'
+                        "
+                      />
+                    </div>
+                    <div
+                      class="row"
+                      *ngIf="row.probType === 'file'"
+                      style="height: 15px; display: flex"
+                    >
+                      <div>
+                        <button
+                          mat-icon-button
+                          matPrefix
+                          (click)="f_input.click()"
+                        >
+                          <mat-icon style="margin-top: -30px"
+                            >attach_file</mat-icon
+                          >
+                        </button>
+                      </div>
+                      <div>
+                        <input
+                          type="text"
+                          readonly
+                          matInput
+                          name="{{ 'HF-' + i + '-' + j }}"
+                          id="{{ 'HJ-' + i + '-' + j }}"
+                          hidden
+                          [(ngModel)]="e[row.probName]"
+                          (change)="toolTip('Instruction', j,[row.probName])"
+                          [disabled]="
+                            row.fillType == 'auto' ||
+                            row.pageFill == 'master' ||
+                            row.pageFill == 'approval'
+                          "
+                        />
+                        <div style="height: 50px; display: flex">
+                          <span>{{ showImage(e[row.probName]) }}</span>
+                        </div>
+
+                        <input
+                          type="file"
+                          id="{{ 'ce-' + i + '-' + j }}"
+                          multiple
+                          hidden
+                          #f_input
+                          (change)="
+                            handleFileInputChange(
+                              f_input.files,
+                              j,
+                              i,
+                              row.probType,
+                              'footer'
+                            )
+                          "
+                        />
+                      </div>
+                    </div>
+                  </mat-form-field>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf="periodicSchedule != 'Daily'">
+          <table [ngStyle]="{ width: dynamicTableWidth }">
+            <mat-form-field
+              appearance="outline"
+              class="example-full-width col-12"
+            >
+              <mat-label>Note:</mat-label>
+              <input
+                matInput
+                type="text"
+                name="shiftNote"
+                class="col-12 floatingName"
+                [(ngModel)]="shiftNote"
+              />
+            </mat-form-field>
+          </table>
+        </div>
+      </div>
+      <hr />
+
+      <div class="form-row row">
+        <div class="col text-right">
+          <button mat-raised-button color="warn" (click)="returnToMaster()">
+            Cancel</button
+          >&nbsp;&nbsp;
+          <button mat-raised-button color="primary" (click)="submit()">
+            Submit
+          </button>
+          &nbsp;&nbsp;
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

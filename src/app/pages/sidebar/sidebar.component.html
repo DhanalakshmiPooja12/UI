@@ -1,0 +1,304 @@
+<!-- <div class="d-flex" id="wrapper">
+  <div
+    class="bg-light border-right"
+    id="sidebar-wrapper"
+    [ngClass]="status ? 'hide' : 'show'"
+  >
+    <div class="list-group list-group-flush">
+      <ul class="list-group-item list-group-item-action">
+        <i class="fa fa-line-chart"></i>
+        <i class="fa fa-eye"></i>
+        <i class="fa fa-desktop"></i>
+        Checklist Definition
+        <a class="dropdown-item" routerLink="/template/list">Template</a>
+        <a class="dropdown-item" routerLink="/master/list">Master</a>
+
+        <i class="fa fa-line-chart"></i>
+        <i class="fa fa-desktop"></i>
+        Checklists
+        <a class="dropdown-item" routerLink="/checklist/filledList"
+          >Filled CheckList</a
+        >
+        <a class="dropdown-item" routerLink="/checklist/fillnew"
+          >Fill New CheckList</a
+        >
+        <a class="dropdown-item" routerLink="/checklist/approval">Approval</a>
+        <i class="fa fa-line-chart"></i>
+        <i class="fa fa-desktop"></i>
+        Configuration
+        <a class="dropdown-item" routerLink="/config/userconfig">User</a>
+        <a class="dropdown-item" routerLink="/config/configData"
+          >Configuration
+        </a>
+        <a class="dropdown-item" routerLink="/config/map">Mapping </a>
+      </ul>
+    </div>
+  </div>
+  <div id="page-content-wrapper">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="justify-content-between">
+        <img
+          src="assets/lmw.png"
+          style="width: 80px; height: 29px; cursor: pointer"
+          class="d-inline-block align-top"
+          alt=""
+          (click)="clickEvent()"
+        />
+      </div>
+      <div class="navbar-nav ml-auto">
+        <button mat-raised-button color="primary" (click)="logout()">
+          LogOut
+        </button>
+      </div>
+    </nav>
+    <router-outlet></router-outlet>
+  </div>
+</div> -->
+
+<!--  material sidebar  -->
+<mat-toolbar color="primary">
+  <!-- [style.background-color]="color" -->
+  <button
+    class="mt-1"
+    mat-icon-button
+    (click)="sidenav.toggle()"
+    matTooltip="Menu"
+  >
+    <mat-icon style="color: rgb(249, 248, 248)">menu</mat-icon>
+  </button>
+  &nbsp;
+  <span
+    ><img
+      src="assets/wim.png"
+      style="width: 165px; height: 40px; cursor: pointer"
+      class="align-top"
+      alt=""
+      (click)="sidenav.toggle()"
+  /></span>
+  <span class="toolbar-item-spacer"></span>
+
+  <span style="font-size: medium; color: rgb(249, 248, 248)">{{
+    date | date : "d MMM y   HH:mm:ss"
+  }}</span>
+  &nbsp;&nbsp;
+  <mat-icon
+    style="color: white; cursor: pointer"
+    [matBadge]="badgeArray?.length || null"
+    matBadgeColor="warn"
+    [matTooltip]="
+      badgeArray?.length ? 'Checklist notifications' : 'No notications'
+    "
+    >notifications_active
+  </mat-icon>
+  <!-- <mat-slide-toggle [checked]="theme" (change)="toggleTheme()">
+    {{ theme ? "Light" : "Dark" }}
+  </mat-slide-toggle> -->
+  &nbsp;
+  <button
+    mat-icon-button
+    matTooltip="My Account"
+    [matMenuTriggerFor]="userAccountMenu"
+    (click)="getUser()"
+  >
+    <mat-icon style="color: rgb(249, 248, 248)">account_circle</mat-icon>
+  </button>
+
+  <mat-menu #userAccountMenu [overlapTrigger]="false" yPosition="below">
+    <div class="container">
+      <!-- <div class="card"> -->
+      <div class="card-content">
+        <mat-icon class="large-icon">account_circle</mat-icon>
+        <div class="text-center">
+          <h2>{{ user }}</h2>
+        </div>
+        <div class="stats">
+          <span>{{ data }}</span>
+        </div>
+        <div class="stat1">
+          <span>{{ email }}</span>
+        </div>
+        <div class="buttons">
+          <button
+            class="message"
+            mat-menu-item
+            (click)="logout()"
+            style="display: flex; align-items: center"
+          >
+            <mat-icon style="margin-right: 5px">exit_to_app</mat-icon>
+            <span style="margin-left: 5px">LogOut</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- </div> -->
+    </div>
+  </mat-menu>
+
+  <button
+    mat-icon-button
+    id="theme-selector"
+    [mat-menu-trigger-for]="themeMenu"
+    i18n-matTooltip="@@Select-a-theme"
+    matTooltip="Select a theme!"
+    tabindex="-1"
+  >
+    <mat-icon style="color: rgb(249, 248, 248)">palette</mat-icon>
+  </button>
+
+  <mat-menu #themeMenu="matMenu">
+    <mat-checkbox
+      [checked]="isThemeDark"
+      (click)="$event.stopPropagation()"
+      (change)="toggleDarkness()"
+      class="mat-menu-item theme-selector-is-dark"
+      i18n="@@Dark"
+      >Dark
+    </mat-checkbox>
+
+    <mat-grid-list cols="2" class="theme-selectors-container">
+      <mat-grid-tile *ngFor="let theme of themes">
+        <button
+          mat-button
+          class="theme-selector"
+          (click)="$event.stopPropagation(); setTheme(theme)"
+        >
+          <div [attr.class]="theme + ' theme-primary center'">
+            <div [attr.class]="theme + ' theme-accent'"></div>
+            <div [attr.class]="theme + ' theme-warn'"></div>
+            <mat-icon *ngIf="activeTheme === theme" class="center theme-check"
+              >check</mat-icon
+            >
+          </div>
+        </button>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-menu>
+</mat-toolbar>
+<mat-sidenav-container class="app-container" color="primary">
+  <!-- [style.background-color]="sideColor" -->
+  <mat-sidenav #sidenav mode="side" [class.mat-elevation-z8]="true">
+    <!-- style="color: rgb(249, 248, 248)"
+    [style.background-color]="sideColor" -->
+    <mat-nav-list style="color: rgb(249, 248, 248)">
+      <mat-list-item routerLink="dashboard" *ngIf="showTemplate">
+        <!-- style="color: rgb(249, 248, 248)" -->
+        <mat-icon>home</mat-icon>&nbsp; <span>Dashboard</span>
+      </mat-list-item>
+      <mat-list-item routerLink="template/list" *ngIf="showTemplate">
+        <!-- style="color: rgb(249, 248, 248)" -->
+        <mat-icon>dashboard</mat-icon>&nbsp; <span>Template</span>
+      </mat-list-item>
+      <mat-list-item routerLink="master/list" *ngIf="showMaster">
+        <!-- style="color: rgb(249, 248, 248)" -->
+        <mat-icon>article</mat-icon> &nbsp;<span>Master</span>
+      </mat-list-item>
+      <mat-expansion-panel
+        [class.mat-elevation-z0]="true"
+        *ngIf="showChecklist"
+      >
+        <!-- style="color: rgb(249, 248, 248)"
+        [style.background-color]="sideColor" -->
+        <mat-expansion-panel-header
+          ><mat-icon>list</mat-icon> &nbsp;<span>
+            Checklist
+          </span></mat-expansion-panel-header
+        >
+        <mat-nav-list>
+          <a mat-list-item routerLink="checklist/fillnew"
+            ><mat-icon>assignment</mat-icon>&nbsp; New Checklist</a
+          >
+          <!-- <a mat-list-item routerLink="checklist/filledList"> -->
+          <a
+            mat-list-item
+            routerLink="checklist/filledCL"
+            *ngIf="!filledClick"
+            (click)="filledCL()"
+          >
+            <mat-icon
+              [matBadge]="rejectedLists?.length || null"
+              matBadgeColor="warn"
+              >fact_check</mat-icon
+            >&nbsp; Filled Checklist</a
+          >
+          <a
+            mat-list-item
+            routerLink="checklist/filledCL"
+            *ngIf="filledClick"
+            (click)="filledCL()"
+          >
+            <mat-icon>fact_check</mat-icon>&nbsp; Filled Checklist</a
+          >
+          <a
+            mat-list-item
+            routerLink="checklist/approvalprocess"
+            *ngIf="!approvalClicked"
+            (click)="approval()"
+          >
+            <mat-icon
+              [matBadge]="assignedChecklists?.length || null"
+              matBadgeColor="warn"
+              >check_circle</mat-icon
+            >
+            &nbsp;Approval</a
+          >
+          <a
+            mat-list-item
+            (click)="approval()"
+            routerLink="checklist/approvalprocess"
+            *ngIf="approvalClicked"
+          >
+            <mat-icon>check_circle</mat-icon>
+            &nbsp;Approval</a
+          >
+          <a mat-list-item routerLink="checklist/approval">
+            <mat-icon>update</mat-icon> &nbsp;checkStatus</a
+          >
+        </mat-nav-list>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel [class.mat-elevation-z0]="true" [hidden]="true">
+        <!-- style="color: rgb(249, 248, 248)" -->
+        <!-- [style.background-color]="sideColor" -->
+        <mat-expansion-panel-header *ngIf="showConfiguration"
+          ><mat-icon>settings</mat-icon> &nbsp; Configuration
+        </mat-expansion-panel-header>
+        <mat-nav-list>
+          <a mat-list-item routerLink="config/role" [hidden]="!showRole">
+            <mat-icon>manage_accounts</mat-icon> &nbsp;<span>Role</span>
+          </a>
+          <a
+            mat-list-item
+            routerLink="config/department"
+            [hidden]="!showDepartment"
+          >
+            <mat-icon>manage_accounts</mat-icon> &nbsp;<span>Department</span>
+          </a>
+          <a mat-list-item routerLink="config/userconfig" [hidden]="!showUser">
+            <mat-icon>person</mat-icon> &nbsp;<span>User</span>
+          </a>
+          <a mat-list-item routerLink="config/shift" [hidden]="!showShift">
+            <mat-icon>manage_accounts</mat-icon> &nbsp;<span>Shift</span>
+          </a>
+          <a mat-list-item routerLink="config/plant" [hidden]="!showPlant">
+            <mat-icon>manage_accounts</mat-icon> &nbsp;<span>Plant</span>
+          </a>
+          <a mat-list-item routerLink="config/zone" [hidden]="!showZone">
+            <mat-icon>manage_accounts</mat-icon> &nbsp;<span>Zone</span>
+          </a>
+          <a mat-list-item routerLink="config/machine" [hidden]="!showMachine">
+            <mat-icon>manage_accounts</mat-icon> &nbsp;<span>Machine</span>
+          </a>
+          <a mat-list-item routerLink="config/map" [hidden]="!showMapping">
+            <mat-icon>description</mat-icon>&nbsp;<span>Mapping</span>
+          </a>
+          <a mat-list-item routerLink="config/part" [hidden]="!showPartConfig">
+            <mat-icon>description</mat-icon>&nbsp;<span>Part Config</span>
+          </a>
+        </mat-nav-list>
+      </mat-expansion-panel>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet> </router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

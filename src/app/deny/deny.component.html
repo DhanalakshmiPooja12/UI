@@ -1,0 +1,32 @@
+<mat-toolbar class="bgcolor">
+  <span
+    ><img
+      src="assets/wim.png"
+      style="width: 165px; height: 40px; cursor: pointer"
+      class="align-top"
+      alt=""
+  /></span>
+  <span class="toolbar-item-spacer"></span>
+
+  <span style="font-size: medium; color: rgb(249, 248, 248)">{{
+    date | date : "d MMM y   HH:mm:ss"
+  }}</span>
+  &nbsp; &nbsp;
+  <button
+    mat-icon-button
+    matTooltip="My Account"
+    [matMenuTriggerFor]="userAccountMenu"
+  >
+    <mat-icon style="color: rgb(249, 248, 248)">account_circle</mat-icon>
+  </button>
+  <mat-menu #userAccountMenu [overlapTrigger]="false" yPosition="below">
+    <mat-divider></mat-divider>
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>exit_to_app</mat-icon>Logout
+    </button>
+  </mat-menu>
+</mat-toolbar>
+<div class="title">
+  <img src="assets/new.png" />
+  <h2>This User is Not Mapped... Please Contact with Administator...!</h2>
+</div>

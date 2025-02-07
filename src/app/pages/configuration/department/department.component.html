@@ -1,0 +1,148 @@
+<div class="container-fluid text-center mt-4">
+  <div class="col text-left">
+    <h2><b>Department</b></h2>
+    <h4>List</h4>
+  </div>
+  <div class="col text-right mt-5">
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="!departPermission['create']"
+      (click)="openWidgetEditorDialog(templateDepartment, '', 'Add')"
+    >
+      + New Department
+    </button>
+  </div>
+  <div class="row mt-4 ml-4 mr-4 justify-content-center">
+    <table class="table table-borderless">
+      <thead class="theme-dependent-colors" style="color: aliceblue">
+        <tr>
+          <th>S.No</th>
+          <th>Department</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let e of paginateData; let i = index">
+          <td>{{ e.index }}</td>
+          <td>{{ e.dName }}</td>
+          <td>
+            <button
+              mat-raised-button
+              color="primary"
+              [disabled]="!departPermission['modify']"
+              (click)="openWidgetEditorDialog(templateDepartment, e, 'Edit')"
+            >
+              Edit
+            </button>
+            &nbsp;
+            <button
+              mat-raised-button
+              color="warn"
+              (click)="openWidgetEditorDialog(template1, e, 'del')"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="padding-left: 10px">
+    <ngb-pagination
+      [collectionSize]="addDepartments?.length"
+      #numPagesExp1
+      [(page)]="currentPage"
+      [maxSize]="maxSize"
+      [rotate]="true"
+      [pageSize]="itemsPerPage"
+      (pageChange)="loadPage()"
+      [directionLinks]="true"
+      [boundaryLinks]="true"
+    ></ngb-pagination>
+
+    <!-- <pre><span class="float-md-left mr-4">Page: {{ currentPage }} / {{ numPagesExp1.pageCount }}</span></pre> -->
+  </div>
+</div>
+<ng-template class="modal" #templateDepartment>
+  <div class="modal-header card-header header-style">
+    <div class="modal-title pull-left">
+      {{ action == "Edit" ? "Edit Department" : "Add Department" }}
+    </div>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      matDialogClose
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body card-body">
+    <form class="mt-2" #gform="ngForm">
+      <div class="form-row mt-2 row">
+        <div class="form-group col-3">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Department</mat-label>
+            <input
+              matInput
+              type="text"
+              required
+              name="dName"
+              [(ngModel)]="dName"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <br />
+      <div class="modal-footer">
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!gform.form.valid"
+          (click)="colSubmit()"
+          matDialogClose
+        >
+          {{ action == "Edit" ? "Update" : "Save" }}
+        </button>
+        &nbsp;
+        <button mat-raised-button color="warn" matDialogClose>Cancel</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+<ng-template class="modal" #template1>
+  <div class="modal-header card-header header-style">
+    <h4 class="modal-title pull-left">Delete</h4>
+    <button
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      aria-label="Close"
+      matDialogClose
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body card-body">
+    <div class="example-container">
+      <form>
+        <div>
+          <p>Are you sure to delete?</p>
+        </div>
+        <button
+          type="submit"
+          mat-raised-button
+          color="warn"
+          matDialogClose
+          (click)="deleteDepartment(addDepartments)"
+        >
+          Delete</button
+        >&nbsp;&nbsp;
+        <button type="submit" mat-raised-button color="primary" matDialogClose>
+          Cancel
+        </button>
+      </form>
+    </div>
+  </div>
+</ng-template>

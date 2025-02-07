@@ -1,0 +1,123 @@
+<div class="row mt-2 ml-2 mr-2">
+  <div class="col text-left">
+    <h2><b>Checklist Master</b></h2>
+    <h4>List</h4>
+  </div>
+  <div class="col text-right mt-5">
+    <button
+      mat-raised-button
+      color="primary"
+      class="tempCreate"
+      [disabled]="!masterPermission['add']"
+      (click)="createMaster()"
+    >
+      + New Master
+    </button>
+  </div>
+</div>
+<div class="row mt-3 ml-3 mr-3 justify-content-center">
+  <mat-form-field appearance="outline" class="example-full-width col-10">
+    <mat-label><i class="fas fa-search"></i> Search</mat-label>
+    <input
+      matInput
+      type="text"
+      autocomplete="off"
+      [(ngModel)]="filterTerm"
+      name="searchTerm"
+      id="searchTerm"
+    />
+  </mat-form-field>
+</div>
+<div class="row mt-4 ml-4 mr-4 justify-content-center">
+  <table class="table table-borderless">
+    <thead class="theme-dependent-colors" style="color: aliceblue">
+      <tr>
+        <th>ID</th>
+        <th>Master Name</th>
+        <th>Template Name</th>
+        <th>Created At</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let m of paginateData | filter : filterTerm; let i = index">
+      <tr>
+        <td>{{ m.index }}</td>
+        <td>{{ m.masterName }}</td>
+        <td>{{ m.Tempname }}</td>
+        <td>{{ dateConvert(m.createdAt) }}</td>
+        <td>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="edit(m)"
+            [disabled]="!masterPermission['modify']"
+          >
+            Edit
+          </button>
+          &nbsp;
+          <button mat-raised-button color="accent" (click)="Preview(m)">
+            Preview
+          </button>
+          &nbsp;
+          <button
+            mat-raised-button
+            color="warn"
+            (click)="openWidgetEditorDialog(deltemplate, m, 'del')"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div style="padding-left: 10px">
+  <ngb-pagination
+    [collectionSize]="master?.length"
+    #numPagesExp1
+    [(page)]="currentPage"
+    [maxSize]="maxSize"
+    [rotate]="true"
+    [pageSize]="itemsPerPage"
+    (pageChange)="loadPage()"
+    [directionLinks]="true"
+    [boundaryLinks]="true"
+  ></ngb-pagination>
+
+  <!-- <pre><span class="float-md-left mr-4">Page: {{ currentPage }} / {{ numPagesExp1.pageCount }}</span></pre> -->
+</div>
+<ng-template class="modal" #deltemplate>
+  <div class="modal-header card-header header-style">
+    <h4 class="modal-title pull-left">Delete</h4>
+    <button
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      aria-label="Close"
+      matDialogClose
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body card-body">
+    <div class="example-container">
+      <form>
+        <div>
+          <p>Are you sure to delete?</p>
+        </div>
+        <button
+          type="submit"
+          mat-raised-button
+          color="warn"
+          matDialogClose
+          (click)="delete()"
+        >
+          Delete</button
+        >&nbsp;&nbsp;
+        <button type="submit" mat-raised-button color="primary" matDialogClose>
+          Cancel
+        </button>
+      </form>
+    </div>
+  </div>
+</ng-template>

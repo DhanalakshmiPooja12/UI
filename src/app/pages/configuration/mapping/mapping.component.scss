@@ -1,0 +1,14 @@
+.drop {
+  z-index: 50;
+}
+
+.modal {
+  z-index: 1000; /* Adjust as needed */
+}
+.modal-backdrop {
+  z-index: 999; /* Adjust as needed */
+}
+.cdk-overlay-pane.mat-select-panel {
+  position: absolute !important;
+  z-index: 10000 !important; /* Adjust as needed */
+}

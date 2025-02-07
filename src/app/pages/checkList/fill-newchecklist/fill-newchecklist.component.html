@@ -1,0 +1,81 @@
+<div class="row mt-2 ml-2 mr-2">
+  <div class="col text-left">
+    <h2><b>New Checklist</b></h2>
+    <h4>List</h4>
+  </div>
+</div>
+<div class="container-fluid mt-5">
+  <div class="row">
+    <span class="col-12 row justify-content-center">
+      <div class="col-md-5">
+        <div
+          class="card text-center shadow-lg p-3 mb-5 rounded"
+          style="width: 100%; cursor: pointer"
+        >
+          <h3 class="text-center">
+            <b>Control Plan</b>
+          </h3>
+          <div class="card-body pdf">
+            <button mat-raised-button color="accent">
+              <a
+                href="assets/OP 90 CONTROL PLAN.pdf"
+                target="_blank"
+                style="color: white"
+                >OP 90 CONTROL PLAN</a
+              >
+            </button>
+            <div style="margin-right: 50px"></div>
+            <button mat-raised-button color="accent">
+              <a
+                href="assets/OP 100 CONTROL PLAN.pdf"
+                target="_blank"
+                style="color: white"
+                >OP 100 CONTROL PLAN</a
+              >
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div
+          class="card text-center shadow-lg p-3 mb-5 rounded"
+          style="width: 100%; cursor: pointer"
+        >
+          <h3 class="text-center">
+            <b>Work Standard</b>
+          </h3>
+          <div class="card-body pdf">
+            <button mat-raised-button color="accent">
+              <a href="assets/WI OP 90.pdf" target="_blank" style="color: white"
+                >WI OP 90</a
+              >
+            </button>
+            <div style="margin-right: 70px"></div>
+            <button mat-raised-button color="accent">
+              <a
+                href="assets/WI OP 100.pdf"
+                target="_blank"
+                style="color: white"
+                >WI OP 100</a
+              >
+            </button>
+          </div>
+        </div>
+      </div>
+    </span>
+    <div class="col-md-3" *ngFor="let e of master">
+      <div
+        class="card text-center shadow-lg p-3 mb-5 rounded"
+        style="width: 100%; cursor: pointer"
+        (click)="tempClick(e)"
+      >
+        <div class="card-body" style="padding: initial">
+          <h3 class="text-center">
+            <b>{{ e.Tempname }}</b>
+          </h3>
+        </div>
+      </div>
+      <br />
+    </div>
+  </div>
+</div>
