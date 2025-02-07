@@ -49,52 +49,50 @@ export class LoginComponent implements OnInit {
     this.hide = !this.hide;
   }
   login() {
-    this.router.navigate(['mainpage/dashboard']);
-    console.log("navigate")
-    // this.submitted = true;
-    // if (this.loginForm.invalid) {
-    //   return;
-    // }
-    // this.loginData = {
-    //   email: this.loginForm.value.email,
-    //   password: this.loginForm.value.password,
-    // };
+    this.submitted = true;
+    if (this.loginForm.invalid) {
+      return;
+    }
+    this.loginData = {
+      email: this.loginForm.value.email,
+      password: this.loginForm.value.password,
+    };
 
-    // this.dataService.post('auth/', this.loginData).subscribe(
-    //   (data) => {
-    //     this.toastr.success('Login Successfully');
-    //     sessionStorage.setItem('user', data['userName']);
-    //     sessionStorage.setItem('role', data['role']);
-    //     sessionStorage.setItem('department', data['department']);
-    //     sessionStorage.setItem('accesstoken', data['token']);
+    this.dataService.post('auth/', this.loginData).subscribe(
+      (data) => {
+        this.toastr.success('Login Successfully');
+        sessionStorage.setItem('user', data['userName']);
+        sessionStorage.setItem('role', data['role']);
+        sessionStorage.setItem('department', data['department']);
+        sessionStorage.setItem('accesstoken', data['token']);
 
-    //     this.dataService
-    //       .get(`config/role?roleName=${data['role']}`)
-    //       .subscribe((res) => {
-    //         if (res['result'].length) {
+        this.dataService
+          .get(`config/role?roleName=${data['role']}`)
+          .subscribe((res) => {
+            if (res['result'].length) {
              
-    //           sessionStorage.setItem(
-    //             'permissions',
-    //             JSON.stringify(res['result'][0]['permissions']['Configuration'])
-    //           );
-    //         }
-    //       });
-    //     if (
-    //       data['role'] == 'SUPERADMIN' ||
-    //       data['role'] == 'ADMIN' ||
-    //       data['role'] == 'SUPERVISOR' ||
-    //       data['role'] == 'MAINTENANCE'
-    //     ) {
-    //       this.router.navigate(['mainpage/dashboard']);
-    //     } else {
-    //       this.getMapping(data['userName']);
-    //     }
-    //   },
+              sessionStorage.setItem(
+                'permissions',
+                JSON.stringify(res['result'][0]['permissions']['Configuration'])
+              );
+            }
+          });
+        if (
+          data['role'] == 'SUPERADMIN' ||
+          data['role'] == 'ADMIN' ||
+          data['role'] == 'SUPERVISOR' ||
+          data['role'] == 'MAINTENANCE'
+        ) {
+          this.router.navigate(['mainpage/dashboard']);
+        } else {
+          this.getMapping(data['userName']);
+        }
+      },
 
-    //   (error) => {
-    //     this.toastr.error(error.error['message']);
-    //   }
-    // );
+      (error) => {
+        this.toastr.error(error.error['message']);
+      }
+    );
   }
 
   getMapping(userName) {
