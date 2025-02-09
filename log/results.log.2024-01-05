@@ -1,0 +1,57 @@
+2024-01-05T05:11:28.144Z [] error: Checklist Hourly Shift1 is not configured
+2024-01-05T05:11:28.144Z [] error: Checklist Hourly Shift1 is not configured
+2024-01-05T09:02:11.490Z [] debug: Debugging info
+2024-01-05T09:02:16.354Z [] debug: Server Initialized
+2024-01-05T09:02:16.380Z [] debug: server is running at 3000
+2024-01-05T09:02:46.386Z [] debug: connect ECONNREFUSED ::1:27017
+2024-01-05T09:06:39.932Z [] debug: Debugging info
+2024-01-05T09:06:40.492Z [] debug: Server Initialized
+2024-01-05T09:06:40.516Z [] debug: server is running at 3000
+2024-01-05T09:07:10.527Z [] debug: connect ECONNREFUSED ::1:27017
+2024-01-05T09:09:15.733Z [] debug: Debugging info
+2024-01-05T09:09:16.292Z [] debug: Server Initialized
+2024-01-05T09:09:16.314Z [] debug: server is running at 3000
+2024-01-05T09:09:34.554Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-05T09:09:35.890Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-05T09:09:37.494Z [] error: Operation `approvalstatuses.find()` buffering timed out after 10000ms
+2024-01-05T09:09:37.494Z [] error: Operation `approvalstatuses.find()` buffering timed out after 10000ms
+2024-01-05T09:09:37.499Z [] error: Operation `roles.find()` buffering timed out after 10000ms
+2024-01-05T09:09:37.499Z [] error: Operation `roles.find()` buffering timed out after 10000ms
+2024-01-05T09:09:37.501Z [] error: Operation `templates.find()` buffering timed out after 10000ms
+2024-01-05T09:09:37.501Z [] error: Operation `templates.find()` buffering timed out after 10000ms
+2024-01-05T09:09:41.726Z [] error: Operation `users.find()` buffering timed out after 10000ms
+2024-01-05T09:09:41.726Z [] error: Operation `users.find()` buffering timed out after 10000ms
+2024-01-05T09:09:44.571Z [] error: logIn ErrorMongooseError: Operation `users.find()` buffering timed out after 10000ms
+2024-01-05T09:09:45.906Z [] error: logIn ErrorMongooseError: Operation `users.find()` buffering timed out after 10000ms
+2024-01-05T09:09:46.327Z [] debug: connect ECONNREFUSED ::1:27017
+2024-01-05T09:10:09.981Z [] debug: Debugging info
+2024-01-05T09:10:10.402Z [] debug: Server Initialized
+2024-01-05T09:10:10.426Z [] debug: server is running at 3000
+2024-01-05T09:10:16.528Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-05T09:10:26.550Z [] error: logIn ErrorMongooseError: Operation `users.find()` buffering timed out after 10000ms
+2024-01-05T09:10:40.425Z [] debug: connect ECONNREFUSED ::1:27017
+2024-01-05T09:12:32.149Z [] debug: Debugging info
+2024-01-05T09:12:32.872Z [] debug: Server Initialized
+2024-01-05T09:12:32.900Z [] debug: server is running at 3000
+2024-01-05T09:12:32.932Z [] debug: Database is connected...
+2024-01-05T09:12:32.998Z [] debug: SUPERADMIN user exists
+2024-01-05T09:12:33.009Z [] debug: SUPERADMIN Role exists
+2024-01-05T09:12:50.194Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-05T09:17:26.829Z [] debug: Debugging info
+2024-01-05T09:17:27.264Z [] debug: Server Initialized
+2024-01-05T09:17:27.288Z [] debug: server is running at 3000
+2024-01-05T09:17:27.305Z [] debug: Database is connected...
+2024-01-05T09:17:27.351Z [] debug: SUPERADMIN user exists
+2024-01-05T09:17:27.361Z [] debug: SUPERADMIN Role exists
+2024-01-05T09:18:31.278Z [] debug: Debugging info
+2024-01-05T09:18:31.729Z [] debug: Server Initialized
+2024-01-05T09:18:31.757Z [] debug: server is running at 3000
+2024-01-05T09:18:31.774Z [] debug: Database is connected...
+2024-01-05T09:18:31.864Z [] debug: SUPERADMIN user exists
+2024-01-05T09:18:31.872Z [] debug: SUPERADMIN Role exists
+2024-01-05T09:23:39.562Z [] debug: Debugging info
+2024-01-05T09:23:40.206Z [] debug: Server Initialized
+2024-01-05T09:23:40.229Z [] debug: server is running at 3000
+2024-01-05T09:23:40.249Z [] debug: Database is connected...
+2024-01-05T09:23:40.297Z [] debug: SUPERADMIN user exists
+2024-01-05T09:23:40.311Z [] debug: SUPERADMIN Role exists

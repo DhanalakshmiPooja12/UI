@@ -1,0 +1,17 @@
+2024-02-01T04:14:24.201Z [] debug: userCredentials---------{"email":"op1@wimerasys.com","password":"Welcome@1"}
+2024-02-01T04:14:44.243Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"kavia1@A9!"}
+2024-02-01T13:03:45.874Z [] debug: Debugging info
+2024-02-01T13:03:55.726Z [] debug: Server Initialized
+2024-02-01T13:03:55.801Z [] debug: server is running at 4000
+2024-02-01T13:03:55.851Z [] debug: Digital Database is connected...
+2024-02-01T13:03:55.863Z [] debug: SFS Database is connected...
+2024-02-01T13:03:55.931Z [] debug: SUPERADMIN user exists
+2024-02-01T13:03:55.968Z [] debug: SUPERADMIN Role exists
+2024-02-01T13:08:26.979Z [] debug: [object Object]
+2024-02-01T13:16:18.610Z [] error: E11000 duplicate key error collection: kaviadb.filledbies index: masterName_1 dup key: { : "MasterDaily01" }
+2024-02-01T13:16:18.610Z [] error: E11000 duplicate key error collection: kaviadb.filledbies index: masterName_1 dup key: { : "MasterDaily01" }
+2024-02-01T13:17:14.296Z [] error: E11000 duplicate key error collection: kaviadb.filledbies index: masterName_1 dup key: { : "MasterDaily01" }
+2024-02-01T13:17:14.296Z [] error: E11000 duplicate key error collection: kaviadb.filledbies index: masterName_1 dup key: { : "MasterDaily01" }
+2024-02-01T15:52:10.243Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"kavia1@A9!"}
+2024-02-01T15:58:02.467Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"kavia1@A9!"}
+2024-02-01T16:09:28.868Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"kavia1@A9!"}

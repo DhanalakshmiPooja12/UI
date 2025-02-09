@@ -1,0 +1,23 @@
+2024-01-16T05:35:54.223Z [] debug: userCredentials---------{"email":"mythili@wimerasys.com","password":"Welcome@1"}
+2024-01-16T05:36:47.665Z [] debug: userCredentials---------{"email":"mythili@wimerasys.com","password":"Welcome@1"}
+2024-01-16T05:43:51.257Z [] debug: userCredentials---------{"email":"operator@gmail.com","password":"Welcome@1"}
+2024-01-16T05:44:14.974Z [] debug: userCredentials---------{"email":"operator@gmail.com","password":"Welcome@1"}
+2024-01-16T12:17:50.033Z [] debug: userCredentials---------{"email":"operator@gmail.com","password":"Welcome@1"}
+2024-01-16T12:19:29.575Z [] debug: userCredentials---------{"email":"mythili@wimerasys.com","password":"Welcome@1"}
+2024-01-16T12:19:58.549Z [] debug: userCredentials---------{"email":"operator@gmail.com","password":"Welcome@1"}
+2024-01-16T12:20:35.766Z [] debug: userCredentials---------{"email":"operator@gmail.com","password":"Welcome@1"}
+2024-01-16T04:56:17.328Z [] debug: Debugging info
+2024-01-16T04:56:23.789Z [] debug: Server Initialized
+2024-01-16T04:56:23.835Z [] debug: server is running at 4000
+2024-01-16T04:56:23.869Z [] debug: Database is connected...
+2024-01-16T04:56:24.006Z [] debug: SUPERADMIN user exists
+2024-01-16T04:56:24.035Z [] debug: SUPERADMIN Role exists
+2024-01-16T04:59:53.059Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-16T05:00:06.619Z [] debug: userCredentials---------{"email":"operator@gmail.com","password":"Welcome@1"}
+2024-01-16T06:28:19.719Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-16T09:41:58.490Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-16T09:53:30.821Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-16T11:08:40.017Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-16T13:01:25.152Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-16T13:11:31.271Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-16T13:12:52.160Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}

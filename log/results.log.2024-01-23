@@ -1,0 +1,46 @@
+2024-01-23T04:29:56.157Z [] debug: Debugging info
+2024-01-23T04:30:01.754Z [] debug: Server Initialized
+2024-01-23T04:30:01.796Z [] debug: server is running at 4000
+2024-01-23T04:30:01.816Z [] debug: Database is connected...
+2024-01-23T04:30:01.875Z [] debug: SUPERADMIN user exists
+2024-01-23T04:30:01.889Z [] debug: SUPERADMIN Role exists
+2024-01-23T04:39:15.017Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-23T05:07:48.099Z [] debug: [object Object]
+2024-01-23T05:56:40.765Z [] debug: Debugging info
+2024-01-23T05:56:41.375Z [] debug: Server Initialized
+2024-01-23T05:56:41.391Z [] debug: server is running at 4000
+2024-01-23T05:56:41.412Z [] debug: Database is connected...
+2024-01-23T05:56:41.448Z [] debug: SUPERADMIN user exists
+2024-01-23T05:56:41.458Z [] debug: SUPERADMIN Role exists
+2024-01-23T06:33:47.675Z [] debug: Debugging info
+2024-01-23T06:33:48.133Z [] debug: Server Initialized
+2024-01-23T06:33:48.150Z [] debug: server is running at 4000
+2024-01-23T06:33:48.165Z [] debug: Database is connected...
+2024-01-23T06:33:48.207Z [] debug: SUPERADMIN user exists
+2024-01-23T06:33:48.218Z [] debug: SUPERADMIN Role exists
+2024-01-23T06:41:06.015Z [] debug: Debugging info
+2024-01-23T06:41:06.521Z [] debug: Server Initialized
+2024-01-23T06:41:06.538Z [] debug: server is running at 4000
+2024-01-23T06:41:06.553Z [] debug: Database is connected...
+2024-01-23T06:41:06.603Z [] debug: SUPERADMIN user exists
+2024-01-23T06:41:06.614Z [] debug: SUPERADMIN Role exists
+2024-01-23T07:37:12.215Z [] debug: Debugging info
+2024-01-23T07:37:12.727Z [] debug: Server Initialized
+2024-01-23T07:37:12.746Z [] debug: server is running at 4000
+2024-01-23T07:37:12.777Z [] debug: Database is connected...
+2024-01-23T07:37:12.835Z [] debug: SUPERADMIN user exists
+2024-01-23T07:37:12.852Z [] debug: SUPERADMIN Role exists
+2024-01-23T07:41:45.689Z [] debug: [object Object]
+2024-01-23T09:57:44.881Z [] debug: Debugging info
+2024-01-23T09:57:45.471Z [] debug: Server Initialized
+2024-01-23T09:57:45.488Z [] debug: server is running at 4000
+2024-01-23T09:57:45.503Z [] debug: Database is connected...
+2024-01-23T09:57:45.540Z [] debug: SUPERADMIN user exists
+2024-01-23T09:57:45.556Z [] debug: SUPERADMIN Role exists
+2024-01-23T09:57:47.280Z [] debug: Debugging info
+2024-01-23T09:57:47.803Z [] debug: Server Initialized
+2024-01-23T09:57:47.822Z [] debug: server is running at 4000
+2024-01-23T09:57:47.837Z [] debug: Database is connected...
+2024-01-23T09:57:47.881Z [] debug: SUPERADMIN user exists
+2024-01-23T09:57:47.893Z [] debug: SUPERADMIN Role exists
+2024-01-23T09:58:00.508Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}

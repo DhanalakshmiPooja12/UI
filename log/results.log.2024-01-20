@@ -1,0 +1,8 @@
+2024-01-20T06:41:15.865Z [] debug: userCredentials---------{"email":"myhili@wimerasys.com","password":"Welcome@1"}
+2024-01-20T06:41:15.869Z [] debug: Invalid user
+2024-01-20T06:41:20.944Z [] debug: userCredentials---------{"email":"mythili@wimerasys.com","password":"Welcome@1"}
+2024-01-20T06:41:48.913Z [] debug: userCredentials---------{"email":"operator@gmail.com","password":"Welcome@1"}
+2024-01-20T06:49:11.496Z [] debug: userCredentials---------{"email":"mythili@wimearsys.com","password":"Welcome@1"}
+2024-01-20T06:49:11.498Z [] debug: Invalid user
+2024-01-20T06:49:19.284Z [] debug: userCredentials---------{"email":"mythili@wimerasys.com","password":"Welcome@1"}
+2024-01-20T06:49:47.881Z [] debug: userCredentials---------{"email":"operator@gmail.com","password":"Welcome@1"}

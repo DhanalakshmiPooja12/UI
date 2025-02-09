@@ -1,0 +1,55 @@
+2024-01-08T04:29:24.967Z [] debug: userCredentials---------{"email":"mythili@wimerasys.com","password":"Welcome@1"}
+2024-01-08T05:15:43.759Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-08T05:16:09.766Z [] debug: Debugging info
+2024-01-08T05:16:10.188Z [] debug: Server Initialized
+2024-01-08T05:16:10.214Z [] debug: server is running at 4000
+2024-01-08T05:16:10.240Z [] debug: Database is connected...
+2024-01-08T05:16:10.282Z [] debug: SUPERADMIN user exists
+2024-01-08T05:16:10.292Z [] debug: SUPERADMIN Role exists
+2024-01-08T05:16:11.242Z [] debug: Debugging info
+2024-01-08T05:16:11.646Z [] debug: Server Initialized
+2024-01-08T05:16:11.662Z [] debug: server is running at 4000
+2024-01-08T05:16:11.675Z [] debug: Database is connected...
+2024-01-08T05:16:11.741Z [] debug: SUPERADMIN user exists
+2024-01-08T05:16:11.745Z [] debug: SUPERADMIN Role exists
+2024-01-08T05:16:17.377Z [] debug: Debugging info
+2024-01-08T05:16:17.782Z [] debug: Server Initialized
+2024-01-08T05:16:17.807Z [] debug: server is running at 4000
+2024-01-08T05:16:17.825Z [] debug: Database is connected...
+2024-01-08T05:16:17.871Z [] debug: SUPERADMIN user exists
+2024-01-08T05:16:17.883Z [] debug: SUPERADMIN Role exists
+2024-01-08T05:18:12.273Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-08T05:49:18.305Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-08T06:19:14.977Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-08T06:19:39.946Z [] debug: userCredentials---------{"email":"operator@gmail.com","password":"Welcome@1"}
+2024-01-08T06:23:29.640Z [] debug: userCredentials---------{"email":"mythili@wimerasys.com","password":"Welcome@1"}
+2024-01-08T07:31:15.912Z [] debug: userCredentials---------{"email":"supervisor@wimerasys.com","password":"Welcome@1"}
+2024-01-08T07:31:15.918Z [] debug: Invalid user
+2024-01-08T07:31:21.855Z [] debug: userCredentials---------{"email":"supervisor@wimerasys.com","password":"welcome"}
+2024-01-08T07:31:21.858Z [] debug: Invalid user
+2024-01-08T07:31:25.804Z [] debug: userCredentials---------{"email":"supervisor@wimerasys.com","password":"welcome"}
+2024-01-08T07:31:25.807Z [] debug: Invalid user
+2024-01-08T07:31:31.920Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-08T07:32:03.344Z [] debug: userCredentials---------{"email":"supervisor@gmail.com","password":"Welcome@1"}
+2024-01-08T07:32:38.171Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-08T07:33:15.609Z [] debug: userCredentials---------{"email":"mythili@wimerasys.com","password":"Welcome@1"}
+2024-01-08T07:35:01.145Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-08T07:38:42.102Z [] debug: userCredentials---------{"email":"mythili@wimerasys.com","password":"Welcome@1"}
+2024-01-08T07:39:29.684Z [] debug: userCredentials---------{"email":"operator@gmail.com","password":"Welcome@1"}
+2024-01-08T09:01:17.007Z [] debug: userCredentials---------{"email":"mythili@wimerasys.com","password":"Welcome@1"}
+2024-01-08T09:01:49.468Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-08T09:46:50.423Z [] debug: userCredentials---------{"email":"operator@gmail.com","password":"Welcome@1"}
+2024-01-08T09:47:11.174Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-08T09:53:08.841Z [] debug: userCredentials---------{"email":"mythili@wimerasys.com","password":"Welcome@1"}
+2024-01-08T09:53:24.076Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-08T09:54:10.789Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-08T10:05:59.246Z [] debug: userCredentials---------{"email":"mythili@wimerasys.com","password":"Welcome@1"}
+2024-01-08T10:06:27.025Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-08T10:23:21.517Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-08T10:24:09.152Z [] debug: userCredentials---------{"email":"mythili@wimerasys.com","password":"Welcome@1"}
+2024-01-08T10:24:40.234Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-08T11:28:04.594Z [] debug: userCredentials---------{"email":"operator@gmail.com","password":"Welcome@1"}
+2024-01-08T11:29:07.804Z [] debug: userCredentials---------{"email":"mythili@wimerasys.com","password":"Welcome@1"}
+2024-01-08T12:50:08.400Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-08T12:53:16.829Z [] debug: userCredentials---------{"email":"mythili@wimerasys.com","password":"Welcome@1"}
+2024-01-08T12:53:47.149Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}

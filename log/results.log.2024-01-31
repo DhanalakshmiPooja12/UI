@@ -1,0 +1,67 @@
+2024-01-31T05:47:17.322Z [] debug: Debugging info
+2024-01-31T05:47:25.549Z [] debug: Server Initialized
+2024-01-31T05:47:25.578Z [] debug: server is running at 4000
+2024-01-31T05:47:25.616Z [] debug: Digital Database is connected...
+2024-01-31T05:47:25.636Z [] debug: SFS Database is connected...
+2024-01-31T05:47:25.715Z [] debug: SUPERADMIN user exists
+2024-01-31T05:47:25.733Z [] debug: SUPERADMIN Role exists
+2024-01-31T06:26:19.282Z [] debug: Debugging info
+2024-01-31T06:26:22.497Z [] debug: Server Initialized
+2024-01-31T06:26:22.518Z [] debug: server is running at 4000
+2024-01-31T06:26:22.534Z [] debug: Digital Database is connected...
+2024-01-31T06:26:22.546Z [] debug: SFS Database is connected...
+2024-01-31T06:26:22.650Z [] debug: SUPERADMIN user exists
+2024-01-31T06:26:22.723Z [] debug: SUPERADMIN Role exists
+2024-01-31T06:26:43.161Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"kavia1@A9!"}
+2024-01-31T06:26:43.174Z [] error: logIn Error TypeError: Cannot read property 'name' of undefined
+2024-01-31T06:28:48.873Z [] debug: Debugging info
+2024-01-31T06:28:50.115Z [] debug: Server Initialized
+2024-01-31T06:28:50.136Z [] debug: server is running at 4000
+2024-01-31T06:28:50.151Z [] debug: Digital Database is connected...
+2024-01-31T06:28:50.166Z [] debug: SFS Database is connected...
+2024-01-31T06:28:50.222Z [] debug: SUPERADMIN user exists
+2024-01-31T06:28:50.247Z [] debug: SUPERADMIN Role exists
+2024-01-31T06:28:57.721Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"kavia1@A9!"}
+2024-01-31T06:28:57.732Z [] error: logIn Error TypeError: Cannot read property 'name' of undefined
+2024-01-31T06:30:57.624Z [] debug: Debugging info
+2024-01-31T06:30:58.751Z [] debug: Server Initialized
+2024-01-31T06:30:58.769Z [] debug: server is running at 4000
+2024-01-31T06:30:58.786Z [] debug: Digital Database is connected...
+2024-01-31T06:30:58.803Z [] debug: SFS Database is connected...
+2024-01-31T06:30:58.863Z [] debug: SUPERADMIN user exists
+2024-01-31T06:30:58.876Z [] debug: SUPERADMIN Role exists
+2024-01-31T06:32:09.145Z [] debug: Debugging info
+2024-01-31T06:32:10.046Z [] debug: Server Initialized
+2024-01-31T06:32:10.070Z [] debug: server is running at 4000
+2024-01-31T06:32:10.095Z [] debug: Digital Database is connected...
+2024-01-31T06:32:10.112Z [] debug: SFS Database is connected...
+2024-01-31T06:32:10.170Z [] debug: SUPERADMIN user exists
+2024-01-31T06:32:10.187Z [] debug: SUPERADMIN Role exists
+2024-01-31T06:32:12.699Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"kavia1@A9!"}
+2024-01-31T06:49:38.151Z [] debug: [object Object]
+2024-01-31T07:09:39.571Z [] debug: [object Object]
+2024-01-31T09:21:12.907Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"kavia1@A9!"}
+2024-01-31T10:19:51.223Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"kavia1@A9!"}
+2024-01-31T10:21:24.057Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"kavia1@A9!"}
+2024-01-31T10:23:17.430Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"kavia1@A9!"}
+2024-01-31T11:10:57.223Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"kavia1@A9!"}
+2024-01-31T11:11:30.063Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"kavia1@A9!"}
+2024-01-31T11:14:52.769Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"kavia1@A9!"}
+2024-01-31T12:10:20.252Z [] debug: [object Object]
+2024-01-31T12:16:51.182Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"kavia1@A9!"}
+2024-01-31T12:17:12.871Z [] debug: userCredentials---------{"email":"op1@wimerasys.com","password":"Welcome@1"}
+2024-01-31T12:30:07.980Z [] debug: userCredentials---------{"email":"op1@wimerasys.com","password":"Welcome@1"}
+2024-01-31T12:30:15.131Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"kavia1@A9!"}
+2024-01-31T12:36:06.150Z [] debug: userCredentials---------{"email":"op1@gmail.com","password":"Welcome@1"}
+2024-01-31T12:36:06.153Z [] debug: Invalid user
+2024-01-31T12:36:16.241Z [] debug: userCredentials---------{"email":"op1@wimerasys.com","password":"Welcome@1"}
+2024-01-31T12:37:57.249Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"kavia1@A9!"}
+2024-01-31T13:38:58.610Z [] debug: userCredentials---------{"email":"op1@wimerasys.com","password":"Welcome@1"}
+2024-01-31T12:41:46.461Z [] debug: userCredentials---------{"email":"op1@wimerasys.com","password":"Welcome@1"}
+2024-01-31T12:59:14.900Z [] debug: Debugging info
+2024-01-31T12:59:28.050Z [] debug: Server Initialized
+2024-01-31T12:59:28.112Z [] debug: server is running at 4000
+2024-01-31T12:59:28.157Z [] debug: Digital Database is connected...
+2024-01-31T12:59:28.197Z [] debug: SFS Database is connected...
+2024-01-31T12:59:28.303Z [] debug: SUPERADMIN user exists
+2024-01-31T12:59:28.338Z [] debug: SUPERADMIN Role exists

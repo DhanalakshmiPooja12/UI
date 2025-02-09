@@ -1,0 +1,45 @@
+2024-01-30T04:46:17.717Z [] debug: userCredentials---------{"email":"sp1@wimerasys.com","password":"Welcome@1"}
+2024-01-30T06:48:54.189Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"kavia1@A9!"}
+2024-01-30T06:49:51.660Z [] debug: userCredentials---------{"email":"sp1@wimerasys.com","password":"Welcome@1"}
+2024-01-30T07:24:24.708Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"kavia1@A9!"}
+2024-01-30T07:52:00.633Z [] debug: [object Object]
+2024-01-30T08:05:03.671Z [] error: Cannot read property 'includes' of undefined
+2024-01-30T08:05:03.673Z [] error: [object Object]
+2024-01-30T08:05:58.087Z [] error: Cannot read property 'includes' of undefined
+2024-01-30T08:05:03.673Z [] error: [object Object]
+2024-01-30T08:07:34.190Z [] error: Cannot read property 'includes' of undefined
+2024-01-30T08:05:03.673Z [] error: [object Object]
+2024-01-30T08:07:49.472Z [] error: Cannot read property 'includes' of undefined
+2024-01-30T08:05:03.673Z [] error: [object Object]
+2024-01-30T08:08:19.264Z [] error: Cannot read property 'includes' of undefined
+2024-01-30T08:05:03.673Z [] error: [object Object]
+2024-01-30T08:10:05.712Z [] error: Cannot read property 'includes' of undefined
+2024-01-30T08:05:03.673Z [] error: [object Object]
+2024-01-30T08:10:35.152Z [] error: Cannot read property 'includes' of undefined
+2024-01-30T08:05:03.673Z [] error: [object Object]
+2024-01-30T08:13:09.207Z [] error: Cannot read property 'includes' of undefined
+2024-01-30T08:05:03.673Z [] error: [object Object]
+2024-01-30T09:29:41.332Z [] error: Cannot read property 'includes' of undefined
+2024-01-30T08:05:03.673Z [] error: [object Object]
+2024-01-30T09:30:47.484Z [] debug: Debugging info
+2024-01-30T09:30:56.201Z [] debug: Server Initialized
+2024-01-30T09:30:56.236Z [] debug: server is running at 4000
+2024-01-30T09:30:56.272Z [] debug: Digital Database is connected...
+2024-01-30T09:30:56.317Z [] debug: SFS Database is connected...
+2024-01-30T09:30:56.419Z [] debug: SUPERADMIN user exists
+2024-01-30T09:30:56.431Z [] debug: SUPERADMIN Role exists
+2024-01-30T09:30:59.241Z [] error: Cannot read property 'includes' of undefined
+2024-01-30T09:30:59.251Z [] error: [object Object]
+2024-01-30T09:31:27.341Z [] debug: Debugging info
+2024-01-30T09:31:28.114Z [] debug: Server Initialized
+2024-01-30T09:31:28.136Z [] debug: server is running at 4000
+2024-01-30T09:31:28.150Z [] debug: Digital Database is connected...
+2024-01-30T09:31:28.161Z [] debug: SFS Database is connected...
+2024-01-30T09:31:28.229Z [] debug: SUPERADMIN user exists
+2024-01-30T09:31:28.244Z [] debug: SUPERADMIN Role exists
+2024-01-30T09:31:44.687Z [] error: Cannot read property 'includes' of undefined
+2024-01-30T09:31:44.690Z [] error: [object Object]
+2024-01-30T11:30:46.797Z [] error: Cannot read property 'includes' of undefined
+2024-01-30T09:31:44.690Z [] error: [object Object]
+2024-01-30T11:58:02.641Z [] debug: userCredentials---------{"email":"op1@wimerasys.com","password":"Welcome@1"}
+2024-01-30T12:01:47.248Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"kavia1@A9!"}

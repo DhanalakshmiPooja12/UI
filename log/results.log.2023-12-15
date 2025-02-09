@@ -1,0 +1,79 @@
+2023-12-15T04:36:36.380Z [] debug: [object Object]
+2023-12-15T05:12:15.954Z [] debug: [object Object]
+2023-12-15T05:12:34.656Z [] debug: [object Object]
+2023-12-15T05:14:26.086Z [] debug: [object Object]
+2023-12-15T05:17:17.982Z [] debug: [object Object]
+2023-12-15T05:19:29.271Z [] debug: [object Object]
+2023-12-15T05:20:37.628Z [] debug: [object Object]
+2023-12-15T05:22:15.743Z [] debug: [object Object]
+2023-12-15T05:27:19.557Z [] debug: [object Object]
+2023-12-15T06:07:07.016Z [] debug: userCredentials---------{"email":"SUPERADMIN","password":"welcome"}
+2023-12-15T06:12:04.816Z [] debug: Debugging info
+2023-12-15T06:12:05.388Z [] debug: Server Initialized
+2023-12-15T06:12:05.417Z [] debug: server is running at 3000
+2023-12-15T06:12:05.443Z [] debug: Database is connected...
+2023-12-15T06:12:05.516Z [] debug: SUPERADMIN user exists
+2023-12-15T06:12:05.534Z [] debug: SUPERADMIN Role exists
+2023-12-15T06:19:28.648Z [] debug: userCredentials---------{"email":"administrator@wimerasysl.com","password":"welcome"}
+2023-12-15T06:19:28.651Z [] debug: Invalid user
+2023-12-15T06:19:44.481Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2023-12-15T06:22:26.903Z [] debug: [object Object]
+2023-12-15T06:24:24.332Z [] debug: [object Object]
+2023-12-15T06:25:17.563Z [] debug: [object Object]
+2023-12-15T06:26:02.465Z [] debug: [object Object]
+2023-12-15T06:26:31.431Z [] debug: [object Object]
+2023-12-15T06:27:02.648Z [] debug: [object Object]
+2023-12-15T06:27:48.015Z [] debug: [object Object]
+2023-12-15T06:28:05.041Z [] debug: [object Object]
+2023-12-15T06:43:52.212Z [] error: Cast to string failed for value "{}" (type Object) at path "pdf"
+2023-12-15T06:43:52.212Z [] error: Cast to string failed for value "{}" (type Object) at path "pdf"
+2023-12-15T07:00:48.494Z [] debug: [object Object]
+2023-12-15T07:01:22.724Z [] debug: [object Object]
+2023-12-15T07:02:00.292Z [] debug: [object Object]
+2023-12-15T07:04:32.820Z [] error: Master validation failed: dName: Path `dName` is required.
+2023-12-15T07:04:32.820Z [] error: Master validation failed: dName: Path `dName` is required.
+2023-12-15T07:04:46.140Z [] error: Master validation failed: dName: Path `dName` is required.
+2023-12-15T07:04:46.140Z [] error: Master validation failed: dName: Path `dName` is required.
+2023-12-15T07:05:42.556Z [] error: Master validation failed: dName: Path `dName` is required.
+2023-12-15T07:05:42.556Z [] error: Master validation failed: dName: Path `dName` is required.
+2023-12-15T07:16:05.186Z [] debug: Debugging info
+2023-12-15T07:16:05.721Z [] debug: Server Initialized
+2023-12-15T07:16:05.736Z [] debug: server is running at 3000
+2023-12-15T07:16:05.746Z [] debug: Database is connected...
+2023-12-15T07:16:05.790Z [] debug: SUPERADMIN user exists
+2023-12-15T07:16:05.797Z [] debug: SUPERADMIN Role exists
+2023-12-15T07:16:26.139Z [] debug: Debugging info
+2023-12-15T07:16:26.513Z [] debug: Server Initialized
+2023-12-15T07:16:26.529Z [] debug: server is running at 3000
+2023-12-15T07:16:26.538Z [] debug: Database is connected...
+2023-12-15T07:16:26.568Z [] debug: SUPERADMIN user exists
+2023-12-15T07:16:26.577Z [] debug: SUPERADMIN Role exists
+2023-12-15T07:31:23.924Z [] debug: Debugging info
+2023-12-15T07:31:24.292Z [] debug: Server Initialized
+2023-12-15T07:31:24.310Z [] debug: server is running at 3000
+2023-12-15T07:31:24.324Z [] debug: Database is connected...
+2023-12-15T07:31:24.365Z [] debug: SUPERADMIN user exists
+2023-12-15T07:31:24.374Z [] debug: SUPERADMIN Role exists
+2023-12-15T07:48:29.480Z [] debug: Debugging info
+2023-12-15T07:48:29.825Z [] debug: Server Initialized
+2023-12-15T07:48:29.841Z [] debug: server is running at 3000
+2023-12-15T07:48:29.855Z [] debug: Database is connected...
+2023-12-15T07:48:29.889Z [] debug: SUPERADMIN user exists
+2023-12-15T07:48:29.898Z [] debug: SUPERADMIN Role exists
+2023-12-15T07:49:07.033Z [] debug: Debugging info
+2023-12-15T07:49:07.486Z [] debug: Server Initialized
+2023-12-15T07:49:07.505Z [] debug: server is running at 3000
+2023-12-15T07:49:07.515Z [] debug: Database is connected...
+2023-12-15T07:49:07.567Z [] debug: SUPERADMIN user exists
+2023-12-15T07:49:07.581Z [] debug: SUPERADMIN Role exists
+2023-12-15T07:49:39.840Z [] debug: Debugging info
+2023-12-15T07:49:40.246Z [] debug: Server Initialized
+2023-12-15T07:49:40.263Z [] debug: server is running at 3000
+2023-12-15T07:49:40.277Z [] debug: Database is connected...
+2023-12-15T07:49:40.319Z [] debug: SUPERADMIN user exists
+2023-12-15T07:49:40.333Z [] debug: SUPERADMIN Role exists
+2023-12-15T09:26:35.750Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2023-12-15T09:29:11.419Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2023-12-15T11:54:17.691Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2023-12-15T11:54:50.418Z [] error: E11000 duplicate key error collection: digitalization.users index: userName_1 dup key: { : "op1" }
+2023-12-15T11:54:50.418Z [] error: E11000 duplicate key error collection: digitalization.users index: userName_1 dup key: { : "op1" }

@@ -1,0 +1,45 @@
+2024-01-24T07:20:40.081Z [] debug: Debugging info
+2024-01-24T07:20:40.848Z [] debug: Server Initialized
+2024-01-24T07:20:40.866Z [] debug: server is running at 4000
+2024-01-24T07:20:40.882Z [] debug: SFS Database is connected...
+2024-01-24T07:20:40.886Z [] debug: Digital Database is connected...
+2024-01-24T07:20:40.967Z [] debug: SUPERADMIN user exists
+2024-01-24T07:20:40.994Z [] debug: SUPERADMIN Role exists
+2024-01-24T07:20:48.733Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-24T07:20:57.983Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"kavia1@A9!"}
+2024-01-24T07:21:13.689Z [] debug: Debugging info
+2024-01-24T07:21:14.442Z [] debug: Server Initialized
+2024-01-24T07:21:14.465Z [] debug: server is running at 4000
+2024-01-24T07:21:14.485Z [] debug: Digital Database is connected...
+2024-01-24T07:21:14.501Z [] debug: SFS Database is connected...
+2024-01-24T07:21:14.553Z [] debug: SUPERADMIN user exists
+2024-01-24T07:21:14.563Z [] debug: SUPERADMIN Role exists
+2024-01-24T07:29:02.500Z [] debug: Debugging info
+2024-01-24T07:29:03.976Z [] debug: Server Initialized
+2024-01-24T07:29:04.004Z [] debug: server is running at 4000
+2024-01-24T07:29:04.020Z [] debug: Digital Database is connected...
+2024-01-24T07:29:04.041Z [] debug: SFS Database is connected...
+2024-01-24T07:29:04.102Z [] debug: SUPERADMIN user exists
+2024-01-24T07:29:04.114Z [] debug: SUPERADMIN Role exists
+2024-01-24T10:11:10.872Z [] debug: [object Object]
+2024-01-24T10:20:19.024Z [] debug: [object Object]
+2024-01-24T10:44:25.252Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-24T10:44:52.137Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"kavia1@A9!"}
+2024-01-24T10:56:36.086Z [] debug: userCredentials---------{"email":"sp1@gmail.com","password":"Welcome@1"}
+2024-01-24T10:56:36.088Z [] debug: Invalid user
+2024-01-24T10:57:49.640Z [] debug: userCredentials---------{"email":"sp1@wimerasys.com","password":"welcome"}
+2024-01-24T10:57:50.389Z [] debug: userCredentials---------{"email":"sp1@wimerasys.com","password":"welcome"}
+2024-01-24T11:03:47.364Z [] debug: userCredentials---------{"email":"op1@wimerasys.com","password":"welcome"}
+2024-01-24T11:03:56.542Z [] debug: userCredentials---------{"email":"op1@wimerasys.com","password":"Welcome@1"}
+2024-01-24T11:06:17.267Z [] debug: userCredentials---------{"email":"op1@wimerasys.com","password":"Welcome@1"}
+2024-01-24T11:07:39.360Z [] debug: userCredentials---------{"email":"op1@wimerasys.com","password":"Welcome@1"}
+2024-01-24T11:08:55.410Z [] debug: userCredentials---------{"email":"op1@wimerasys.com","password":"Welcome@1"}
+2024-01-24T11:10:31.066Z [] debug: userCredentials---------{"email":"op1@wimerasys.com","password":"Welcome@1"}
+2024-01-24T11:45:23.965Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"kavia1@A9!"}
+2024-01-24T11:45:57.467Z [] debug: [object Object]
+2024-01-24T12:21:28.807Z [] debug: [object Object]
+2024-01-24T12:32:39.908Z [] debug: userCredentials---------{"email":"op1@gmail.com","password":"Welcome@1"}
+2024-01-24T12:32:39.910Z [] debug: Invalid user
+2024-01-24T12:32:54.497Z [] debug: userCredentials---------{"email":"op1@gmail.com","password":"Welcome@1"}
+2024-01-24T12:32:54.499Z [] debug: Invalid user
+2024-01-24T12:33:01.712Z [] debug: userCredentials---------{"email":"op1@wimerasys.com","password":"Welcome@1"}

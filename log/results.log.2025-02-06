@@ -1,0 +1,13 @@
+2025-02-06T07:46:16.659Z [] debug: Debugging info
+2025-02-06T07:46:17.744Z [] debug: Server Initialized
+2025-02-06T07:46:17.770Z [] debug: server is running at 4000
+2025-02-06T07:46:47.775Z [] debug: connect ECONNREFUSED ::1:27017
+2025-02-06T08:00:06.635Z [] debug: Debugging info
+2025-02-06T08:00:07.457Z [] debug: Server Initialized
+2025-02-06T08:00:07.483Z [] debug: server is running at 4000
+2025-02-06T08:00:36.405Z [] debug: userCredentials---------{"email":"admin@example.com","password":"Admin@123"}
+2025-02-06T08:00:37.504Z [] debug: connect ECONNREFUSED ::1:27017
+2025-02-06T08:06:37.841Z [] debug: Debugging info
+2025-02-06T08:06:38.774Z [] debug: Server Initialized
+2025-02-06T08:06:38.798Z [] debug: server is running at 4000
+2025-02-06T08:07:08.804Z [] debug: connect ECONNREFUSED ::1:27017

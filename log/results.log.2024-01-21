@@ -1,0 +1,9 @@
+2024-01-21T06:50:41.366Z [] debug: userCredentials---------{"email":"mythili@wimerasys.com","password":"Welcome@1"}
+2024-01-21T06:51:06.142Z [] debug: userCredentials---------{"email":"operator@gmail.com","password":"Welcome@1"}
+2024-01-21T06:51:36.076Z [] debug: userCredentials---------{"email":"operator@gmail.com","password":"Welcome@1"}
+2024-01-21T12:41:07.777Z [] debug: Debugging info
+2024-01-21T12:41:13.876Z [] debug: Server Initialized
+2024-01-21T12:41:13.916Z [] debug: server is running at 4000
+2024-01-21T12:41:13.941Z [] debug: Database is connected...
+2024-01-21T12:41:14.020Z [] debug: SUPERADMIN user exists
+2024-01-21T12:41:14.033Z [] debug: SUPERADMIN Role exists

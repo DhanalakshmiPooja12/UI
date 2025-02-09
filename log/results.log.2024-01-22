@@ -1,0 +1,65 @@
+2024-01-22T04:22:07.572Z [] debug: Debugging info
+2024-01-22T04:22:20.662Z [] debug: Server Initialized
+2024-01-22T04:22:20.713Z [] debug: server is running at 4000
+2024-01-22T04:22:20.732Z [] debug: Database is connected...
+2024-01-22T04:22:20.863Z [] debug: SUPERADMIN user exists
+2024-01-22T04:22:20.877Z [] debug: SUPERADMIN Role exists
+2024-01-22T05:29:55.602Z [] debug: Debugging info
+2024-01-22T05:30:00.977Z [] debug: Server Initialized
+2024-01-22T05:30:01.015Z [] debug: server is running at 4000
+2024-01-22T05:30:01.030Z [] debug: Database is connected...
+2024-01-22T05:30:01.091Z [] debug: SUPERADMIN user exists
+2024-01-22T05:30:01.131Z [] debug: SUPERADMIN Role exists
+2024-01-22T05:30:06.046Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-22T05:31:19.244Z [] debug: Debugging info
+2024-01-22T05:31:19.987Z [] debug: Server Initialized
+2024-01-22T05:31:20.022Z [] debug: server is running at 4000
+2024-01-22T05:31:20.051Z [] debug: Database is connected...
+2024-01-22T05:31:20.117Z [] debug: SUPERADMIN user exists
+2024-01-22T05:31:20.137Z [] debug: SUPERADMIN Role exists
+2024-01-22T10:04:00.997Z [] debug: Debugging info
+2024-01-22T10:04:10.188Z [] debug: Server Initialized
+2024-01-22T10:04:10.237Z [] debug: server is running at 4000
+2024-01-22T10:04:10.262Z [] debug: Database is connected...
+2024-01-22T10:04:10.382Z [] debug: SUPERADMIN user exists
+2024-01-22T10:04:10.413Z [] debug: SUPERADMIN Role exists
+2024-01-22T10:25:55.117Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-22T10:26:26.195Z [] debug: [object Object]
+2024-01-22T11:05:41.566Z [] debug: Debugging info
+2024-01-22T11:05:46.930Z [] debug: Server Initialized
+2024-01-22T11:05:46.954Z [] debug: server is running at 4000
+2024-01-22T11:05:46.971Z [] debug: Database is connected...
+2024-01-22T11:05:47.032Z [] debug: SUPERADMIN user exists
+2024-01-22T11:05:47.046Z [] debug: SUPERADMIN Role exists
+2024-01-22T11:08:19.376Z [] error: Master validation failed: formatData: Cast to string failed for value "[
+  {
+    formatNo: 'FORMAT NO',
+    formatValue: 'MNT',
+    formattype: 'text',
+    fillTypeFormat: 'manual',
+    pageFillformat: 'master',
+    permissionFormat: [ 'SUPERADMIN' ]
+  }
+]" (type Array) at path "formatData"
+2024-01-22T11:08:19.376Z [] error: Master validation failed: formatData: Cast to string failed for value "[
+  {
+    formatNo: 'FORMAT NO',
+    formatValue: 'MNT',
+    formattype: 'text',
+    fillTypeFormat: 'manual',
+    pageFillformat: 'master',
+    permissionFormat: [ 'SUPERADMIN' ]
+  }
+]" (type Array) at path "formatData"
+2024-01-22T11:09:59.280Z [] debug: Debugging info
+2024-01-22T11:09:59.788Z [] debug: Server Initialized
+2024-01-22T11:09:59.809Z [] debug: server is running at 4000
+2024-01-22T11:09:59.830Z [] debug: Database is connected...
+2024-01-22T11:09:59.886Z [] debug: SUPERADMIN user exists
+2024-01-22T11:09:59.899Z [] debug: SUPERADMIN Role exists
+2024-01-22T12:58:53.141Z [] debug: Debugging info
+2024-01-22T12:58:53.737Z [] debug: Server Initialized
+2024-01-22T12:58:53.752Z [] debug: server is running at 4000
+2024-01-22T12:58:53.765Z [] debug: Database is connected...
+2024-01-22T12:58:53.803Z [] debug: SUPERADMIN user exists
+2024-01-22T12:58:53.811Z [] debug: SUPERADMIN Role exists

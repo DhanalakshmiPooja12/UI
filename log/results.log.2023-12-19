@@ -1,0 +1,33 @@
+2023-12-19T04:28:52.981Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2023-12-19T05:05:32.948Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2023-12-19T05:56:54.721Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2023-12-19T06:15:17.876Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2023-12-19T06:16:54.385Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2023-12-19T06:28:35.263Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2023-12-19T06:28:50.495Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2023-12-19T06:29:31.593Z [] debug: userCredentials---------{"email":"op1@wimerasys.com","password":"welcome"}
+2023-12-19T06:30:44.582Z [] debug: userCredentials---------{"email":"op1@wimerasys.com","password":"welcome"}
+2023-12-19T06:35:58.761Z [] debug: userCredentials---------{"email":"op1@wimerasys.com","password":"welcome"}
+2023-12-19T07:07:48.817Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2023-12-19T07:08:03.102Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2023-12-19T07:08:14.254Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2023-12-19T07:13:29.383Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2023-12-19T07:16:40.764Z [] debug: Debugging info
+2023-12-19T07:16:41.800Z [] debug: Server Initialized
+2023-12-19T07:16:41.853Z [] debug: server is running at 3000
+2023-12-19T07:16:41.893Z [] debug: Database is connected...
+2023-12-19T07:16:41.973Z [] debug: SUPERADMIN user exists
+2023-12-19T07:16:41.991Z [] debug: SUPERADMIN Role exists
+2023-12-19T07:46:23.331Z [] debug: Debugging info
+2023-12-19T07:46:23.731Z [] debug: Server Initialized
+2023-12-19T07:46:23.747Z [] debug: server is running at 3000
+2023-12-19T07:46:23.759Z [] debug: Database is connected...
+2023-12-19T07:46:23.794Z [] debug: SUPERADMIN user exists
+2023-12-19T07:46:23.806Z [] debug: SUPERADMIN Role exists
+2023-12-19T07:52:14.035Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2023-12-19T07:54:55.685Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2023-12-19T07:56:23.347Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2023-12-19T09:13:58.892Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2023-12-19T09:14:08.366Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2023-12-19T09:14:22.659Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2023-12-19T09:21:52.499Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}

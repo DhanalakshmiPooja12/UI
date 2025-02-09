@@ -1,0 +1,94 @@
+{"level":"debug","message":"D:\\Git projects\\bitBucket\\digitalization\\API\\utils\\logger.js","timestamp":"2023-10-31T06:28:03.165Z"}
+{"level":"debug","message":"server is running at 3000","timestamp":"2023-10-31T06:28:03.509Z"}
+{"level":"debug","message":"Database is connected...","timestamp":"2023-10-31T06:28:03.532Z"}
+{"level":"debug","message":"D:\\Git projects\\bitBucket\\digitalization\\API\\utils\\logger.js","timestamp":"2023-10-31T06:29:09.585Z"}
+{"level":"debug","message":"server is running at 3000","timestamp":"2023-10-31T06:29:09.855Z"}
+{"level":"debug","message":"Database is connected...","timestamp":"2023-10-31T06:29:09.873Z"}
+{"level":"debug","message":"D:\\Git projects\\bitBucket\\digitalization\\API\\utils\\logger.js","timestamp":"2023-10-31T06:29:46.478Z"}
+{"level":"debug","message":"server is running at 3000","timestamp":"2023-10-31T06:29:46.789Z"}
+{"level":"debug","message":"Database is connected...","timestamp":"2023-10-31T06:29:46.817Z"}
+{"level":"debug","message":"userCredentials---------","timestamp":"2023-10-31T06:39:24.620Z"}
+{"level":"debug","message":"incorrect email","timestamp":"2023-10-31T06:39:24.631Z"}
+{"level":"debug","message":"userCredentials---------","timestamp":"2023-10-31T06:39:37.966Z"}
+{"level":"debug","message":"incorrect email","timestamp":"2023-10-31T06:39:37.969Z"}
+{"level":"debug","message":"userCredentials---------","timestamp":"2023-10-31T06:39:49.925Z"}
+{"level":"debug","message":"incorrect email","timestamp":"2023-10-31T06:39:49.929Z"}
+{"level":"debug","message":"userCredentials---------","timestamp":"2023-10-31T06:40:37.302Z"}
+{"level":"debug","message":"incorrect email","timestamp":"2023-10-31T06:40:37.304Z"}
+{"level":"debug","message":"userCredentials---------","timestamp":"2023-10-31T06:41:33.534Z"}
+{"level":"debug","message":"incorrect email","timestamp":"2023-10-31T06:41:33.536Z"}
+{"level":"debug","message":"userCredentials---------","timestamp":"2023-10-31T06:41:34.721Z"}
+{"level":"debug","message":"incorrect email","timestamp":"2023-10-31T06:41:34.726Z"}
+{"level":"debug","message":"userCredentials---------","timestamp":"2023-10-31T06:41:34.905Z"}
+{"level":"debug","message":"incorrect email","timestamp":"2023-10-31T06:41:34.911Z"}
+{"level":"debug","message":"userCredentials---------","timestamp":"2023-10-31T06:42:22.580Z"}
+{"level":"error","message":"signIn ErrorError: Invalid IV length","timestamp":"2023-10-31T06:42:22.598Z"}
+{"level":"debug","message":"D:\\Git projects\\bitBucket\\digitalization\\API\\utils\\logger.js","timestamp":"2023-10-31T06:45:15.772Z"}
+{"level":"debug","message":"server is running at 3000","timestamp":"2023-10-31T06:45:15.966Z"}
+{"level":"debug","message":"Database is connected...","timestamp":"2023-10-31T06:45:15.977Z"}
+{"level":"debug","message":"inside add admin user","timestamp":"2023-10-31T06:45:16.030Z"}
+{"level":"debug","message":"userCredentials---------","timestamp":"2023-10-31T06:47:49.489Z"}
+{"level":"error","message":"signIn ErrorError: Invalid IV length","timestamp":"2023-10-31T06:47:49.504Z"}
+{"level":"debug","message":"D:\\Git projects\\bitBucket\\digitalization\\API\\utils\\logger.js","timestamp":"2023-10-31T06:49:07.741Z"}
+{"level":"debug","message":"server is running at 3000","timestamp":"2023-10-31T06:49:07.929Z"}
+{"level":"debug","message":"Database is connected...","timestamp":"2023-10-31T06:49:07.941Z"}
+{"level":"debug","message":"SUPERADMIN user exists","timestamp":"2023-10-31T06:49:07.977Z"}
+{"level":"debug","message":"D:\\Git projects\\bitBucket\\digitalization\\API\\utils\\logger.js","timestamp":"2023-10-31T06:49:20.949Z"}
+{"level":"debug","message":"server is running at 3000","timestamp":"2023-10-31T06:49:21.143Z"}
+{"level":"debug","message":"Database is connected...","timestamp":"2023-10-31T06:49:21.155Z"}
+{"level":"debug","message":"SUPERADMIN user exists","timestamp":"2023-10-31T06:49:21.182Z"}
+{"level":"debug","message":"userCredentials---------","timestamp":"2023-10-31T06:49:55.867Z"}
+{"level":"debug","message":"D:\\Git projects\\bitBucket\\digitalization\\API\\utils\\logger.js","timestamp":"2023-10-31T06:53:16.351Z"}
+{"level":"debug","message":"server is running at 3000","timestamp":"2023-10-31T06:53:16.545Z"}
+{"level":"debug","message":"Database is connected...","timestamp":"2023-10-31T06:53:16.557Z"}
+{"level":"debug","message":"SUPERADMIN user exists","timestamp":"2023-10-31T06:53:16.586Z"}
+{"level":"debug","message":"D:\\Git projects\\bitBucket\\digitalization\\API\\utils\\logger.js","timestamp":"2023-10-31T06:53:46.112Z"}
+{"level":"debug","message":"server is running at 3000","timestamp":"2023-10-31T06:53:46.336Z"}
+{"level":"debug","message":"Database is connected...","timestamp":"2023-10-31T06:53:46.355Z"}
+{"level":"debug","message":"D:\\Git projects\\bitBucket\\digitalization\\API\\utils\\logger.js","timestamp":"2023-10-31T06:54:36.162Z"}
+{"level":"debug","message":"server is running at 3000","timestamp":"2023-10-31T06:54:36.347Z"}
+{"level":"debug","message":"Database is connected...","timestamp":"2023-10-31T06:54:36.361Z"}
+{"level":"debug","message":"inside add admin user","timestamp":"2023-10-31T06:54:36.397Z"}
+{"level":"debug","message":"D:\\Git projects\\bitBucket\\digitalization\\API\\utils\\logger.js","timestamp":"2023-10-31T06:54:43.849Z"}
+{"level":"debug","message":"server is running at 3000","timestamp":"2023-10-31T06:54:44.033Z"}
+{"level":"debug","message":"Database is connected...","timestamp":"2023-10-31T06:54:44.045Z"}
+{"level":"debug","message":"inside add admin user","timestamp":"2023-10-31T06:54:44.074Z"}
+{"level":"debug","message":"D:\\Git projects\\bitBucket\\digitalization\\API\\utils\\logger.js","timestamp":"2023-10-31T06:55:40.209Z"}
+{"level":"debug","message":"server is running at 3000","timestamp":"2023-10-31T06:55:40.439Z"}
+{"level":"debug","message":"Database is connected...","timestamp":"2023-10-31T06:55:40.452Z"}
+{"level":"debug","message":"inside add admin user","timestamp":"2023-10-31T06:55:40.499Z"}
+{"level":"debug","message":"D:\\Git projects\\bitBucket\\digitalization\\API\\utils\\logger.js","timestamp":"2023-10-31T06:55:51.435Z"}
+{"level":"debug","message":"server is running at 3000","timestamp":"2023-10-31T06:55:51.616Z"}
+{"level":"debug","message":"Database is connected...","timestamp":"2023-10-31T06:55:51.626Z"}
+{"level":"debug","message":"inside add admin user","timestamp":"2023-10-31T06:55:51.655Z"}
+{"level":"debug","message":"D:\\Git projects\\bitBucket\\digitalization\\API\\utils\\logger.js","timestamp":"2023-10-31T06:56:41.444Z"}
+{"level":"debug","message":"server is running at 3000","timestamp":"2023-10-31T06:56:41.670Z"}
+{"level":"debug","message":"Database is connected...","timestamp":"2023-10-31T06:56:41.685Z"}
+{"level":"debug","message":"inside add admin user","timestamp":"2023-10-31T06:56:41.723Z"}
+{"level":"debug","message":"D:\\Git projects\\bitBucket\\digitalization\\API\\utils\\logger.js","timestamp":"2023-10-31T06:57:05.941Z"}
+{"level":"debug","message":"server is running at 3000","timestamp":"2023-10-31T06:57:06.156Z"}
+{"level":"debug","message":"Database is connected...","timestamp":"2023-10-31T06:57:06.170Z"}
+{"level":"debug","message":"inside add admin user","timestamp":"2023-10-31T06:57:06.207Z"}
+{"level":"debug","message":"D:\\Git projects\\bitBucket\\digitalization\\API\\utils\\logger.js","timestamp":"2023-10-31T06:57:43.232Z"}
+{"level":"debug","message":"server is running at 3000","timestamp":"2023-10-31T06:57:43.443Z"}
+{"level":"debug","message":"Database is connected...","timestamp":"2023-10-31T06:57:43.456Z"}
+{"level":"debug","message":"D:\\Git projects\\bitBucket\\digitalization\\API\\utils\\logger.js","timestamp":"2023-10-31T07:01:51.799Z"}
+{"level":"debug","message":"server is running at 3000","timestamp":"2023-10-31T07:01:52.103Z"}
+{"level":"debug","message":"Database is connected...","timestamp":"2023-10-31T07:01:52.117Z"}
+{"level":"debug","message":"SUPERADMIN user exists","timestamp":"2023-10-31T07:01:52.157Z"}
+{"level":"debug","message":"D:\\Git projects\\bitBucket\\digitalization\\API\\utils\\logger.js","timestamp":"2023-10-31T07:02:09.077Z"}
+{"level":"debug","message":"server is running at 3000","timestamp":"2023-10-31T07:02:09.286Z"}
+{"level":"debug","message":"Database is connected...","timestamp":"2023-10-31T07:02:09.299Z"}
+{"level":"debug","message":"SUPERADMIN user exists","timestamp":"2023-10-31T07:02:09.333Z"}
+{"level":"debug","message":"D:\\Git projects\\bitBucket\\digitalization\\API\\utils\\logger.js","timestamp":"2023-10-31T07:02:47.144Z"}
+{"level":"debug","message":"server is running at 3000","timestamp":"2023-10-31T07:02:47.330Z"}
+{"level":"debug","message":"Database is connected...","timestamp":"2023-10-31T07:02:47.341Z"}
+{"level":"debug","message":"SUPERADMIN user exists","timestamp":"2023-10-31T07:02:47.369Z"}
+{"level":"debug","message":"D:\\Git projects\\bitBucket\\digitalization\\API\\utils\\logger.js","timestamp":"2023-10-31T10:48:04.290Z"}
+{"level":"debug","message":"server is running at 3000","timestamp":"2023-10-31T10:48:04.572Z"}
+{"level":"debug","message":"Database is connected...","timestamp":"2023-10-31T10:48:04.584Z"}
+{"level":"debug","message":"SUPERADMIN user exists","timestamp":"2023-10-31T10:48:04.633Z"}
+{"level":"debug","message":"D:\\Git projects\\bitBucket\\digitalization\\API\\utils\\logger.js","timestamp":"2023-10-31T10:48:43.988Z"}
+{"level":"debug","message":"server is running at 3000","timestamp":"2023-10-31T10:48:44.238Z"}
+{"level":"debug","message":"Database is connected...","timestamp":"2023-10-31T10:48:44.251Z"}
+{"level":"debug","message":"SUPERADMIN user exists","timestamp":"2023-10-31T10:48:44.294Z"}

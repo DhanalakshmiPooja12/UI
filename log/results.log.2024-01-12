@@ -1,0 +1,21 @@
+2024-01-12T04:37:57.159Z [] debug: Debugging info
+2024-01-12T04:38:02.734Z [] debug: Server Initialized
+2024-01-12T04:38:02.774Z [] debug: server is running at 4000
+2024-01-12T04:38:02.792Z [] debug: Database is connected...
+2024-01-12T04:38:02.878Z [] debug: SUPERADMIN user exists
+2024-01-12T04:38:02.888Z [] debug: SUPERADMIN Role exists
+2024-01-12T04:49:43.533Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-12T07:12:46.504Z [] debug: userCredentials---------{"email":"operator@gmail.com","password":"Welcome@1"}
+2024-01-12T07:16:35.221Z [] debug: userCredentials---------{"email":"operator@gmail.com","password":"Welcome@1"}
+2024-01-12T07:16:46.303Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-12T07:26:18.352Z [] debug: userCredentials---------{"email":"operator@gmail.com","password":"Welcome@1"}
+2024-01-12T07:29:03.405Z [] debug: userCredentials---------{"email":"operator@gmail.com","password":"Welcome@1"}
+2024-01-12T07:30:33.284Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-12T07:30:44.279Z [] debug: userCredentials---------{"email":"operator@gmail.com","password":"Welcome@1"}
+2024-01-12T07:32:10.795Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-12T07:32:19.960Z [] debug: userCredentials---------{"email":"operator@gmail.com","password":"Welcome@1"}
+2024-01-12T07:45:38.181Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-12T10:03:55.277Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-12T10:06:20.976Z [] debug: userCredentials---------{"email":"operator@gmail.com","password":"Welcome@1"}
+2024-01-12T10:08:59.805Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-12T11:21:37.240Z [] debug: userCredentials---------{"email":"operator@gmail.com","password":"Welcome@1"}

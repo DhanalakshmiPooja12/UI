@@ -1,0 +1,26 @@
+2023-12-18T04:09:56.462Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2023-12-18T04:38:08.770Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2023-12-18T05:09:41.715Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2023-12-18T05:10:41.033Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2023-12-18T05:11:34.475Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2023-12-18T05:13:45.871Z [] debug: Debugging info
+2023-12-18T05:13:46.290Z [] debug: Server Initialized
+2023-12-18T05:13:46.307Z [] debug: server is running at 3000
+2023-12-18T05:13:46.318Z [] debug: Database is connected...
+2023-12-18T05:13:46.356Z [] debug: SUPERADMIN user exists
+2023-12-18T05:13:46.363Z [] debug: SUPERADMIN Role exists
+2023-12-18T05:15:36.606Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2023-12-18T05:16:21.627Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2023-12-18T05:27:43.621Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2023-12-18T10:49:58.594Z [] debug: [object Object]
+2023-12-18T10:50:49.460Z [] error: Master validation failed: dName: Path `dName` is required.
+2023-12-18T10:50:49.460Z [] error: Master validation failed: dName: Path `dName` is required.
+2023-12-18T10:54:10.600Z [] debug: [object Object]
+2023-12-18T11:53:10.527Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2023-12-18T11:56:41.631Z [] debug: Debugging info
+2023-12-18T11:56:42.071Z [] debug: Server Initialized
+2023-12-18T11:56:42.088Z [] debug: server is running at 3000
+2023-12-18T11:56:42.100Z [] debug: Database is connected...
+2023-12-18T11:56:42.142Z [] debug: SUPERADMIN user exists
+2023-12-18T11:56:42.145Z [] debug: SUPERADMIN Role exists
+2023-12-18T11:59:41.858Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}

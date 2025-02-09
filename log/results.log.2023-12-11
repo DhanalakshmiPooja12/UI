@@ -1,0 +1,100 @@
+2023-12-11T05:56:06.003Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2023-12-11T06:55:43.099Z [] debug: userCredentials---------{"email":"Bharath","password":"welcome"}
+2023-12-11T07:05:17.102Z [] debug: userCredentials---------{"email":"Manju","password":"welcome"}
+2023-12-11T09:04:56.866Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2023-12-11T09:18:55.022Z [] debug: userCredentials---------{"email":"Manju","password":"welcome"}
+2023-12-08T12:20:15.325Z [] error: undefined is not configured
+2023-12-08T12:20:15.325Z [] error: undefined is not configured
+2023-12-08T12:20:15.325Z [] error: undefined is not configured
+2023-12-08T12:20:15.325Z [] error: undefined is not configured
+2023-12-08T12:20:15.325Z [] error: undefined is not configured
+2023-12-08T12:20:15.325Z [] error: undefined is not configured
+2023-12-11T10:50:23.365Z [] debug: Debugging info
+2023-12-11T10:50:23.941Z [] debug: Server Initialized
+2023-12-11T10:50:23.959Z [] debug: server is running at 3000
+2023-12-11T10:50:23.975Z [] debug: Database is connected...
+2023-12-11T10:50:24.022Z [] debug: SUPERADMIN user exists
+2023-12-11T10:50:24.034Z [] debug: SUPERADMIN Role exists
+2023-12-11T10:52:48.269Z [] debug: Debugging info
+2023-12-11T10:52:48.804Z [] debug: Server Initialized
+2023-12-11T10:52:48.823Z [] debug: server is running at 3000
+2023-12-11T10:52:48.836Z [] debug: Database is connected...
+2023-12-11T10:52:48.883Z [] debug: SUPERADMIN user exists
+2023-12-11T10:52:48.895Z [] debug: SUPERADMIN Role exists
+2023-12-11T10:54:26.559Z [] debug: Debugging info
+2023-12-11T10:54:26.937Z [] debug: Server Initialized
+2023-12-11T10:54:26.955Z [] debug: server is running at 3000
+2023-12-11T10:54:26.968Z [] debug: Database is connected...
+2023-12-11T10:54:27.005Z [] debug: SUPERADMIN user exists
+2023-12-11T10:54:27.016Z [] debug: SUPERADMIN Role exists
+2023-12-11T10:55:51.382Z [] debug: Debugging info
+2023-12-11T10:55:51.783Z [] debug: Server Initialized
+2023-12-11T10:55:51.805Z [] debug: server is running at 3000
+2023-12-11T10:55:51.814Z [] debug: Database is connected...
+2023-12-11T10:55:51.863Z [] debug: SUPERADMIN user exists
+2023-12-11T10:55:51.878Z [] debug: SUPERADMIN Role exists
+2023-12-11T10:55:54.494Z [] debug: Debugging info
+2023-12-11T10:55:54.988Z [] debug: Server Initialized
+2023-12-11T10:55:55.004Z [] debug: server is running at 3000
+2023-12-11T10:55:55.020Z [] debug: Database is connected...
+2023-12-11T10:55:55.064Z [] debug: SUPERADMIN user exists
+2023-12-11T10:55:55.077Z [] debug: SUPERADMIN Role exists
+2023-12-11T12:10:13.230Z [] debug: [object Object]
+2023-12-11T12:37:03.721Z [] debug: Debugging info
+2023-12-11T12:37:04.231Z [] debug: Server Initialized
+2023-12-11T12:37:04.257Z [] debug: server is running at 3000
+2023-12-11T12:37:04.272Z [] debug: Database is connected...
+2023-12-11T12:37:04.318Z [] debug: SUPERADMIN user exists
+2023-12-11T12:37:04.333Z [] debug: SUPERADMIN Role exists
+2023-12-11T12:57:17.625Z [] debug: Debugging info
+2023-12-11T12:57:18.080Z [] debug: Server Initialized
+2023-12-11T12:57:18.098Z [] debug: server is running at 3000
+2023-12-11T12:57:18.125Z [] debug: Database is connected...
+2023-12-11T12:57:18.165Z [] debug: SUPERADMIN user exists
+2023-12-11T12:57:18.178Z [] debug: SUPERADMIN Role exists
+2023-12-11T14:55:32.273Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2023-12-11T15:23:56.129Z [] error: undefined is not configured
+2023-12-11T15:23:56.129Z [] error: vbnnbvcxcvbnbvc is not configured
+2023-12-11T15:23:56.129Z [] error: vbnnbvcxcvbnbvc is not configured
+2023-12-11T15:33:36.669Z [] debug: Debugging info
+2023-12-11T15:33:37.167Z [] debug: Server Initialized
+2023-12-11T15:33:37.195Z [] debug: server is running at 3000
+2023-12-11T15:33:37.215Z [] debug: Database is connected...
+2023-12-11T15:33:37.255Z [] debug: SUPERADMIN user exists
+2023-12-11T15:33:37.265Z [] debug: SUPERADMIN Role exists
+2023-12-11T15:35:19.928Z [] error: E11000 duplicate key error collection: digitalization.lists index: masterName_1 dup key: { : "jkfnksnfksjdfnksfksjfsd" }
+2023-12-11T15:35:19.928Z [] error: E11000 duplicate key error collection: digitalization.lists index: masterName_1 dup key: { : "jkfnksnfksjdfnksfksjfsd" }
+2023-12-11T15:38:39.842Z [] error: E11000 duplicate key error collection: digitalization.lists index: masterName_1 dup key: { : "jkfnksnfksjdfnksfksjfsd" }
+2023-12-11T15:38:39.842Z [] error: E11000 duplicate key error collection: digitalization.lists index: masterName_1 dup key: { : "jkfnksnfksjdfnksfksjfsd" }
+2023-12-11T15:39:25.381Z [] error: E11000 duplicate key error collection: digitalization.lists index: masterName_1 dup key: { : "jkfnksnfksjdfnksfksjfsd" }
+2023-12-11T15:39:25.381Z [] error: E11000 duplicate key error collection: digitalization.lists index: masterName_1 dup key: { : "jkfnksnfksjdfnksfksjfsd" }
+2023-12-11T15:41:40.408Z [] debug: Debugging info
+2023-12-11T15:41:40.791Z [] debug: Server Initialized
+2023-12-11T15:41:40.815Z [] debug: server is running at 3000
+2023-12-11T15:41:40.825Z [] debug: Database is connected...
+2023-12-11T15:41:40.862Z [] debug: SUPERADMIN user exists
+2023-12-11T15:41:40.872Z [] debug: SUPERADMIN Role exists
+2023-12-11T15:42:17.376Z [] error: E11000 duplicate key error collection: digitalization.lists index: masterName_1 dup key: { : "jkfnksnfksjdfnksfksjfsd" }
+2023-12-11T15:42:17.376Z [] error: E11000 duplicate key error collection: digitalization.lists index: masterName_1 dup key: { : "jkfnksnfksjdfnksfksjfsd" }
+2023-12-11T15:48:18.666Z [] error: E11000 duplicate key error collection: digitalization.lists index: masterName_1 dup key: { : "jkfnksnfksjdfnksfksjfsd" }
+2023-12-11T15:48:18.666Z [] error: E11000 duplicate key error collection: digitalization.lists index: masterName_1 dup key: { : "jkfnksnfksjdfnksfksjfsd" }
+2023-12-11T15:48:55.687Z [] error: E11000 duplicate key error collection: digitalization.lists index: masterName_1 dup key: { : "jkfnksnfksjdfnksfksjfsd" }
+2023-12-11T15:48:55.687Z [] error: E11000 duplicate key error collection: digitalization.lists index: masterName_1 dup key: { : "jkfnksnfksjdfnksfksjfsd" }
+2023-12-11T15:51:01.835Z [] debug: Debugging info
+2023-12-11T15:51:02.270Z [] debug: Server Initialized
+2023-12-11T15:51:02.304Z [] debug: server is running at 3000
+2023-12-11T15:51:02.343Z [] debug: Database is connected...
+2023-12-11T15:51:02.470Z [] debug: SUPERADMIN user exists
+2023-12-11T15:51:02.511Z [] debug: SUPERADMIN Role exists
+2023-12-11T15:52:12.864Z [] error: E11000 duplicate key error collection: digitalization.lists index: masterName_1 dup key: { : "jkfnksnfksjdfnksfksjfsd" }
+2023-12-11T15:52:12.864Z [] error: E11000 duplicate key error collection: digitalization.lists index: masterName_1 dup key: { : "jkfnksnfksjdfnksfksjfsd" }
+2023-12-11T15:55:23.291Z [] error: masterName REQUIRED
+2023-12-11T15:55:23.291Z [] error: masterName REQUIRED
+2023-12-11T15:55:23.291Z [] error: masterName REQUIRED
+2023-12-11T16:40:15.008Z [] debug: Debugging info
+2023-12-11T16:40:15.435Z [] debug: Server Initialized
+2023-12-11T16:40:15.459Z [] debug: server is running at 3000
+2023-12-11T16:40:15.467Z [] debug: Database is connected...
+2023-12-11T16:40:15.498Z [] debug: SUPERADMIN user exists
+2023-12-11T16:40:15.508Z [] debug: SUPERADMIN Role exists
+2023-12-11T17:03:21.951Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}

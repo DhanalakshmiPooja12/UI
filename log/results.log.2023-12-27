@@ -1,0 +1,8 @@
+2023-12-27T04:09:31.532Z [] debug: Debugging info
+2023-12-27T04:09:32.116Z [] debug: Server Initialized
+2023-12-27T04:09:32.135Z [] debug: server is running at 3000
+2023-12-27T04:09:32.149Z [] debug: Database is connected...
+2023-12-27T04:09:32.206Z [] debug: SUPERADMIN user exists
+2023-12-27T04:09:32.219Z [] debug: SUPERADMIN Role exists
+2023-12-27T05:30:49.383Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2023-12-27T07:37:52.338Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}

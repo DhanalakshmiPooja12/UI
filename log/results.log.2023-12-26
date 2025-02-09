@@ -1,0 +1,6 @@
+2023-12-26T13:55:35.210Z [] debug: Debugging info
+2023-12-26T13:55:36.033Z [] debug: Server Initialized
+2023-12-26T13:55:36.063Z [] debug: server is running at 3000
+2023-12-26T13:55:36.081Z [] debug: Database is connected...
+2023-12-26T13:55:36.128Z [] debug: SUPERADMIN user exists
+2023-12-26T13:55:36.142Z [] debug: SUPERADMIN Role exists

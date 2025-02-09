@@ -1,0 +1,69 @@
+2024-01-17T05:44:48.248Z [] debug: userCredentials---------{"email":"operator@gmail.com","password":"Welcome@1"}
+2024-01-17T05:45:37.646Z [] debug: userCredentials---------{"email":"mythili@wimerasys.com","password":"Welcome@1"}
+2024-01-17T05:47:24.759Z [] debug: userCredentials---------{"email":"operator@gmail.com","password":"Welcome@1"}
+2024-01-17T05:54:23.852Z [] debug: userCredentials---------{"email":"operator@gmail.com","password":"Welcome@1"}
+2024-01-17T04:59:29.508Z [] debug: Debugging info
+2024-01-17T04:59:34.484Z [] debug: Server Initialized
+2024-01-17T04:59:34.503Z [] debug: server is running at 4000
+2024-01-17T04:59:34.516Z [] debug: Database is connected...
+2024-01-17T04:59:34.569Z [] debug: SUPERADMIN user exists
+2024-01-17T04:59:34.582Z [] debug: SUPERADMIN Role exists
+2024-01-17T04:59:55.937Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-17T05:06:18.193Z [] debug: Debugging info
+2024-01-17T05:06:18.633Z [] debug: Server Initialized
+2024-01-17T05:06:18.655Z [] debug: server is running at 4000
+2024-01-17T05:06:18.669Z [] debug: Database is connected...
+2024-01-17T05:06:18.985Z [] debug: SUPERADMIN created
+2024-01-17T05:06:41.938Z [] error: inspect17 is not configured
+2024-01-17T05:07:27.930Z [] debug: [object Object]
+2024-01-17T05:56:43.379Z [] debug: [object Object]
+2024-01-17T06:19:46.305Z [] debug: [object Object]
+2024-01-17T06:44:54.641Z [] debug: userCredentials---------{"email":"op1@gmail.com","password":"Welcome@1"}
+2024-01-17T06:45:12.598Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-17T06:47:19.590Z [] debug: userCredentials---------{"email":"op1@gmail.com","password":"Welcome@1"}
+2024-01-17T10:30:19.035Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-17T10:31:06.195Z [] debug: [object Object]
+2024-01-17T10:44:40.644Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-17T10:45:46.988Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-17T10:51:09.402Z [] debug: userCredentials---------{"email":"operator@gmail.com","password":"Welcome@1"}
+2024-01-17T10:51:09.403Z [] debug: Invalid user
+2024-01-17T10:51:17.801Z [] debug: userCredentials---------{"email":"op1@gmail.com","password":"Welcome@1"}
+2024-01-17T10:53:41.868Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-17T10:53:57.447Z [] error: E11000 duplicate key error collection: kaviadb.plants index: plantName_1 dup key: { : "Plant 1" }
+2024-01-17T10:54:08.814Z [] error: E11000 duplicate key error collection: kaviadb.plants index: plantName_1 dup key: { : "Plant 1" }
+2024-01-17T10:54:34.184Z [] error: E11000 duplicate key error collection: kaviadb.plants index: plantName_1 dup key: { : "Plant 1" }
+2024-01-17T11:15:57.440Z [] debug: Debugging info
+2024-01-17T11:16:03.762Z [] debug: Server Initialized
+2024-01-17T11:16:03.808Z [] debug: server is running at 4000
+2024-01-17T11:16:03.833Z [] debug: Database is connected...
+2024-01-17T11:16:03.939Z [] debug: SUPERADMIN user exists
+2024-01-17T11:16:03.964Z [] debug: SUPERADMIN Role exists
+2024-01-17T11:16:09.872Z [] debug: Debugging info
+2024-01-17T11:16:10.217Z [] debug: Server Initialized
+2024-01-17T11:16:10.232Z [] debug: server is running at 4000
+2024-01-17T11:16:10.243Z [] debug: Database is connected...
+2024-01-17T11:16:10.278Z [] debug: SUPERADMIN user exists
+2024-01-17T11:16:10.288Z [] debug: SUPERADMIN Role exists
+2024-01-17T11:16:15.314Z [] debug: Debugging info
+2024-01-17T11:16:15.722Z [] debug: Server Initialized
+2024-01-17T11:16:15.738Z [] debug: server is running at 4000
+2024-01-17T11:16:15.759Z [] debug: Database is connected...
+2024-01-17T11:16:15.793Z [] debug: SUPERADMIN user exists
+2024-01-17T11:16:15.802Z [] debug: SUPERADMIN Role exists
+2024-01-17T11:16:23.131Z [] debug: Debugging info
+2024-01-17T11:16:23.470Z [] debug: Server Initialized
+2024-01-17T11:16:23.485Z [] debug: server is running at 4000
+2024-01-17T11:16:23.497Z [] debug: Database is connected...
+2024-01-17T11:16:23.532Z [] debug: SUPERADMIN user exists
+2024-01-17T11:16:23.541Z [] debug: SUPERADMIN Role exists
+2024-01-17T11:16:47.271Z [] error: E11000 duplicate key error collection: kaviadb.plants index: plantName_1 dup key: { : "Plant 1" }
+2024-01-17T11:17:20.816Z [] debug: Debugging info
+2024-01-17T11:17:21.314Z [] debug: Server Initialized
+2024-01-17T11:17:21.331Z [] debug: server is running at 4000
+2024-01-17T11:17:21.346Z [] debug: Database is connected...
+2024-01-17T11:17:21.382Z [] debug: SUPERADMIN user exists
+2024-01-17T11:17:21.392Z [] debug: SUPERADMIN Role exists
+2024-01-17T11:17:21.448Z [] error: E11000 duplicate key error collection: kaviadb.plants index: plantName_1 dup key: { : "Plant 1" }
+2024-01-17T11:35:04.236Z [] debug: userCredentials---------{"email":"op1@gmail.com","password":"Welcome@1"}
+2024-01-17T11:35:34.428Z [] debug: userCredentials---------{"email":"administrator@wimerasys.com","password":"welcome"}
+2024-01-17T11:36:24.842Z [] debug: userCredentials---------{"email":"op1@gmail.com","password":"Welcome@1"}
